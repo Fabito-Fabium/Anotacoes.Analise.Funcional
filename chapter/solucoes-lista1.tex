@@ -1,15 +1,6 @@
 \section{Lista 1}
 \renewcommand{\currentlista}{1}
-\setcounter{ex}{0}
-
-\newcommand{\R}{\bbR}
-\newcommand{\N}{\bbN}
-\newcommand{\Z}{\bbZ}
-\renewcommand{\sol}{\textcolor{myr}{\textbf{[RASCUNHO --- substituir]}}\par\smallskip}
-
-\newenvironment{obs}[1][]
-  {\par\smallskip\begin{note}\ifstrempty{#1}{}{\textbf{#1:}\par\smallskip}}
-  {\end{note}\par\smallskip}
+\setcounter{exq}{0}
 
 \begin{tcolorbox}[
   enhanced,
@@ -61,15 +52,20 @@ A lista percorre, em ordem, dez temas fundamentais:
 \noindent\footnotesize\textit{Nota: As soluções fazem referências cruzadas entre si; sempre que um resultado de outro exercício é invocado, o enunciado utilizado vem explicitado.}
 \end{tcolorbox}
 \vspace{4mm}
-\begin{exercicio}{Seja $(X,d)$ um espaço métrico. Mostre que $\abs{d(x,z)-d(z,y)}\le d(x,y)$ e $\abs{d(x_1,y_1)-d(x_2,y_2)}\le d(x_1,x_2)+d(y_1,y_2)$.}
-\sol
+% exercício 1
+\begin{exercicio}{Seja $(X,d)$ um espaço métrico. Vejamos que 
+$$\abs{d(x,z)-d(z,y)}\le d(x,y) 
+\text{e} \abs{d(x_1,y_1)-d(x_2,y_2)}\le d(x_1,x_2)+d(y_1,y_2).$$}
+
 \textbf{(i)} Pela desigualdade triangular e pela simetria,
 \[ d(x,z) \le d(x,y)+d(y,z) \quad\Longrightarrow\quad d(x,z)-d(z,y) \le d(x,y). \]
-Trocando os papéis de $x$ e $y$: $d(z,y)\le d(z,x)+d(x,y)$, logo $d(z,y)-d(x,z)\le d(x,y)$. Como o módulo de um número real é o maior entre ele e seu simétrico, concluímos $\abs{d(x,z)-d(z,y)}\le d(x,y)$.
+De maneira análoga segue que $d(z,y)-d(x,z)\le d(x,y)$. Com isso, temos 
+$\abs{d(x,z)-d(z,y)}\le d(x,y)$.
 
 \textbf{(ii)} Usando a desigualdade triangular duas vezes,
 \[ d(x_1,y_1) \le d(x_1,x_2)+d(x_2,y_2)+d(y_2,y_1), \]
-donde $d(x_1,y_1)-d(x_2,y_2)\le d(x_1,x_2)+d(y_1,y_2)$. Permutando os índices $1$ e $2$ obtemos a desigualdade simétrica $d(x_2,y_2)-d(x_1,y_1)\le d(x_1,x_2)+d(y_1,y_2)$. As duas juntas dão o resultado.
+donde $d(x_1,y_1)-d(x_2,y_2)\le d(x_1,x_2)+d(y_1,y_2)$. Semelhante ao item anterior, 
+segue o resultado.
 \end{exercicio}
 
 \begin{exercicio}{Sejam $A,B\subset X$ e $D(A,B)=\inf\{d(x,y);\, x\in A,\ y\in B\}$, $D(x,B)=\inf_{y\in B} d(x,y)$. (a) $D$ não é métrica nas partes de $X$. (b) $\abs{D(x,B)-D(z,B)}\le d(x,z)$.}

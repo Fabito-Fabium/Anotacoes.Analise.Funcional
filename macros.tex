@@ -29,7 +29,7 @@
 \newcommand{\id}{\text{id}}
 \newcommand{\bb}{\mathbb}
 
-\newcommand{\sol}{\setlength{\parindent}{0cm}\textbf{\textit{Solution:}}\setlength{\parindent}{1cm} }
+\newcommand{\sol}{\textcolor{myr}{\textbf{[RASCUNHO --- substituir]}}\par\smallskip}
 \newcommand{\solve}[1]{\setlength{\parindent}{0cm}\textbf{\textit{Solution: }}\setlength{\parindent}{1cm}#1 \Qed}
 
 \newcommand{\qslista}[3][1]{%
@@ -41,11 +41,24 @@
 }
 
 \newcommand{\currentlista}{1}
-\newcounter{ex}
+\newcounter{exq}
 \newenvironment{exercicio}[1][]
-  {\refstepcounter{ex}%
-   \hypertarget{sol:lista\currentlista:\theex}{}%
-   \begin{solucaobox}{\hypersetup{linkcolor=white}\hyperlink{enun:lista\currentlista:\theex}{Solução do Exercício \theex}}%
-   \noindent\hfill{\footnotesize\hypersetup{linkcolor=doc}\hyperlink{enun:lista\currentlista:\theex}{\textbf{[Enunciado no Capítulo $\leftarrow$]}}}\par\smallskip
+  {\stepcounter{exq}%
+   \hypertarget{sol:lista\currentlista:\theexq}{}%
+   \begin{solucaobox}{\hypersetup{linkcolor=white}\hyperlink{enun:lista\currentlista:\theexq}{Solução do Exercício \theexq}}%
+   \noindent\hfill{\footnotesize\hypersetup{linkcolor=doc}\hyperlink{enun:lista\currentlista:\theexq}{\textbf{[Enunciado no Capítulo $\leftarrow$]}}}\par\smallskip
   }
   {\end{solucaobox}}
+
+\newenvironment{obs}[1][]
+  {\par\smallskip\begin{note}\ifstrempty{#1}{}{\textbf{#1:}\par\smallskip}}
+  {\end{note}\par\smallskip}
+
+% Notação usada nas soluções (chapter/solucoes-lista1.tex e solucoes-lista2.tex)
+\newcommand{\R}{\bbR}
+\newcommand{\N}{\bbN}
+\newcommand{\Z}{\bbZ}
+\newcommand{\K}{\bbK}
+\newcommand{\Ker}{\mathcal{N}}
+\newcommand{\Ima}{\operatorname{Im}}
+\newcommand{\dist}{\operatorname{dist}}

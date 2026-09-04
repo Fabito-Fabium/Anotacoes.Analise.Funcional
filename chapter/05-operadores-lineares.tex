@@ -329,16 +329,6 @@ logo $|f(x)|/\|x\|_2\leq\|a\|_2$, $\forall x\neq 0$, donde $\|f\|\leq\|a\|_2$. P
 $f(a)=\sum_{j=1}^{\infty}a_j^2=\|a\|_2^2$ (o supremo é atingido em $x=a$), logo
 $|f(a)|/\|a\|_2=\|a\|_2$, i.e., $\|f\|=\|a\|_2$.}
 
-\qslista[2]{11}{Isomorfismos isométricos: (a) $(\bbR^n)'\simeq\bbR^n$; (b) $(\ell^p)'\simeq \ell^q$,
-$p>1$, $\frac1p+\frac1q=1$; (c) $(\ell^1)'\simeq \ell^\infty$; (d) $(c_0)'\simeq \ell^1$.}
-
-\qslista[2]{16}{$a\in \ell^1$ e $f:c_0\to\bbR$, $f(x)=\sum_{j\geq1}a_jx_j$. Mostre que $f$ é linear e
-limitado e calcule $\|f\|$.}
-
-\qslista[2]{21}{$V$ com produto interno, $u\in V$ e $f_u(x)=\langle x,u\rangle$. Então $f_u\in V'$ e
-$\|f_u\|=\|u\|$.}
-\nt{Cf. exemplo acima ($X=\ell^2$), caso particular deste resultado com $V=\ell^2$.}
-
 \qslista[2]{12}{$f_1,\dots,f_m$ funcionais em $X$ com $\dim X=n>m$. Então existe $x\neq0$ em
 $\bigcap_{j=1}^m N(f_j)$. Consequências para equações lineares?}
 
@@ -359,6 +349,99 @@ $f_k(e_j)=\delta_{jk}=\begin{cases}1\text{,}&j=k\text{,}\\0\text{,}&j\neq k\text
 \end{itemize}
 
 $\beta'$ é dita base dual de $X'$ com relação a $\beta$.
+
+\section{Duais Concretos}
+
+Nesta seção identificamos o dual topológico de alguns espaços de sequências clássicos com outros espaços
+já conhecidos, associando a cada $f\in X'$ a sequência de seus valores na base canônica
+$e_j=(0,\dots,0,1,0,\dots)$ (o $1$ na $j$-ésima posição),
+$$\Phi(f)=\big(f(e_1),f(e_2),\dots\big)\text{.}$$
+
+\thm{}{$(\bbR^n)'\simeq\bbR^n$ isometricamente, via $\Phi(f)=a:=(f(e_1),\dots,f(e_n))$, com $\bbR^n$
+munido da norma euclidiana.}
+\begin{myproof}
+	$\Phi$ é linear e bijetiva — a inversa é $a\mapsto\langle\cdot,a\rangle$ —, pois todo $f\in(\bbR^n)'$
+	satisfaz $f(x)=\sum_i x_if(e_i)=\langle x,a\rangle$. Por Cauchy--Schwarz, $|f(x)|\leq\|a\|_2\|x\|_2$,
+	logo $\|f\|\leq\|a\|_2$; e, se $a\neq0$, tomando $x=a/\|a\|_2$ obtemos $f(x)=\|a\|_2$, donde
+	$\|f\|=\|a\|_2$. Portanto $\Phi$ é uma isometria linear bijetiva.
+\end{myproof}
+
+\thm{}{Sejam $1<p<\infty$ e $\frac1p+\frac1q=1$. Então $(\ell^p)'\simeq \ell^q$ isometricamente, via
+$\Phi(f)=b:=(f(e_1),f(e_2),\dots)$.}
+\begin{myproof}
+	\textit{$\Phi$ está bem definida e $\|\Phi(f)\|_q\leq\|f\|$:} dado $b\in\ell^q$, pela desigualdade de
+	Hölder $\big|\sum_jb_jx_j\big|\leq\|b\|_q\|x\|_p$, logo o funcional $f_b(x)=\sum_jb_jx_j$ satisfaz
+	$f_b\in(\ell^p)'$ com $\|f_b\|\leq\|b\|_q$.
+
+	\textit{$\|\Phi(f)\|_q\geq\|f\|$:} seja $f\in(\ell^p)'$ e $b_j=f(e_j)$. Fixe $N\in\bbN$ e defina
+	$x^{(N)}_j=|b_j|^{q}/b_j$ para $j\leq N$ com $b_j\neq0$ (e $x_j^{(N)}=0$ caso contrário). Como
+	$(q-1)p=q$, $|x_j^{(N)}|^p=|b_j|^{(q-1)p}=|b_j|^q$, logo
+	$\|x^{(N)}\|_p=\big(\sum_{j\leq N}|b_j|^q\big)^{1/p}$; por outro lado
+	$f(x^{(N)})=\sum_{j\leq N}|b_j|^q$. Da desigualdade $|f(x^{(N)})|\leq\|f\|\,\|x^{(N)}\|_p$ resulta,
+	usando $1-\frac1p=\frac1q$,
+	$$\Big(\sum_{j\leq N}|b_j|^q\Big)^{1/q}\leq\|f\|\text{,}\quad\forall N\in\bbN\text{,}$$
+	donde, fazendo $N\to\infty$, $b\in\ell^q$ com $\|b\|_q\leq\|f\|$.
+
+	\textit{$f=f_b$:} vale em $c_{00}$ pela linearidade. Além disso $c_{00}$ é denso em $\ell^p$, pois as
+	truncaduras $x^{(N)}=(x_1,\dots,x_N,0,0,\dots)$ satisfazem
+	$\|x-x^{(N)}\|_p^p=\sum_{j>N}|x_j|^p\to0$; como $f$ e $f_b$ são contínuos, a igualdade se estende a
+	todo $\ell^p$. Juntando as duas desigualdades, $\|f\|=\|b\|_q$, i.e., $\Phi$ é uma bijeção linear
+	isométrica.
+\end{myproof}
+
+\thm{}{$(\ell^1)'\simeq \ell^\infty$ isometricamente, via $\Phi(f)=b:=(f(e_1),f(e_2),\dots)$.}
+\begin{myproof}
+	Se $b\in\ell^\infty$, $\big|\sum_jb_jx_j\big|\leq\|b\|_\infty\|x\|_1$, logo $\|f_b\|\leq\|b\|_\infty$.
+	Reciprocamente, dado $f\in(\ell^1)'$ e $b_j=f(e_j)$, de $\|e_j\|_1=1$ vem
+	$|b_j|=|f(e_j)|\leq\|f\|$, $\forall j$, donde $b\in\ell^\infty$ e $\|b\|_\infty\leq\|f\|$. Como
+	$c_{00}$ é denso em $\ell^1$ (mesmo argumento de truncamento acima), $f=f_b$ e portanto
+	$\|f\|=\|b\|_\infty$.
+\end{myproof}
+
+\thm{}{$(c_0)'\simeq \ell^1$ isometricamente, via $\Phi(f)=b:=(f(e_1),f(e_2),\dots)$, onde $c_0\subset
+\ell^\infty$ é munido da norma $\|\cdot\|_\infty$.}
+\begin{myproof}
+	Se $b\in\ell^1$, $\big|\sum_jb_jx_j\big|\leq\|b\|_1\|x\|_\infty$, logo $\|f_b\|\leq\|b\|_1$.
+	Reciprocamente, dado $f\in(c_0)'$ e $b_j=f(e_j)$, tome $x^{(N)}=\sum_{j\leq N}\sigma_je_j\in
+	c_{00}\subset c_0$, com $\sigma_j=\overline{b_j}/|b_j|$ se $b_j\neq0$ e $\sigma_j=0$ caso contrário; então
+	$\|x^{(N)}\|_\infty\leq1$ e
+	$$\sum_{j\leq N}|b_j|=f\big(x^{(N)}\big)\leq\|f\|\text{,}\quad\forall N\in\bbN\text{,}$$
+	donde $b\in\ell^1$ com $\|b\|_1\leq\|f\|$. Como $c_{00}$ é denso em $c_0$ (as mesmas truncaduras
+	satisfazem $\|x-x^{(N)}\|_\infty\to0$ para $x\in c_0$), $f=f_b$ e $\|f\|=\|b\|_1$.
+\end{myproof}
+
+\nt{O item anterior \emph{não} se estende a $\ell^\infty$: o argumento quebra porque $c_{00}$ não é denso
+em $\ell^\infty$. De fato $(\ell^\infty)'\supsetneq\ell^1$ — existem funcionais (os ``limites de Banach'',
+obtidos via Hahn-Banach) que se anulam em $c_0$ sem serem nulos. Assim a cadeia de duais $c_0\to
+\ell^1\to\ell^\infty$ não fecha o ciclo, e $\ell^1$ não é reflexivo.}
+
+\thm{}{Seja $V$ um espaço com produto interno e $u\in V$. Definindo $f_u:V\to\bbK$, $f_u(x)=\langle
+x,u\rangle$, tem-se $f_u\in V'$ e $\|f_u\|=\|u\|$.}
+\begin{myproof}
+	A linearidade de $f_u$ segue da linearidade do produto interno na primeira entrada. Por
+	Cauchy--Schwarz, $|f_u(x)|\leq\|x\|\,\|u\|$, $\forall x\in V$, logo $f_u$ é limitado com
+	$\|f_u\|\leq\|u\|$. Se $u=0$, ambos os lados são nulos; se $u\neq0$, tomando $x=u/\|u\|$,
+	$$f_u\Big(\frac{u}{\|u\|}\Big)=\frac{\langle u,u\rangle}{\|u\|}=\|u\|\text{,}$$
+	logo $\|f_u\|\geq\|u\|$ e, portanto, $\|f_u\|=\|u\|$.
+\end{myproof}
+
+\nt{A aplicação $u\mapsto f_u$ é, assim, uma isometria de $V$ em $V'$ (conjugado-linear no caso
+complexo). O Teorema da Representação de Riesz afirma que ela é \emph{sobrejetiva} quando $V$ é um
+espaço de Hilbert, generalizando os isomorfismos $(\bbR^n)'\simeq\bbR^n$ e $(\ell^2)'\simeq\ell^2$
+(caso $p=q=2$) obtidos acima.}
+
+\qslista[2]{11}{Isomorfismos isométricos: (a) $(\bbR^n)'\simeq\bbR^n$; (b) $(\ell^p)'\simeq \ell^q$,
+$p>1$, $\frac1p+\frac1q=1$; (c) $(\ell^1)'\simeq \ell^\infty$; (d) $(c_0)'\simeq \ell^1$.}
+\nt{Cf. os quatro teoremas acima, já demonstrados.}
+
+\qslista[2]{16}{$a\in \ell^1$ e $f:c_0\to\bbR$, $f(x)=\sum_{j\geq1}a_jx_j$. Mostre que $f$ é linear e
+limitado e calcule $\|f\|$.}
+\nt{Caso particular de $(c_0)'\simeq \ell^1$, demonstrado acima.}
+
+\qslista[2]{21}{$V$ com produto interno, $u\in V$ e $f_u(x)=\langle x,u\rangle$. Então $f_u\in V'$ e
+$\|f_u\|=\|u\|$.}
+\nt{Cf. Teorema acima, já demonstrado; note que $f_u$ realiza a Questão 4.5.1 (Corolários de
+Hahn-Banach), pois $\|f_u\|=\|u\|$ e $f_u(u)=\|u\|^2$, sem precisar de Hahn-Banach.}
 
 \section{Espaços Quociente}
 
