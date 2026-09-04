@@ -1,0 +1,127 @@
+\section{Topologia dos Espaços Métricos}
+
+Seja $(X,d)$ um espaço métrico, $A\subset X$ e $x_0\in X$.
+
+\subsection{Conjuntos Abertos, Fechados e Pontos Notáveis}
+
+\dfn{Pontos Notáveis, Conjuntos Abertos e Fechados}{
+\begin{itemize}
+	\item $x_0$ é \emph{ponto interior} de $A$ quando $\exists\,\eps>0$ tal que $B(x_0,\eps)\subset A$; se
+	      $A=\text{int}\,A$, dizemos que $A$ é \emph{aberto}.
+	\item $F\subset X$ é \emph{fechado} se $X\setminus F$ é aberto.
+	\item $x_0$ é \emph{ponto aderente} de $A$ quando $\forall\,\eps>0$, $B(x_0,\eps)\cap A\neq\emptyset$;
+	      o conjunto dos pontos aderentes de $A$ (o \emph{fecho} de $A$) é denotado por $\bar A$.
+	\item $x_0$ é \emph{ponto de acumulação} de $A$ quando $\forall\,\eps>0$,
+	      $\big(B(x_0,\eps)\cap A\big)\setminus\{x_0\}\neq\emptyset$; o conjunto dos pontos de acumulação
+	      de $A$ é denotado por $A'$.
+\end{itemize}}
+
+\qslista{3}{Mostre que o fecho da bola aberta em um espaço métrico nem sempre é a bola
+fechada correspondente.}
+
+\qslista{8}{Seja $A$ um subconjunto do espaço métrico $(X,d)$. Mostre que
+$$x\in\bar A \iff D(x,A)=\inf_{y\in A}d(x,y)=0\text{.}$$}
+
+\qslista{9}{Seja $E$ espaço normado e $A\subset E$ um conjunto limitado. Definindo
+$\text{diam}(A)=\sup_{x,y\in A}\|x-y\|$, mostre que $\text{diam}(A)=\text{diam}(\bar A)$.}
+
+\qslista{17}{Seja $x_0\in[a,b]$. Prove que o conjunto $A_{x_0}=\{f\in C^1[a,b] \mid
+Df(x_0)>0\}$ é aberto em $C^1[a,b]$.}
+
+\qslista{18}{Prove que o conjunto $A=\big\{f\in C[a,b] \mid \int_a^b f(t)\,dt>0\big\}$ é
+aberto em $C[a,b]$.}
+
+\subsection{Compacidade e Continuidade}
+
+\dfn{Compacidade e Continuidade}{
+\begin{itemize}
+	\item $K\subset X$ é \emph{compacto} quando toda sequência em $K$ possui subsequência convergente em
+	      $K$.
+	\item $f:(X,d_1)\to(Y,d_2)$ é \emph{contínua} em $x_0\in X$ sse $\forall\,\eps>0\ \exists\,
+	      \delta(x_0,\eps)>0$ tal que $f(B_1(x_0,\delta))\subset B_2(f(x_0),\eps)$.
+\end{itemize}}
+
+\mprop{Continuidade sequencial e via abertos}{
+	\begin{enumerate}
+		\item Se $f$ é contínua e $x_n\to x$ em $X$, então $f(x_n)\to f(x)$.
+		\item $f$ é contínua $\iff$ $f^{-1}(A)$ é aberto em $X$ sempre que $A$ é aberto em $Y$.
+	\end{enumerate}}
+
+\qslista{5}{Sejam $(X,d)$ espaço métrico e $A\subset X$, $A\neq\emptyset$. Mostre que a
+função $f(x)=d(x,A)$ é Lipschitz.}
+
+\qslista{6}{Sejam $(X,d)$ espaço métrico e $F,G\subset X$ fechados disjuntos. Considere
+$f:X\to[0,1]$ dada por
+$$f(x)=\frac{d(x,F)}{d(x,F)+d(x,G)}\text{.}$$
+\begin{enumerate}
+	\item Mostre que $f$ é contínua e que $f|_F=0$, $f|_G=1$.
+	\item Prove que $A=\{x\in X \mid f(x)<1/2\}$ e $B=\{x\in X \mid f(x)>1/2\}$ são abertos e disjuntos em
+	      $X$, com $F\subset A$ e $G\subset B$.
+\end{enumerate}}
+
+\qslista{16}{Mostre as seguintes caracterizações para funções contínuas: $f:(X,d_1)\to
+(Y,d_2)$ é contínua se, e somente se,
+\begin{enumerate}
+	\item para todo aberto $A\subset Y$, $f^{-1}(A)$ é aberto em $X$;
+	\item para todo fechado $F\subset Y$, $f^{-1}(F)$ é fechado em $X$;
+	\item para toda sequência $(x_n)$ em $X$ tal que $x_n\to x$, tem-se $f(x_n)\to f(x)$.
+\end{enumerate}}
+
+\qslista{19}{Mostre que são equivalentes, para $K\subset X$, $(X,d)$ espaço métrico:
+\begin{enumerate}
+	\item $K$ é compacto em $X$;
+	\item $K$ é completo e, para cada $\eps>0$, $K$ pode ser coberto por uma quantidade finita de bolas
+	      de raio $\eps$ (i.e., $K$ é \emph{totalmente limitado});
+	\item (Heine--Borel) se $\{A_\lambda\}_{\lambda\in\Lambda}$ é uma cobertura aberta de $K$, então
+	      existe $F\subset\Lambda$ finito tal que $\{A_\lambda\}_{\lambda\in F}$ ainda é uma cobertura de
+	      $K$.
+\end{enumerate}}
+
+\qslista{20}{Mostre que um espaço métrico discreto consistindo de infinitos pontos não é
+compacto.}
+
+\qslista{21}{Sejam $(X,d)$ espaço métrico compacto e $f:X\to\bbR$ uma função contínua.
+Mostre que $f$ é uniformemente contínua.}
+
+\qslista{39}{Verifique que todo conjunto totalmente limitado em um espaço métrico é
+limitado. Vale a recíproca? Justifique.}
+
+\subsection{Densidade e Separabilidade}
+
+\dfn{Densidade e Separabilidade}{$A\subset X$ é denso em $X$ quando $\bar A=X$. $X$ é separável se
+existe $A\subset X$ enumerável tal que $\bar A=X$.}
+
+\mprop{$\ell^p$ é separável, $1\leq p<\infty$}{}
+\begin{myproof}
+	Seja $A_m=\big\{x=(x_j)\in\bbR^{\bbN} \mid x=(x_1,x_2,\dots,x_m,0,0,\dots),\ x_j\in\bbQ\ \forall j\big\}$.
+	Note que $A_m\cong \bbQ^m$; como $A_m$ é enumerável, $A=\bigcup_{m\in\bbN}A_m$ também é enumerável.
+
+	Dado $\eps>0$ e $x=(x_j)\in\ell^p$, como $x\in\ell^p$ existe $m_0\in\bbN$ tal que
+	$$\sum_{k=m_0+1}^{\infty}|x_k|^p<\frac{\eps^p}{2} \quad \text{(critério de Cauchy para séries convergentes).}$$
+	Por outro lado, da densidade de $\bbQ$ em $\bbR$, existe $y=(y_k)_{k=1}^{m_0}\in A_{m_0}$ satisfazendo
+	$$\sum_{k=1}^{m_0}|x_k-y_k|^p<\frac{\eps^p}{2}\text{.}$$
+	Com isso,
+	$$\sum_{k=1}^{\infty}|x_k-y_k|^p=\sum_{k=1}^{m_0}|x_k-y_k|^p+\sum_{k=m_0+1}^{\infty}|x_k|^p<\frac{\eps^p}{2}+\frac{\eps^p}{2}=\eps^p\text{,}$$
+	logo $d(x,y)<\eps$. Portanto $\bar A=\ell^p$, $1\leq p<\infty$.
+\end{myproof}
+
+\mprop{$\ell^\infty$ não é separável}{}
+\begin{myproof}
+	Usamos o resultado: se $X$ é um espaço métrico discreto, então $X$ é separável $\iff$ $X$ é enumerável.
+
+	Seja $S\subset \ell^\infty$ dado por $S=\{x=(x_j)\in\bbR^{\bbN} \mid x_j\in\{0,1\}\ \forall j\in\bbN\}$.
+	Para cada $x=(x_j)\in S$, construímos $A_x\subset\bbN$ por
+	$$x_j=1 \implies j\in A_x\text{,}\qquad x_j=0 \implies j\notin A_x\text{,}$$
+	e $A_x\in\mcP(\bbN)$, que é não-enumerável; logo $S$ é não-enumerável.
+
+	Além disso $S$ é discreto: se $x,y\in S$, $x\neq y$, então para $\eps=\frac12$ temos
+	$$d(x,y)=\sup_{j\in\bbN}|x_j-y_j|=1>\eps\text{.}$$
+	Com isso, $S$ é não separável e, por consequência, $\ell^\infty\supset S$ é não-separável.
+\end{myproof}
+
+\qslista{38}{Dizemos que um espaço métrico $(X,d)$ é totalmente limitado se, para cada
+$\eps>0$, $X$ pode ser coberto por uma quantidade finita de bolas de raio $\eps$. Se $(X,d)$ é totalmente
+limitado, mostre que $X$ é separável.}
+
+\qslista{43}{Um espaço métrico $(X,d)$ é de Lindelöf quando toda cobertura aberta de $X$
+possui uma subcobertura enumerável. Mostre que todo espaço métrico separável é de Lindelöf.}

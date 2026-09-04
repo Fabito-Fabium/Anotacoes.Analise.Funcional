@@ -1,0 +1,863 @@
+\section{Lista 1}
+\renewcommand{\currentlista}{1}
+\setcounter{ex}{0}
+
+\newcommand{\R}{\bbR}
+\newcommand{\N}{\bbN}
+\newcommand{\Z}{\bbZ}
+\renewcommand{\sol}{\textcolor{myr}{\textbf{[RASCUNHO --- substituir]}}\par\smallskip}
+
+\newenvironment{obs}[1][]
+  {\par\smallskip\begin{note}\ifstrempty{#1}{}{\textbf{#1:}\par\smallskip}}
+  {\end{note}\par\smallskip}
+
+\begin{tcolorbox}[
+  enhanced,
+  breakable,
+  colback=mytheorembg,
+  colframe=doc!80!black,
+  boxrule=0sp,
+  borderline west={2.5pt}{0pt}{doc!80!black},
+  sharp corners,
+  title=\textbf{Notação e Convenções},
+  coltitle=doc!80!black,
+  fonttitle=\bfseries\sffamily,
+  detach title,
+  before upper=\tcbtitle\par\smallskip
+]
+$(X,d)$ denota um espaço métrico e $(E,\norm{\cdot})$ ou $(X,\norm{\cdot})$ um espaço normado sobre $\bbK\in\{\R,\mathbb{C}\}$; $B(x,r)=\{y;\ d(x,y)<r\}$ e $\overline{B}(x,r)=\{y;\ d(x,y)\le r\}$. Em espaços normados a métrica é sempre $d(x,y)=\norm{x-y}$, salvo menção em contrário, e $D(x,A)=d(x,A)=\inf_{y\in A}d(x,y)$. Para $1\le p<\infty$,
+\[ \ell^p=\Bigl\{x=(x_j)\subset\bbK;\ \norm{x}_p:=\Bigl(\sum_{j=1}^\infty\abs{x_j}^p\Bigr)^{1/p}<\infty\Bigr\},\qquad \ell^\infty=\Bigl\{x;\ \norm{x}_\infty:=\sup_j\abs{x_j}<\infty\Bigr\}, \]
+e $c_{00}\subset c_0\subset c\subset\ell^\infty$ são os subespaços das sequências com finitos termos não nulos, das que convergem a zero e das convergentes; $e_n$ é o $n$-ésimo vetor canônico e $S$ é o espaço de \emph{todas} as sequências reais. Em $C[a,b]$ usamos $\norm{x}_\infty=\max_t\abs{x(t)}$ e $\norm{x}_1=\int_a^b\abs{x}$; em $C^1[a,b]$, $\norm{x}=\norm{x}_\infty+\norm{x'}_\infty$. Um subconjunto $K\subset X$ é \emph{compacto} quando toda sequência em $K$ possui subsequência convergente em $K$; é \emph{totalmente limitado} quando, para cada $\eps>0$, pode ser coberto por finitas bolas de raio $\eps$.
+\end{tcolorbox}
+
+\begin{tcolorbox}[
+  enhanced,
+  breakable,
+  colback=myexamplebg,
+  colframe=myexampleti,
+  boxrule=0sp,
+  borderline west={2.5pt}{0pt}{myexampleti},
+  sharp corners,
+  title=\textbf{Roteiro Temático da Lista},
+  coltitle=myexampleti,
+  fonttitle=\bfseries\sffamily,
+  detach title,
+  before upper=\tcbtitle\par\smallskip
+]
+A lista percorre, em ordem, dez temas fundamentais:
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item \textbf{Desigualdades básicas e a função distância} (1, 2, 4, 5, 8, 9): a desigualdade triangular ``de segunda ordem''; $x\mapsto d(x,A)$ é $1$-Lipschitz; $x\in\overline{A}\iff d(x,A)=0$; e $\operatorname{diam}(A)=\operatorname{diam}(\overline{A})$.
+\item \textbf{Geometria de bolas e construções de métricas} (3, 6, 7): fecho de bola aberta versus bola fechada; função de separação de Urysohn; métricas produto.
+\item \textbf{Espaços de sequências} (10, 12, 14, 15): Hölder no caso extremo; paralelogramo em $\ell^p$; cadeia $\ell^1\subset \ell^p\subset \ell^q\subset c_0\subset \ell^\infty$.
+\item \textbf{Quando uma métrica provém de uma norma} (11, 13, 30): invariância por translações e homotetia; métricas limitadas.
+\item \textbf{Continuidade e conjuntos abertos} (16, 17, 18): caracterizações de continuidade; aplicações em espaços de funções.
+\item \textbf{Compacidade e dimensão finita} (19, 20, 21, 22, 23, 26): compacidade sequencial e Heine--Borel; continuidade uniforme; caracterização em dimensão finita.
+\item \textbf{Semi-normas e somas de conjuntos} (24, 25): a semi-norma $\limsup\abs{x_n}$ e núcleo $c_0$; propriedades de $A+B$.
+\item \textbf{Completude: critérios e contraexemplos} (27--36): critério de subsequência de Cauchy; bolas encaixadas; incompletude de $c_{00}$ e $(C[0,1],\norm{\cdot}_1)$.
+\item \textbf{Separabilidade, limitação e isometrias} (33, 37--44): totalmente limitado $\Rightarrow$ separável $\Rightarrow$ Lindelöf; base de Schauder; isometrias sobrejetivas.
+\item \textbf{Geometria dos Banach e quocientes} (45--50): subespaços fechados e soma $Y+Z$; Lema de Riesz; espaços quocientes $X/M$.
+\end{itemize}
+\medskip
+\noindent\footnotesize\textit{Nota: As soluções fazem referências cruzadas entre si; sempre que um resultado de outro exercício é invocado, o enunciado utilizado vem explicitado.}
+\end{tcolorbox}
+\vspace{4mm}
+\begin{exercicio}{Seja $(X,d)$ um espaço métrico. Mostre que $\abs{d(x,z)-d(z,y)}\le d(x,y)$ e $\abs{d(x_1,y_1)-d(x_2,y_2)}\le d(x_1,x_2)+d(y_1,y_2)$.}
+\sol
+\textbf{(i)} Pela desigualdade triangular e pela simetria,
+\[ d(x,z) \le d(x,y)+d(y,z) \quad\Longrightarrow\quad d(x,z)-d(z,y) \le d(x,y). \]
+Trocando os papéis de $x$ e $y$: $d(z,y)\le d(z,x)+d(x,y)$, logo $d(z,y)-d(x,z)\le d(x,y)$. Como o módulo de um número real é o maior entre ele e seu simétrico, concluímos $\abs{d(x,z)-d(z,y)}\le d(x,y)$.
+
+\textbf{(ii)} Usando a desigualdade triangular duas vezes,
+\[ d(x_1,y_1) \le d(x_1,x_2)+d(x_2,y_2)+d(y_2,y_1), \]
+donde $d(x_1,y_1)-d(x_2,y_2)\le d(x_1,x_2)+d(y_1,y_2)$. Permutando os índices $1$ e $2$ obtemos a desigualdade simétrica $d(x_2,y_2)-d(x_1,y_1)\le d(x_1,x_2)+d(y_1,y_2)$. As duas juntas dão o resultado.
+\end{exercicio}
+
+\begin{exercicio}{Sejam $A,B\subset X$ e $D(A,B)=\inf\{d(x,y);\, x\in A,\ y\in B\}$, $D(x,B)=\inf_{y\in B} d(x,y)$. (a) $D$ não é métrica nas partes de $X$. (b) $\abs{D(x,B)-D(z,B)}\le d(x,z)$.}
+\sol
+\textbf{(a)} Falham simultaneamente a separação e a desigualdade triangular. Tome $X=\R$ com a métrica usual.
+
+\emph{Falha da separação:} $A=[0,1]$ e $B=[1,2]$ são conjuntos distintos com $D(A,B)=0$, pois $1\in A\cap B$. Também $A=(0,1)$ e $B=(1,2)$ são disjuntos, distintos, e ainda assim $D(A,B)=0$ (basta tomar $x=1-\tfrac1n$, $y=1+\tfrac1n$).
+
+\emph{Falha da desigualdade triangular:} com $A=\{0\}$, $B=\{10\}$ e $C=[0,10]$ temos
+\[ D(A,B)=10 > 0+0 = D(A,C)+D(C,B). \]
+Ainda: $D(\emptyset,B)=\inf\emptyset=+\infty$, de modo que $D$ nem sequer assume valores em $[0,\infty)$ em todo $\mcP(X)$.
+
+\textbf{(b)} Se $B=\emptyset$ a afirmação é vazia; suponha $B\neq\emptyset$. Para todo $y\in B$,
+\[ D(x,B)\le d(x,y)\le d(x,z)+d(z,y). \]
+Tomando o ínfimo em $y\in B$ do lado direito, $D(x,B)\le d(x,z)+D(z,B)$, ou seja, $D(x,B)-D(z,B)\le d(x,z)$. Trocando $x$ por $z$ obtém-se a outra desigualdade, e portanto $\abs{D(x,B)-D(z,B)}\le d(x,z)$.
+\end{exercicio}
+
+\begin{exercicio}{Mostre que o fecho da bola aberta nem sempre é a bola fechada correspondente.}
+\sol
+Seja $X$ um conjunto com pelo menos dois pontos, munido da métrica discreta
+\[ d(x,y)=\begin{cases} 0,& x=y\\ 1,& x\neq y.\end{cases} \]
+Fixado $x_0\in X$ e $r=1$:
+\[ B(x_0,1)=\{x;\ d(x_0,x)<1\}=\{x_0\}, \qquad \overline{B}(x_0,1)=\{x;\ d(x_0,x)\le 1\}=X. \]
+Na métrica discreta todo subconjunto é fechado, logo $\overline{B(x_0,1)}=\{x_0\}\neq X=\overline{B}(x_0,1)$.
+
+\begin{obs}
+Vale sempre a inclusão $\overline{B(x,r)}\subset \overline{B}(x,r)$, pois $\overline{B}(x,r)$ é fechada (é a pré-imagem de $[0,r]$ pela função contínua $y\mapsto d(x,y)$) e contém $B(x,r)$. A igualdade vale, por exemplo, em qualquer espaço \emph{normado} não trivial: se $\norm{y-x}\le r$, então $y_n = x+(1-\tfrac1n)(y-x)\in B(x,r)$ e $y_n\to y$.
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{Num espaço normado $X$ vale $\bigl|\norm{x}-\norm{y}\bigr|\le \norm{x\pm y}$.}
+\sol
+Da desigualdade triangular, $\norm{x}=\norm{(x-y)+y}\le \norm{x-y}+\norm{y}$, isto é, $\norm{x}-\norm{y}\le\norm{x-y}$. Trocando $x\leftrightarrow y$ e usando $\norm{y-x}=\norm{-(x-y)}=\norm{x-y}$, obtemos $\norm{y}-\norm{x}\le \norm{x-y}$. Logo
+\[ \bigl|\norm{x}-\norm{y}\bigr|\le \norm{x-y}. \]
+Aplicando esta desigualdade ao par $(x,-y)$ e usando $\norm{-y}=\norm{y}$:
+\[ \bigl|\norm{x}-\norm{y}\bigr| = \bigl|\norm{x}-\norm{-y}\bigr| \le \norm{x-(-y)}=\norm{x+y}. \]
+\end{exercicio}
+
+\begin{exercicio}{Se $\emptyset\neq A\subset X$, então $f(x)=d(x,A)$ é Lipschitz.}
+\sol
+Pelo Exercício 2(b), para todos $x,z\in X$ temos $\abs{d(x,A)-d(z,A)}\le d(x,z)$, ou seja, $f$ é Lipschitz com constante $L=1$ (em particular $f$ é uniformemente contínua). A hipótese $A\neq\emptyset$ garante que $f$ toma valores finitos.
+\end{exercicio}
+
+\begin{exercicio}{$F,G\subset X$ fechados disjuntos e $f(x)=\dfrac{d(x,F)}{d(x,F)+d(x,G)}$. (a) $f$ é contínua, $f|_F=0$, $f|_G=1$. (b) $A=\{f<1/2\}$ e $B=\{f>1/2\}$ são abertos disjuntos com $F\subset A$, $G\subset B$.}
+\sol
+Suponha $F,G\neq\emptyset$ (caso contrário defina $f\equiv 1$ ou $f\equiv 0$).
+
+\textbf{(a)} Primeiro, o denominador nunca se anula. De fato, sabemos (Exercício 8) que $d(x,F)=0 \iff x\in\overline{F}=F$. Se tivéssemos $d(x,F)+d(x,G)=0$, então $x\in F\cap G=\emptyset$, absurdo. Assim $\varphi(x):=d(x,F)+d(x,G)>0$ para todo $x$.
+
+Pelo Exercício 5, $x\mapsto d(x,F)$ e $x\mapsto d(x,G)$ são contínuas; logo $\varphi$ é contínua e não se anula, e o quociente $f=d(\cdot,F)/\varphi$ é contínuo. Como $0\le d(x,F)\le \varphi(x)$, temos $f(X)\subset[0,1]$.
+
+Se $x\in F$, então $d(x,F)=0$ e $f(x)=0$; se $x\in G$, então $d(x,G)=0$, logo $\varphi(x)=d(x,F)$ e $f(x)=1$.
+
+\textbf{(b)} $A=f^{-1}\bigl((-\infty,1/2)\bigr)$ e $B=f^{-1}\bigl((1/2,+\infty)\bigr)$ são pré-imagens de abertos de $\R$ por uma função contínua, portanto abertos (Exercício 16(a)). São disjuntos porque $(-\infty,1/2)\cap(1/2,\infty)=\emptyset$. Finalmente, $f|_F=0<1/2$ dá $F\subset A$ e $f|_G=1>1/2$ dá $G\subset B$.
+
+\begin{obs}
+Isto prova que todo espaço métrico é \emph{normal}, e ainda mais: fechados disjuntos são separados por uma função contínua (Lema de Urysohn, versão métrica).
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{$X=X_1\times X_2$ é métrico com $d_a(x,y)=\sqrt{d_1(x_1,y_1)^2+d_2(x_2,y_2)^2}$, $d_b = d_1+d_2$ e $d_c=\max\{d_1,d_2\}$.}
+\sol
+Escreva $u=d_1(x_1,y_1)$, $v=d_2(x_2,y_2)$, e analogamente para os outros pares. Em todos os três casos, não-negatividade e simetria são imediatas de $d_1,d_2$ serem métricas, e
+\[ d_\bullet(x,y)=0 \iff d_1(x_1,y_1)=d_2(x_2,y_2)=0 \iff x_1=y_1 \text{ e } x_2=y_2 \iff x=y, \]
+pois em cada caso $d_\bullet(x,y)=0$ força as duas parcelas a se anularem. Resta a desigualdade triangular; sejam $x,y,z\in X$ e ponha $a_i=d_i(x_i,z_i)$, $b_i=d_i(z_i,y_i)$, de modo que $d_i(x_i,y_i)\le a_i+b_i$ para $i=1,2$.
+
+\emph{$d_b$:} $d_b(x,y)\le (a_1+b_1)+(a_2+b_2)=d_b(x,z)+d_b(z,y)$.
+
+\emph{$d_c$:} para $i=1,2$, $d_i(x_i,y_i)\le a_i+b_i \le \max\{a_1,a_2\}+\max\{b_1,b_2\}$; tomando o máximo em $i$ segue o resultado.
+
+\emph{$d_a$:} como $t\mapsto \sqrt{t_1^2+t_2^2}$ é a norma euclidiana $\norm{\cdot}_2$ de $\R^2$ e é monótona em cada coordenada sobre vetores de coordenadas não-negativas,
+\[ d_a(x,y)=\norm{(d_1(x_1,y_1),d_2(x_2,y_2))}_2 \le \norm{(a_1+b_1,\,a_2+b_2)}_2 \le \norm{(a_1,a_2)}_2+\norm{(b_1,b_2)}_2, \]
+onde na última passagem usamos a desigualdade de Minkowski em $\R^2$. Isto é exatamente $d_a(x,y)\le d_a(x,z)+d_a(z,y)$.
+
+\begin{obs}
+As três métricas são equivalentes: $d_c\le d_a\le d_b\le 2d_c$.
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{$A\subset X$. Então $x\in\overline{A} \iff D(x,A)=\inf_{y\in A} d(x,y)=0$.}
+\sol
+($\Rightarrow$) Se $x\in\overline{A}$, para cada $n\in\N$ a bola $B(x,1/n)$ intersecta $A$; escolha $y_n\in A$ com $d(x,y_n)<1/n$. Então $0\le D(x,A)\le d(x,y_n)<1/n$ para todo $n$, logo $D(x,A)=0$.
+
+($\Leftarrow$) Se $D(x,A)=0$, dado $\eps>0$ o número $\eps$ não é cota inferior do conjunto $\{d(x,y);y\in A\}$, logo existe $y\in A$ com $d(x,y)<\eps$, isto é, $B(x,\eps)\cap A\neq\emptyset$. Como $\eps>0$ é arbitrário, toda vizinhança de $x$ encontra $A$ e portanto $x\in\overline{A}$.
+\end{exercicio}
+
+\begin{exercicio}{$E$ normado, $A\subset E$ limitado, $\operatorname{diam}(A)=\sup_{x,y\in A}\norm{x-y}$. Mostre que $\operatorname{diam}(A)=\operatorname{diam}(\overline{A})$.}
+\sol
+Como $A\subset\overline{A}$, o supremo sobre $\overline{A}$ é tomado sobre um conjunto maior de pares, logo $\operatorname{diam}(A)\le \operatorname{diam}(\overline{A})$.
+
+Reciprocamente, sejam $x,y\in\overline{A}$ e $\eps>0$. Existem $a,b\in A$ com $\norm{x-a}<\eps/2$ e $\norm{y-b}<\eps/2$. Então
+\[ \norm{x-y}\le \norm{x-a}+\norm{a-b}+\norm{b-y} < \operatorname{diam}(A)+\eps. \]
+Como $\eps>0$ é arbitrário, $\norm{x-y}\le\operatorname{diam}(A)$; tomando o supremo sobre $x,y\in\overline{A}$ obtemos $\operatorname{diam}(\overline{A})\le\operatorname{diam}(A)$. (Em particular $\overline{A}$ também é limitado.) O argumento vale, ipsis litteris, em qualquer espaço métrico.
+\end{exercicio}
+
+\begin{exercicio}{Desigualdade de Hölder para $p=1$, $q=\infty$: se $x\in \ell^1$ e $y\in \ell^\infty$, então $\sum_{j\ge1}\abs{x_jy_j}\le\norm{x}_1\norm{y}_\infty$.}
+\sol
+Por definição, $\abs{y_j}\le \sup_k \abs{y_k}=\norm{y}_\infty$ para todo $j$. Logo, para cada $N\in\N$,
+\[ \sum_{j=1}^{N}\abs{x_jy_j}=\sum_{j=1}^{N}\abs{x_j}\,\abs{y_j} \le \norm{y}_\infty\sum_{j=1}^{N}\abs{x_j} \le \norm{y}_\infty\norm{x}_1. \]
+A sequência das somas parciais é crescente e limitada por $\norm{x}_1\norm{y}_\infty$; portanto a série converge e
+\[ \sum_{j=1}^{\infty}\abs{x_jy_j}\le \norm{x}_1\norm{y}_\infty. \]
+Em particular $(x_jy_j)\in \ell^1$, isto é, $\ell^\infty$ age sobre $\ell^1$ por multiplicação pontual. A desigualdade é ótima: se $y=(1,1,1,\dots)$, vale a igualdade.
+\end{exercicio}
+\begin{exercicio}{Se $d$ é métrica num espaço vetorial $E$, invariante por translações e homogênea, então $d$ é induzida por uma norma.}
+\sol
+Defina $\norm{x}:=d(x,0)$, $x\in E$. Verifiquemos os axiomas de norma.
+
+\emph{Positividade e separação:} $\norm{x}=d(x,0)\ge 0$ e $\norm{x}=0\iff d(x,0)=0\iff x=0$.
+
+\emph{Homogeneidade:} pela lei de homotetia, $\norm{\lambda x}=d(\lambda x,0)=d(\lambda x,\lambda 0)=\abs{\lambda}d(x,0)=\abs{\lambda}\norm{x}$.
+
+\emph{Desigualdade triangular:} usando a invariância por translações (com $z=y$ e depois $z=-y$),
+\[ \norm{x+y}=d(x+y,0)\le d(x+y,y)+d(y,0)=d(x,0)+d(y,0)=\norm{x}+\norm{y}, \]
+pois $d(x+y,y)=d\bigl((x+y)+(-y),\,y+(-y)\bigr)=d(x,0)$.
+
+Finalmente, a métrica induzida por $\norm{\cdot}$ coincide com $d$: pela invariância por translações,
+\[ \norm{x-y}=d(x-y,0)=d\bigl((x-y)+y,\,0+y\bigr)=d(x,y). \]
+\end{exercicio}
+
+\begin{exercicio}{$\norm{x}_p=\bigl(\sum_j\abs{x_j}^p\bigr)^{1/p}$ em $\ell^p$ provém de um produto interno se, e somente se, $p=2$.}
+\sol
+($\Leftarrow$) Para $p=2$, $\langle x,y\rangle=\sum_{j}x_j\overline{y_j}$ está bem definido (a série converge absolutamente por Cauchy--Schwarz, isto é, Hölder com $p=q=2$), é sesquilinear, hermitiano, positivo definido e satisfaz $\langle x,x\rangle=\norm{x}_2^2$. Logo $\norm{\cdot}_2$ provém do produto interno $\langle\cdot,\cdot\rangle$.
+
+($\Rightarrow$) Uma norma provém de um produto interno se, e somente se, satisfaz a \emph{lei do paralelogramo}
+\[ \norm{u+v}^2+\norm{u-v}^2=2\norm{u}^2+2\norm{v}^2 \qquad (\text{Jordan--von Neumann}). \]
+Tome $u=e_1=(1,0,0,\dots)$ e $v=e_2=(0,1,0,\dots)$, ambos em $\ell^p$. Então
+\[ u+v=(1,1,0,\dots),\qquad u-v=(1,-1,0,\dots),\qquad \norm{u\pm v}_p=2^{1/p},\qquad \norm{u}_p=\norm{v}_p=1. \]
+A lei do paralelogramo forçaria
+\[ 2\cdot 2^{2/p}=2+2=4 \quad\Longrightarrow\quad 2^{2/p}=2 \quad\Longrightarrow\quad \tfrac{2}{p}=1 \quad\Longrightarrow\quad p=2. \]
+Logo, para $p\neq 2$ a lei do paralelogramo falha e $\norm{\cdot}_p$ não é induzida por produto interno. (O mesmo cálculo, com $\norm{u\pm v}_\infty=1$, exclui $p=\infty$: teríamos $1+1=4$.)
+
+\begin{obs}
+A implicação ``lei do paralelogramo $\Rightarrow$ existe produto interno'' é o teorema de Jordan--von Neumann; o candidato a produto interno é dado pela \emph{identidade de polarização}
+\[ \langle x,y\rangle=\tfrac14\bigl(\norm{x+y}^2-\norm{x-y}^2\bigr) \quad(\bbK=\R),\qquad \langle x,y\rangle=\tfrac14\sum_{k=0}^{3}i^k\norm{x+i^ky}^2 \quad(\bbK=\mathbb{C}). \]
+Para o exercício, porém, só é preciso a direção elementar: se $\norm{\cdot}$ vem de um produto interno, então
+\[ \norm{u+v}^2+\norm{u-v}^2=\langle u+v,u+v\rangle+\langle u-v,u-v\rangle=2\norm{u}^2+2\norm{v}^2, \]
+por expansão direta --- e é essa identidade que os vetores $e_1,e_2$ violam quando $p\neq2$.
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{$S$ = espaço de todas as sequências reais e $d(x,y)=\sum_{j\ge1}2^{-j}\dfrac{\abs{x_j-y_j}}{1+\abs{x_j-y_j}}$ é métrica em $S$, não induzida por norma alguma.}
+\sol
+\emph{$d$ está bem definida:} cada parcela é $\le 2^{-j}$, logo a série converge e $0\le d(x,y)\le 1$.
+
+\emph{Separação e simetria:} são claras, pois $\varphi(t)=\frac{t}{1+t}$ satisfaz $\varphi(t)=0\iff t=0$ para $t \geq 0$; assim $d(x,y)=0$ implica $\abs{x_j-y_j}=0$ para todo $j$.
+
+\emph{Desigualdade triangular:} a função $\varphi(t)=\frac{t}{1+t}$ é crescente em $[0,\infty)$ (pois $\varphi'(t)=(1+t)^{-2}>0$) e subaditiva:
+\[ \varphi(a+b)=\frac{a+b}{1+a+b}=\frac{a}{1+a+b}+\frac{b}{1+a+b}\le \frac{a}{1+a}+\frac{b}{1+b}=\varphi(a)+\varphi(b). \]
+Logo, com $a=\abs{x_j-z_j}$ e $b=\abs{z_j-y_j}$ e usando $\abs{x_j-y_j}\le a+b$,
+\[ \varphi(\abs{x_j-y_j})\le\varphi(a+b)\le \varphi(a)+\varphi(b). \]
+Multiplicando por $2^{-j}$ e somando em $j$ obtém-se $d(x,y)\le d(x,z)+d(z,y)$.
+
+\emph{$d$ não é induzida por norma:} se $d$ proviesse de uma norma $\norm{\cdot}$, teríamos $d(\lambda x,0)=\abs{\lambda}\norm{x}\to\infty$ quando $\abs{\lambda}\to\infty$, para qualquer $x\neq 0$ fixado. Mas $d$ é limitada por $1$. Como $S\neq\{0\}$, isto é impossível. (Equivalentemente: $d$ não é homogênea, cf.\ Exercício 11.)
+\end{exercicio}
+
+\begin{exercicio}{Se $1<p<q<\infty$, então $\ell^1\subset \ell^p\subset \ell^q\subset \ell^\infty$, com inclusões próprias.}
+\sol
+\emph{Inclusões.} Sejam $1\le r<s<\infty$ e $x\in \ell^r$. Como $\sum_j\abs{x_j}^r<\infty$, temos $\abs{x_j}\to0$; logo $\abs{x_j}\le 1$ para $j\ge j_0$ e, nesse regime, $\abs{x_j}^s\le\abs{x_j}^r$ (pois $t\mapsto t^\alpha$ é decrescente em $\alpha$ para $0\le t\le1$). Portanto
+\[ \sum_{j\ge j_0}\abs{x_j}^s\le \sum_{j\ge j_0}\abs{x_j}^r<\infty, \]
+e somando os finitos termos restantes, $x\in \ell^s$. Isto dá $\ell^1\subset \ell^p\subset \ell^q$. Para $\ell^q\subset \ell^\infty$: se $x\in \ell^q$, então $\abs{x_k}^q\le\sum_j\abs{x_j}^q=\norm{x}_q^q$ para cada $k$, ou seja, $\norm{x}_\infty\le\norm{x}_q<\infty$.
+
+\begin{obs}
+O mesmo argumento, aplicado a $x/\norm{x}_r$, fornece $\norm{x}_s\le\norm{x}_r$ para $r<s$: podemos supor $\norm{x}_r=1$, e então $\abs{x_j}\le1$ para todo $j$, donde $\sum\abs{x_j}^s\le\sum\abs{x_j}^r=1$.
+\end{obs}
+
+\emph{As inclusões são próprias.}
+\begin{itemize}[leftmargin=*]
+\item $\ell^p\setminus \ell^1\neq\emptyset$: $x_j=j^{-1}$ satisfaz $\sum j^{-p}<\infty$ (pois $p>1$) e $\sum j^{-1}=\infty$.
+\item $\ell^q\setminus \ell^p\neq\emptyset$: tome $x_j=j^{-1/p}$. Então $\sum\abs{x_j}^p=\sum j^{-1}=\infty$, logo $x\notin \ell^p$; e $\sum\abs{x_j}^q=\sum j^{-q/p}<\infty$, pois $q/p>1$.
+\item $\ell^\infty\setminus \ell^q\neq\emptyset$: a sequência constante $x=(1,1,1,\dots)$ é limitada mas $\sum 1^q=\infty$.
+\end{itemize}
+\end{exercicio}
+
+\begin{exercicio}{Para $1\le p<\infty$, $\ell^p\subset c_0\subset \ell^\infty$; e existe elemento de $c_0$ que não pertence a nenhum $\ell^p$.}
+\sol
+\emph{$\ell^p\subset c_0$:} se $\sum_j\abs{x_j}^p<\infty$, o termo geral da série tende a zero, isto é, $\abs{x_j}^p\to0$, logo $x_j\to0$ e $x\in c_0$.
+
+\emph{$c_0\subset \ell^\infty$:} toda sequência convergente é limitada.
+
+\emph{Elemento de $c_0\setminus\bigcup_p \ell^p$:} tome
+\[ x_j=\frac{1}{\log(j+1)},\qquad j\ge1. \]
+Claramente $x_j\to0$, logo $x\in c_0$. Fixe $1\le p<\infty$. Como $\log(j+1)^p = o(j)$ quando $j\to\infty$ (o logaritmo elevado a qualquer potência cresce mais devagar que qualquer potência positiva de $j$), existe $j_0$ tal que $(\log(j+1))^p\le j$ para $j\ge j_0$. Assim
+\[ \abs{x_j}^p=\frac{1}{(\log(j+1))^p}\ge\frac{1}{j},\qquad j\ge j_0, \]
+e por comparação com a série harmônica $\sum_j\abs{x_j}^p=\infty$. Logo $x\notin \ell^p$ para todo $p\in[1,\infty)$. As inclusões $\ell^p\subset c_0\subset \ell^\infty$ são, portanto, próprias (para a segunda, use $(1,1,1,\dots)$).
+\end{exercicio}
+
+\begin{exercicio}{Caracterizações de continuidade: (a) via abertos, (b) via fechados, (c) via sequências.}
+\sol
+\textbf{(a)} ($\Rightarrow$) Seja $f$ contínua e $A\subset Y$ aberto. Se $x\in f^{-1}(A)$, então $f(x)\in A$, logo existe $\eps>0$ com $B(f(x),\eps)\subset A$. Pela continuidade em $x$, existe $\delta>0$ tal que $d_1(x,z)<\delta \Rightarrow d_2(f(x),f(z))<\eps$, isto é, $f(B(x,\delta))\subset B(f(x),\eps)\subset A$, ou seja $B(x,\delta)\subset f^{-1}(A)$. Logo $f^{-1}(A)$ é aberto.
+
+($\Leftarrow$) Dados $x\in X$ e $\eps>0$, o conjunto $A=B(f(x),\eps)$ é aberto em $Y$; por hipótese $f^{-1}(A)$ é aberto e contém $x$, logo existe $\delta>0$ com $B(x,\delta)\subset f^{-1}(A)$, o que é exatamente a definição $\eps$--$\delta$ de continuidade em $x$.
+
+\textbf{(b)} Segue de (a) e da identidade $f^{-1}(Y\setminus F)=X\setminus f^{-1}(F)$: $F$ é fechado $\iff Y\setminus F$ é aberto $\iff f^{-1}(Y\setminus F)=X\setminus f^{-1}(F)$ é aberto $\iff f^{-1}(F)$ é fechado.
+
+\textbf{(c)} ($\Rightarrow$) Sejam $f$ contínua em $x$ e $x_n\to x$. Dado $\eps>0$, tome $\delta>0$ da continuidade e $n_0$ com $d_1(x_n,x)<\delta$ para $n\ge n_0$; então $d_2(f(x_n),f(x))<\eps$ para $n\ge n_0$, isto é, $f(x_n)\to f(x)$.
+
+($\Leftarrow$) Suponha $f$ descontínua em algum $x$: existe $\eps_0>0$ tal que para todo $\delta=1/n$ existe $x_n$ com $d_1(x_n,x)<1/n$ e $d_2(f(x_n),f(x))\ge\eps_0$. Então $x_n\to x$ mas $f(x_n)\not\to f(x)$, contradizendo a hipótese. Logo $f$ é contínua.
+\end{exercicio}
+
+\begin{exercicio}{$x_0\in[a,b]$. O conjunto $A_{x_0}=\{f\in C^1[a,b];\ Df(x_0)>0\}$ é aberto em $C^1[a,b]$.}
+\sol
+Em $C^1[a,b]$ usamos a norma usual
+\[ \norm{f}=\max_{t\in[a,b]}\abs{f(t)}+\max_{t\in[a,b]}\abs{f'(t)}=\norm{f}_\infty+\norm{f'}_\infty \]
+(com a qual $C^1[a,b]$ é um espaço de Banach --- Exercício 48). Considere o funcional
+\[ \delta_{x_0}\circ D: C^1[a,b]\to\R, \qquad f\longmapsto f'(x_0). \]
+Ele é linear e limitado, pois $\abs{f'(x_0)}\le\norm{f'}_\infty\le\norm{f}$; em particular é contínuo. Logo
+\[ A_{x_0}=(\delta_{x_0}\circ D)^{-1}\bigl((0,+\infty)\bigr) \]
+é a pré-imagem de um aberto de $\R$ por função contínua, portanto aberto (Exercício 16(a)).
+
+\emph{Argumento direto (equivalente):} se $f\in A_{x_0}$, ponha $c=f'(x_0)>0$ e tome $r=c$. Se $\norm{g-f}<r$, então
+\[ \abs{g'(x_0)-f'(x_0)}\le\norm{g'-f'}_\infty\le\norm{g-f}<c, \]
+logo $g'(x_0)>f'(x_0)-c=0$ e $g\in A_{x_0}$. Assim $B(f,c)\subset A_{x_0}$.
+
+\begin{obs}
+O conjunto \emph{não} é aberto em $C^1[a,b]$ com a norma $\norm{\cdot}_\infty$ de $C[a,b]$: perturbações uniformemente pequenas podem alterar drasticamente a derivada (p.ex.\ $g_n(t)=f(t)+\frac1n\sin(n^2 t)$).
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{$A=\{f\in C[a,b];\ \int_a^b f(t)\,dt>0\}$ é aberto em $C[a,b]$.}
+\sol
+O funcional $I(f)=\int_a^b f(t)\,dt$ é linear e satisfaz
+\[ \abs{I(f)-I(g)}=\Bigl|\int_a^b (f-g)\Bigr|\le\int_a^b\abs{f-g}\le (b-a)\norm{f-g}_\infty, \]
+logo é Lipschitz (com constante $b-a$) e, em particular, contínuo. Portanto $A=I^{-1}\bigl((0,\infty)\bigr)$ é aberto.
+
+Explicitamente: se $I(f)=c>0$, tome $r=\dfrac{c}{b-a}$. Para $\norm{g-f}_\infty<r$ temos $\abs{I(g)-I(f)}<(b-a)r=c$, donde $I(g)>0$ e $B(f,r)\subset A$.
+\end{exercicio}
+
+\begin{exercicio}{Equivalência: (a) $K$ sequencialmente compacto; (b) $K$ completo e totalmente limitado; (c) Heine--Borel.}
+\sol
+\textbf{(a)$\Rightarrow$(b).} \emph{Completude:} seja $(x_n)$ de Cauchy em $K$. Por (a) existe subsequência $x_{n_k}\to x\in K$; como \emph{toda sequência de Cauchy com subsequência convergente converge para o mesmo limite} (Exercício 28: dado $\eps>0$, use $d(x_n,x)\le d(x_n,x_{n_k})+d(x_{n_k},x)<\eps$ para $n$ e $n_k$ grandes), a sequência inteira converge a $x\in K$. \emph{Totalmente limitado:} suponha que exista $\eps>0$ tal que $K$ não seja coberto por finitas bolas de raio $\eps$. Construímos indutivamente $x_1\in K$ e, tendo escolhido $x_1,\dots,x_n$, como $\bigcup_{i\le n}B(x_i,\eps)\not\supset K$, existe $x_{n+1}\in K\setminus\bigcup_{i\le n}B(x_i,\eps)$. Por construção $d(x_n,x_m)\ge\eps$ para $n\neq m$, logo nenhuma subsequência de $(x_n)$ é de Cauchy e, a fortiori, nenhuma converge --- contradizendo (a).
+
+\textbf{(b)$\Rightarrow$(c).} Seja $\{A_\lambda\}_{\lambda\in\Lambda}$ cobertura aberta de $K$ e suponha, por absurdo, que nenhuma subfamília finita cobre $K$. Construímos indutivamente conjuntos $K_0=K\supset K_1\supset K_2\supset\cdots$, cada $K_n$ não vazio, contido em uma bola $B(z_n,2^{-n})$ de raio $2^{-n}$, e tal que nenhuma subfamília finita de $\{A_\lambda\}$ cobre $K_n$. Com efeito, dado $K_{n}$ nessas condições, $K$ é coberto por finitas bolas de raio $2^{-(n+1)}$; intersectando-as com $K_n$ obtemos um número finito de conjuntos cuja união é $K_n$. Se todos admitissem subcobertura finita, $K_n$ também admitiria; logo algum deles, que chamamos $K_{n+1}$, não admite (e é não vazio, pois o vazio é coberto pela família vazia).
+
+Escolha $x_n\in K_n$. Se $m\ge n$, então $x_m,x_n\in K_n\subset B(z_n,2^{-n})$, donde $d(x_n,x_m)<2^{-n+1}$: $(x_n)$ é de Cauchy e, por completude, $x_n\to x\in K$. Existe $\lambda_0$ com $x\in A_{\lambda_0}$ e $\eps>0$ com $B(x,\eps)\subset A_{\lambda_0}$. Escolha $n$ tal que $d(x_n,x)<\eps/2$ e $2^{-n+1}<\eps/2$. Se $z\in K_n$, então
+\[ d(z,x)\le d(z,x_n)+d(x_n,x)<2^{-n+1}+\eps/2<\eps, \]
+isto é, $K_n\subset B(x,\eps)\subset A_{\lambda_0}$. Assim $K_n$ é coberto por \emph{um} elemento da família, contradizendo sua construção. Logo existe subcobertura finita.
+
+\textbf{(c)$\Rightarrow$(a).} Seja $(x_n)\subset K$ e suponha que nenhuma subsequência convirja em $K$. Então nenhum $x\in K$ é ponto de acumulação da sequência (se fosse, poderíamos extrair subsequência convergindo a $x$); logo, para cada $x\in K$ existe $r_x>0$ tal que $B(x,r_x)$ contém $x_n$ apenas para finitos índices $n$. A família $\{B(x,r_x)\}_{x\in K}$ é uma cobertura aberta de $K$; por (c) existem $y_1,\dots,y_m\in K$ com $K\subset\bigcup_{i=1}^m B(y_i,r_{y_i})$. Mas então o conjunto de \emph{todos} os índices $n\in\N$ seria finito (união finita de conjuntos finitos de índices), o que é absurdo. Portanto alguma subsequência converge em $K$.
+
+\begin{obs}
+Da implicação (a)$\Rightarrow$(c) extrai-se também o \emph{Lema do número de Lebesgue}: se $K$ é compacto e $\{A_\lambda\}$ é uma cobertura aberta de $K$, existe $\delta>0$ tal que todo subconjunto de $K$ com diâmetro menor que $\delta$ está contido em algum $A_\lambda$. De fato, caso contrário existiriam conjuntos $C_n\subset K$ com $\operatorname{diam}(C_n)<1/n$ não contidos em nenhum $A_\lambda$; tomando $x_n\in C_n$ e uma subsequência $x_{n_k}\to x\in A_{\lambda_0}\supset B(x,\eps)$, teríamos $C_{n_k}\subset B(x,\eps)\subset A_{\lambda_0}$ para $k$ grande, contradição. Esse lema fornece uma prova alternativa (e bastante direta) do Exercício 21.
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{Um espaço métrico discreto com infinitos pontos não é compacto.}
+\sol
+Seja $(X,d)$ discreto (todo subconjunto é aberto; equivalentemente, para cada $x$ existe $r_x>0$ com $B(x,r_x)=\{x\}$) e infinito.
+
+\emph{Via Heine--Borel:} $\{\{x\}\}_{x\in X}$ é uma cobertura aberta de $X$ sem subcobertura finita, pois a união de finitos singletons é um conjunto finito, e $X$ é infinito.
+
+\emph{Via sequências:} escolha pontos dois a dois distintos $x_1,x_2,x_3,\dots\in X$ (possível pois $X$ é infinito). Se alguma subsequência $x_{n_k}$ convergisse para $x\in X$, teríamos $x_{n_k}\in B(x,r_x)=\{x\}$ para $k$ grande, ou seja, $x_{n_k}=x$ para infinitos $k$ --- contradizendo a escolha de termos distintos. Logo nenhuma subsequência converge e $X$ não é compacto.
+
+\begin{obs}
+Se além disso a métrica for \emph{uniformemente} discreta (existe $\eps_0>0$ com $d(x,y)\ge\eps_0$ para $x\neq y$), então $X$ é completo (Exercício 31) mas não totalmente limitado --- coerente com o Exercício 19.
+\end{obs}
+\end{exercicio}
+\begin{exercicio}{$(X,d)$ compacto e $f:X\to\R$ contínua $\Rightarrow$ $f$ uniformemente contínua.}
+\sol
+Suponha, por absurdo, que $f$ não seja uniformemente contínua: existe $\eps_0>0$ tal que, para cada $n\in\N$ (tomando $\delta=1/n$), existem $x_n,y_n\in X$ com
+\[ d(x_n,y_n)<\tfrac1n \qquad\text{e}\qquad \abs{f(x_n)-f(y_n)}\ge\eps_0. \]
+Como $X$ é compacto, existe subsequência $x_{n_k}\to x\in X$. Então
+\[ d(y_{n_k},x)\le d(y_{n_k},x_{n_k})+d(x_{n_k},x)<\tfrac{1}{n_k}+d(x_{n_k},x)\longrightarrow 0, \]
+logo $y_{n_k}\to x$ também. Pela continuidade de $f$ em $x$ na sua forma sequencial (Exercício 16(c): $f$ é contínua em $x$ se, e somente se, $z_n\to x$ implica $f(z_n)\to f(x)$),
+\[ \abs{f(x_{n_k})-f(y_{n_k})}\le\abs{f(x_{n_k})-f(x)}+\abs{f(x)-f(y_{n_k})}\longrightarrow 0, \]
+contradizendo $\abs{f(x_{n_k})-f(y_{n_k})}\ge\eps_0>0$ para todo $k$. Logo $f$ é uniformemente contínua. (O argumento não usa nada específico de $\R$: vale para $f:X\to Y$ com $Y$ métrico qualquer.)
+
+\begin{obs}[Prova alternativa, por coberturas]
+Dado $\eps>0$, para cada $x\in X$ a continuidade fornece $\delta_x>0$ com
+\[ f\bigl(B(x,\delta_x)\bigr)\subset B\bigl(f(x),\tfrac\eps2\bigr). \]
+A família $\{B(x,\delta_x/2)\}_{x\in X}$ cobre $X$; por Heine--Borel (Exercício 19(c)) existem $x_1,\dots,x_m$ com $X=\bigcup_iB(x_i,\delta_{x_i}/2)$. Tome $\delta=\frac12\min_i\delta_{x_i}>0$. Se $d(u,v)<\delta$, escolha $i$ com $u\in B(x_i,\delta_{x_i}/2)$; então $d(v,x_i)\le d(v,u)+d(u,x_i)<\delta+\delta_{x_i}/2\le\delta_{x_i}$, logo $u,v\in B(x_i,\delta_{x_i})$ e
+\[ \abs{f(u)-f(v)}\le\abs{f(u)-f(x_i)}+\abs{f(x_i)-f(v)}<\tfrac\eps2+\tfrac\eps2=\eps. \]
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{$E$ normado de dimensão finita: $A\subset E$ é compacto $\iff$ $A$ é fechado e limitado.}
+\sol
+($\Rightarrow$) Vale em qualquer espaço métrico. Se $A$ é compacto e $x\in\overline{A}$, existe $(x_n)\subset A$ com $x_n\to x$; alguma subsequência converge para um ponto de $A$, e como o limite é único, $x\in A$: $A$ é fechado. Se $A$ fosse ilimitado, existiria $(x_n)\subset A$ com $\norm{x_n}\ge n$; nenhuma subsequência dessa sequência é limitada, logo nenhuma converge --- absurdo.
+
+($\Leftarrow$) Seja $\dim E=n$ e $\{e_1,\dots,e_n\}$ uma base. Considere o isomorfismo linear
+\[ T:\bbK^n\to E,\qquad T(\xi)=\sum_{i=1}^{n}\xi_ie_i. \]
+Pelo Exercício 26, a norma $\xi\mapsto\norm{T\xi}_E$ é equivalente a $\norm{\cdot}_1$ em $\bbK^n$: existem $C_1,C_2>0$ com
+\[ C_1\norm{\xi}_1\le\norm{T\xi}_E\le C_2\norm{\xi}_1 . \]
+Em particular $T$ e $T^{-1}$ são contínuos, isto é, $T$ é um homeomorfismo.
+
+Seja agora $A\subset E$ fechado e limitado. O conjunto $T^{-1}(A)$ é fechado em $\bbK^n$, por ser a imagem inversa do fechado $A$ pela aplicação contínua $T$, e é limitado, pois $\norm{\xi}_1\le C_1^{-1}\norm{T\xi}_E\le C_1^{-1}M$. Pelo teorema de Bolzano--Weierstrass em $\bbK^n$, $T^{-1}(A)$ é compacto. Como $T$ é contínua e a imagem contínua de compacto é compacta, $A=T(T^{-1}(A))$ é compacto.
+\end{exercicio}
+
+\begin{exercicio}{Exemplo de conjunto fechado e limitado que não é compacto.}
+\sol
+Tome $E=\ell^\infty$ (ou $\ell^2$, ou $C[0,1]$) e
+\[ A=\overline{B}(0,1)=\{x\in \ell^\infty;\ \norm{x}_\infty\le1\}. \]
+$A$ é fechado (bola fechada) e limitado. Mas não é compacto: considere $e_n=(0,\dots,0,1,0,\dots)$ ($1$ na $n$-ésima posição). Então $e_n\in A$ e, para $n\neq m$,
+\[ \norm{e_n-e_m}_\infty=1 . \]
+Nenhuma subsequência de $(e_n)$ é de Cauchy, logo nenhuma converge, e $A$ não é (sequencialmente) compacto.
+
+\begin{obs}
+Isso não é acidental: pelo Lema de Riesz, a bola fechada unitária de um espaço normado $E$ é compacta se, e somente se, $\dim E<\infty$.
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{Em $\ell^\infty$, $\vert\!\vert\!\vert x\vert\!\vert\!\vert=\limsup\abs{x_n}$ é semi-norma e $c_0=\{x;\ \vert\!\vert\!\vert x\vert\!\vert\!\vert=0\}$.}
+\sol
+Para $x\in \ell^\infty$ a sequência $(\abs{x_n})$ é limitada, logo $\limsup_n\abs{x_n}\in[0,\infty)$ está bem definido.
+
+\emph{Homogeneidade:} para $\lambda\neq0$, $\limsup\abs{\lambda x_n}=\limsup\abs{\lambda}\abs{x_n}=\abs{\lambda}\limsup\abs{x_n}$ (o supremo de um conjunto multiplicado por constante positiva); para $\lambda=0$ ambos os lados são $0$.
+
+\emph{Subaditividade:} usando $\sup_{n\ge N}(a_n+b_n)\le \sup_{n\ge N}a_n+\sup_{n\ge N}b_n$ e $\abs{x_n+y_n}\le\abs{x_n}+\abs{y_n}$,
+\[ \vert\!\vert\!\vert x+y\vert\!\vert\!\vert=\lim_{N\to\infty}\sup_{n\ge N}\abs{x_n+y_n}\le \lim_{N\to\infty}\Bigl(\sup_{n\ge N}\abs{x_n}+\sup_{n\ge N}\abs{y_n}\Bigr)=\vert\!\vert\!\vert x\vert\!\vert\!\vert+\vert\!\vert\!\vert y\vert\!\vert\!\vert. \]
+Logo $\vert\!\vert\!\vert\cdot\vert\!\vert\!\vert$ é uma semi-norma.
+
+\emph{Não é norma:} $x=e_1=(1,0,0,\dots)\neq0$ tem $\limsup\abs{x_n}=0$.
+
+\emph{Núcleo:} $\limsup_n\abs{x_n}=0$ equivale a $\lim_n\abs{x_n}=0$ (pois $0\le\liminf\abs{x_n}\le\limsup\abs{x_n}$), isto é, $x_n\to0$. Portanto
+\[ \{x\in \ell^\infty;\ \vert\!\vert\!\vert x\vert\!\vert\!\vert=0\}=c_0. \]
+Como o núcleo de uma semi-norma é sempre um subespaço fechado (se $p(x)=p(y)=0$ então $p(x+\lambda y)\le p(x)+\abs{\lambda}p(y)=0$; e $\abs{p(x)-p(y)}\le p(x-y)$ mostra que $p$ é contínua, aqui com $p\le\norm{\cdot}_\infty$), reencontramos que $c_0$ é subespaço fechado de $\ell^\infty$. Além disso $\vert\!\vert\!\vert\cdot\vert\!\vert\!\vert$ induz uma \emph{norma} no quociente $\ell^\infty/c_0$, dada por $\vert\!\vert\!\vert[x]\vert\!\vert\!\vert=\limsup\abs{x_n}$ (Exercício 49(a)).
+\end{exercicio}
+
+\begin{exercicio}{$X$ normado, $A,B\subset X$. (a) $A$ aberto $\Rightarrow A+B$ aberto. (b) $A,B$ fechados $\not\Rightarrow A+B$ fechado. (c) $A$ fechado e $B$ compacto $\Rightarrow A+B$ fechado.}
+\sol
+\textbf{(a)} Para cada $y\in X$, a translação $\tau_y(x)=x+y$ é um homeomorfismo de $X$ (é bijetiva, e ela e sua inversa são isometrias). Logo $A+y=\tau_y(A)$ é aberto sempre que $A$ é aberto. Como
+\[ A+B=\bigcup_{y\in B}(A+y), \]
+$A+B$ é união de abertos, portanto aberto (se $B=\emptyset$, $A+B=\emptyset$ também é aberto).
+
+\textbf{(b)} Em $X=\R$ tome
+\[ A=\N=\{1,2,3,\dots\},\qquad B=\Bigl\{-n+\tfrac1n;\ n\ge2\Bigr\}. \]
+Ambos são fechados: $A$ é discreto sem pontos de acumulação; os elementos de $B$ tendem a $-\infty$, logo $B$ também não tem pontos de acumulação em $\R$. Agora, para $n\ge2$,
+\[ n+\Bigl(-n+\tfrac1n\Bigr)=\tfrac1n\in A+B,\qquad \tfrac1n\to0. \]
+Mas $0\notin A+B$: se $0=m-n+\frac1n$ com $m\in\N$, $n\ge2$, então $\frac1n=n-m\in\Z$, impossível para $n\ge2$. Logo $A+B$ não é fechado.
+
+\emph{Outro exemplo clássico:} em $\R^2$, $A=\{(t,0);t\in\R\}$ e $B=\{(t,e^{t});t\in\R\}$ são fechados, e $A+B$ é o semiplano aberto $\{(x,y);y>0\}$.
+
+\textbf{(c)} Seja $z\in\overline{A+B}$ e tome $(a_n)\subset A$, $(b_n)\subset B$ com $a_n+b_n\to z$. Como $B$ é compacto, existe subsequência $b_{n_k}\to b\in B$. Então
+\[ a_{n_k}=(a_{n_k}+b_{n_k})-b_{n_k}\longrightarrow z-b, \]
+e como $A$ é fechado, $a:=z-b\in A$. Portanto $z=a+b\in A+B$, mostrando que $A+B$ é fechado.
+\end{exercicio}
+
+\begin{exercicio}{Em dimensão finita todas as normas são equivalentes.}
+\sol
+Seja $V$ com $\dim V=n$ e base $\{e_1,\dots,e_n\}$. Como equivalência de normas é uma relação de equivalência (transitividade: multiplicam-se as constantes), basta mostrar que toda norma $\norm{\cdot}$ em $V$ é equivalente à norma
+\[ \norm{x}_1:=\sum_{i=1}^{n}\abs{\xi_i},\qquad \text{onde } x=\sum_{i=1}^n\xi_ie_i \]
+(a decomposição é única, logo $\norm{\cdot}_1$ está bem definida e é de fato uma norma).
+
+\emph{Cota superior.} Com $C_2:=\max_i\norm{e_i}>0$,
+\[ \norm{x}=\Bigl\|\sum_i\xi_ie_i\Bigr\|\le\sum_i\abs{\xi_i}\norm{e_i}\le C_2\norm{x}_1. \]
+
+\emph{Cota inferior.} Esta desigualdade mostra que $f(x)=\norm{x}$ é contínua com respeito a $\norm{\cdot}_1$, pois $\bigl|\norm{x}-\norm{y}\bigr|\le\norm{x-y}\le C_2\norm{x-y}_1$. Considere
+\[ S=\{x\in V;\ \norm{x}_1=1\}. \]
+Identificando $V\cong\bbK^n$ via coordenadas, $S$ corresponde à esfera unitária de $(\bbK^n,\norm{\cdot}_1)$, que é fechada e limitada, logo compacta (Bolzano--Weierstrass). Assim $f$ atinge um mínimo em $S$: existe $x_0\in S$ com
+\[ C_1:=\norm{x_0}=\min_{x\in S}\norm{x}. \]
+Como $x_0\in S$ implica $x_0\neq0$, temos $C_1>0$. Para $x\neq0$ qualquer, $x/\norm{x}_1\in S$, donde
+\[ \Bigl\|\frac{x}{\norm{x}_1}\Bigr\|\ge C_1 \quad\Longrightarrow\quad \norm{x}\ge C_1\norm{x}_1, \]
+desigualdade que também vale trivialmente para $x=0$. Portanto $C_1\norm{x}_1\le\norm{x}\le C_2\norm{x}_1$.
+
+\begin{obs}[Consequências]
+\begin{enumerate}[label=(\roman*),leftmargin=1.6em,itemsep=2pt]
+\item Normas equivalentes têm as mesmas sequências convergentes, as mesmas de Cauchy, os mesmos abertos, limitados e compactos. Logo, em dimensão finita, todas essas noções independem da norma escolhida.
+\item Todo espaço normado de dimensão finita é completo (pois $(\bbK^n,\norm{\cdot}_1)$ o é e a equivalência preserva completude). Em consequência, \emph{todo subespaço de dimensão finita de um espaço normado é fechado} --- fato usado nos Exercícios 22 e 46.
+\item A hipótese de dimensão finita é indispensável: em $C[a,b]$ as normas $\norm{\cdot}_1$ e $\norm{\cdot}_\infty$ não são equivalentes (Exercício 47).
+\end{enumerate}
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{$(x_n),(y_n)$ de Cauchy em $(X,d)$ $\Rightarrow$ $(d(x_n,y_n))$ converge.}
+\sol
+Pelo Exercício 1(ii), para todos $m,n$,
+\[ \abs{d(x_n,y_n)-d(x_m,y_m)}\le d(x_n,x_m)+d(y_n,y_m). \]
+Dado $\eps>0$, existe $n_0$ tal que $n,m\ge n_0$ implica $d(x_n,x_m)<\eps/2$ e $d(y_n,y_m)<\eps/2$; logo $\abs{d(x_n,y_n)-d(x_m,y_m)}<\eps$. Assim $(d(x_n,y_n))$ é uma sequência de Cauchy em $\R$, que é completo, e portanto converge.
+
+\begin{obs}
+O limite não precisa ser $d$ de coisa alguma: em $X=(0,1)$ com $x_n=1/n$, $y_n=1/(2n)$, o limite é $0$ embora as sequências não convirjam em $X$. Esta construção é a base da definição do completamento de $X$.
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{Sequência de Cauchy com subsequência convergente converge para o mesmo limite.}
+\sol
+Seja $(x_n)$ de Cauchy e $x_{n_k}\to x$. Dado $\eps>0$, escolha $n_0$ com $d(x_n,x_m)<\eps/2$ para $n,m\ge n_0$, e $k_0$ tal que $d(x_{n_k},x)<\eps/2$ para $k\ge k_0$. Fixe $k\ge k_0$ com $n_k\ge n_0$ (possível, pois $n_k\to\infty$). Então, para todo $n\ge n_0$,
+\[ d(x_n,x)\le d(x_n,x_{n_k})+d(x_{n_k},x)<\tfrac\eps2+\tfrac\eps2=\eps. \]
+Logo $x_n\to x$.
+\end{exercicio}
+
+\begin{exercicio}{Encontre uma métrica $d$ em $\R$ tal que $(\R,d)$ não seja completo.}
+\sol
+Defina
+\[ d(x,y)=\abs{\arctan x-\arctan y}. \]
+Como $\arctan:\R\to(-\frac\pi2,\frac\pi2)$ é injetiva, $d(x,y)=0\iff x=y$; simetria e desigualdade triangular são herdadas do módulo em $\R$. Logo $d$ é métrica (é o \emph{pull-back} da métrica usual por uma função injetiva).
+
+A sequência $x_n=n$ é de Cauchy em $(\R,d)$: $\arctan n\to\frac\pi2$, logo $(\arctan n)$ é de Cauchy em $\R$ e $d(x_n,x_m)=\abs{\arctan n-\arctan m}\to0$. Porém $(x_n)$ não converge: se $d(n,x)\to0$ para algum $x\in\R$, então $\arctan n\to\arctan x$, isto é, $\arctan x=\frac\pi2$, o que é impossível pois $\arctan x<\frac\pi2$ para todo $x\in\R$.
+
+Portanto $(\R,d)$ não é completo. Note que $d$ gera a mesma topologia usual de $\R$ (pois $\arctan$ é um homeomorfismo sobre sua imagem): completude \emph{não} é invariante topológico.
+\end{exercicio}
+
+\begin{exercicio}{$\widetilde{d}=\dfrac{d}{1+d}$. (a) é métrica; (b) $X$ é limitado em $\widetilde d$; (c) $(X,d)$ completo $\Rightarrow(X,\widetilde d)$ completo; vale a recíproca?}
+\sol
+Seja $\varphi(t)=\frac{t}{1+t}$, $t\ge0$. Ela é crescente, pois $\varphi'(t)=(1+t)^{-2}>0$; satisfaz $\varphi(t)=0\iff t=0$; e é subaditiva:
+\[ \varphi(a+b)=\frac{a}{1+a+b}+\frac{b}{1+a+b}\le\frac{a}{1+a}+\frac{b}{1+b}=\varphi(a)+\varphi(b),\qquad a,b\ge0. \]
+
+\textbf{(a)} Simetria e separação são imediatas. Para a triangular, com $a=d(x,z)$, $b=d(z,y)$:
+\[ \widetilde d(x,y)=\varphi(d(x,y))\le\varphi(a+b)\le\varphi(a)+\varphi(b)=\widetilde d(x,z)+\widetilde d(z,y). \]
+
+\textbf{(b)} $\widetilde d(x,y)=\frac{d(x,y)}{1+d(x,y)}<1$ para todos $x,y$, logo $\operatorname{diam}_{\widetilde d}(X)\le1<\infty$.
+
+\textbf{(c)} As duas métricas têm as \emph{mesmas} sequências de Cauchy e as mesmas sequências convergentes. De fato, invertendo $s=\varphi(t)$ obtemos $t=\frac{s}{1-s}$, ou seja,
+\[ \widetilde d\le d \qquad\text{e}\qquad d=\frac{\widetilde d}{1-\widetilde d}\le 2\widetilde d \quad\text{sempre que } \widetilde d\le\tfrac12. \]
+\emph{($d$ Cauchy $\Rightarrow \widetilde d$ Cauchy):} segue de $\widetilde d\le d$. \emph{($\widetilde d$ Cauchy $\Rightarrow d$ Cauchy):} dado $\eps>0$, tome $\eps'=\min\{\eps/2,1/2\}$ e $n_0$ com $\widetilde d(x_n,x_m)<\eps'$ para $n,m\ge n_0$; então $d(x_n,x_m)\le2\widetilde d(x_n,x_m)<\eps$. O mesmo argumento com $x_m$ substituído por um ponto fixo $x$ mostra que $x_n\to x$ em $d$ $\iff$ $x_n\to x$ em $\widetilde d$.
+
+Logo, se $(X,d)$ é completo e $(x_n)$ é $\widetilde d$-Cauchy, então $(x_n)$ é $d$-Cauchy, converge em $d$ a algum $x\in X$ e portanto converge a $x$ em $\widetilde d$: $(X,\widetilde d)$ é completo.
+
+\emph{Recíproca:} sim, vale, pelo mesmo par de implicações --- se $(X,\widetilde d)$ é completo e $(x_n)$ é $d$-Cauchy, então é $\widetilde d$-Cauchy, converge em $\widetilde d$ e, portanto, em $d$. Ou seja, $(X,d)$ é completo $\iff$ $(X,\widetilde d)$ é completo (as métricas são \emph{uniformemente equivalentes}).
+\end{exercicio}
+\begin{exercicio}{$(\Z,d)$ com $d(m,n)=\abs{m-n}$ é completo. Mais geralmente, todo espaço métrico uniformemente discreto é completo.}
+\sol
+Dizemos que $(X,d)$ é \emph{uniformemente discreto} se existe $\eps_0>0$ tal que $d(x,y)\ge\eps_0$ sempre que $x\neq y$. O caso $(\Z,\abs{\cdot})$ corresponde a $\eps_0=1$.
+
+Seja $(x_n)$ de Cauchy em $X$ uniformemente discreto. Tomando $\eps=\eps_0$ na definição, existe $n_0$ tal que
+\[ n,m\ge n_0 \Longrightarrow d(x_n,x_m)<\eps_0 . \]
+Pela hipótese, isso força $x_n=x_m$ para todos $n,m\ge n_0$: a sequência é eventualmente constante, digamos igual a $x:=x_{n_0}$. Logo $d(x_n,x)=0$ para $n\ge n_0$ e $x_n\to x\in X$. Portanto $X$ é completo.
+
+\begin{obs}
+A hipótese de \emph{uniformidade} é essencial. O espaço $X=\{1/n;\ n\in\N\}\subset\R$ é discreto (todo ponto é isolado) mas não é completo: $(1/n)$ é de Cauchy e seu limite $0$ não pertence a $X$.
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{$c_{00}\subset \ell^\infty$ (sequências com finitos termos não nulos) não é completo na métrica induzida de $\ell^\infty$.}
+\sol
+Considere, para cada $n\in\N$,
+\[ x^{(n)}=\Bigl(1,\tfrac12,\tfrac13,\dots,\tfrac1n,0,0,\dots\Bigr)\in c_{00}. \]
+Para $m>n$,
+\[ \norm{x^{(m)}-x^{(n)}}_\infty=\sup_{n<j\le m}\frac1j=\frac{1}{n+1}\xrightarrow[n\to\infty]{}0, \]
+logo $(x^{(n)})$ é de Cauchy em $c_{00}$.
+
+Suponha que $x^{(n)}\to y$ em $c_{00}$ com a norma do sup. Como a convergência uniforme implica convergência coordenada a coordenada ($\abs{x^{(n)}_j-y_j}\le\norm{x^{(n)}-y}_\infty$), teríamos
+\[ y_j=\lim_{n\to\infty}x^{(n)}_j=\frac1j \qquad\text{para todo } j\in\N. \]
+Mas então $y$ teria \emph{infinitos} termos não nulos, contradizendo $y\in c_{00}$. Logo a sequência de Cauchy $(x^{(n)})$ não converge em $c_{00}$, e $c_{00}$ não é completo.
+
+\begin{obs}
+Equivalentemente: $c_{00}$ é denso em $c_0$ (Exercício 33) e $c_0\neq c_{00}$, logo $c_{00}$ não é fechado em $\ell^\infty$; e um subespaço de um espaço completo é completo se, e somente se, é fechado. O fecho de $c_{00}$ em $\ell^\infty$ é exatamente $c_0$.
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{$c$ e $c_0$ são fechados em $\ell^\infty$ (logo completos) e separáveis.}
+\sol
+\textbf{$c_0$ é fechado.} Seja $x\in\overline{c_0}$ e $\eps>0$. Existe $y\in c_0$ com $\norm{x-y}_\infty<\eps/2$, e existe $j_0$ com $\abs{y_j}<\eps/2$ para $j\ge j_0$. Então, para $j\ge j_0$,
+\[ \abs{x_j}\le\abs{x_j-y_j}+\abs{y_j}<\eps. \]
+Logo $x_j\to0$ e $x\in c_0$.
+
+\textbf{$c$ é fechado.} Seja $x\in\overline{c}$; mostremos que $(x_j)$ é de Cauchy em $\bbK$ (logo convergente). Dado $\eps>0$, tome $y\in c$ com $\norm{x-y}_\infty<\eps/3$ e $j_0$ tal que $\abs{y_i-y_j}<\eps/3$ para $i,j\ge j_0$ ($y$ é convergente, logo de Cauchy). Então, para $i,j\ge j_0$,
+\[ \abs{x_i-x_j}\le\abs{x_i-y_i}+\abs{y_i-y_j}+\abs{y_j-x_j}<\eps. \]
+Assim $x\in c$. Como $\ell^\infty$ é completo e $c,c_0$ são fechados, ambos são completos (com $c_0\subset c$).
+
+\textbf{Separabilidade de $c_0$.} Seja
+\[ D_0=\{(q_1,\dots,q_N,0,0,\dots);\ N\in\N,\ q_i\in\mathbb{Q}\ (\text{ou } \mathbb{Q}+i\mathbb{Q})\}, \]
+que é enumerável (união enumerável de cópias de $\mathbb{Q}^N$). Dados $x\in c_0$ e $\eps>0$, escolha $N$ com $\abs{x_j}<\eps$ para $j>N$ e racionais $q_i$ com $\abs{x_i-q_i}<\eps$ para $i\le N$. O elemento $q=(q_1,\dots,q_N,0,\dots)\in D_0$ satisfaz $\norm{x-q}_\infty\le\eps$. Logo $D_0$ é denso em $c_0$.
+
+\textbf{Separabilidade de $c$.} Seja
+\[ D=\{(q_1,\dots,q_N,q,q,q,\dots);\ N\in\N,\ q_i,q\in\mathbb{Q}\}, \]
+o conjunto (enumerável) das sequências racionais eventualmente constantes. Dado $x\in c$ com $x_j\to a$ e $\eps>0$: escolha $q\in\mathbb{Q}$ com $\abs{a-q}<\eps/2$, $N$ tal que $\abs{x_j-a}<\eps/2$ para $j>N$, e racionais $q_i$ com $\abs{x_i-q_i}<\eps$ para $i\le N$. Então o elemento correspondente de $D$ dista de $x$ no máximo $\eps$. Logo $c$ é separável.
+
+\begin{obs}
+Contraste: $\ell^\infty$ \emph{não} é separável --- o conjunto $\{0,1\}^\N\subset \ell^\infty$ é não enumerável e seus elementos distam $1$ entre si.
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{$(X,d)$ é completo $\iff$ toda sequência de bolas fechadas encaixadas $B_{j+1}\subset B_j$ com raios $r_j\to0$ tem interseção unitária.}
+\sol
+Escreva $B_j=\overline{B}(x_j,r_j)$.
+
+($\Rightarrow$) Suponha $X$ completo. Se $k\ge j$, então $x_k\in B_k\subset B_j$, logo $d(x_j,x_k)\le r_j$. Como $r_j\to0$, $(x_j)$ é de Cauchy; seja $x=\lim x_j$. Fixado $j$, todos os $x_k$ com $k\ge j$ pertencem ao fechado $B_j$, logo $x\in B_j$. Assim $x\in\bigcap_j B_j\neq\emptyset$. Se $y,z\in\bigcap_jB_j$, então $d(y,z)\le d(y,x_j)+d(x_j,z)\le 2r_j\to0$, donde $y=z$. A interseção tem exatamente um ponto.
+
+($\Leftarrow$) Suponha a propriedade e seja $(y_n)$ de Cauchy em $X$. Construa uma subsequência: escolha $n_1<n_2<\cdots$ tais que
+\[ d(y_n,y_{n_k})\le 2^{-(k+1)} \qquad \text{para todo } n\ge n_k. \]
+Defina $B_k=\overline{B}(y_{n_k},2^{-k})$. Elas são encaixadas: se $z\in B_{k+1}$, então
+\[ d(z,y_{n_k})\le d(z,y_{n_{k+1}})+d(y_{n_{k+1}},y_{n_k})\le 2^{-(k+1)}+2^{-(k+1)}=2^{-k}, \]
+isto é, $z\in B_k$. Os raios $2^{-k}\to0$, logo $\bigcap_kB_k=\{x\}$ para algum $x\in X$. Como $x\in B_k$, temos $d(y_{n_k},x)\le2^{-k}\to0$, ou seja, $y_{n_k}\to x$. Sendo $(y_n)$ de Cauchy com subsequência convergente, a sequência inteira converge a $x$ (Exercício 28: dado $\eps>0$, escolha $n_0$ com $d(y_n,y_m)<\eps/2$ para $n,m\ge n_0$ e $k$ com $n_k\ge n_0$ e $d(y_{n_k},x)<\eps/2$; então $d(y_n,x)<\eps$ para todo $n\ge n_0$). Portanto $X$ é completo.
+
+\begin{obs}
+A hipótese $r_j\to0$ não pode ser dispensada: existem espaços métricos completos com bolas fechadas encaixadas de interseção vazia quando os raios não tendem a zero.
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{$X=C[0,1]$ com $d(x,y)=\int_0^1\abs{x(t)-y(t)}\,dt$ não é completo.}
+\sol
+Para $n\ge3$ defina $f_n\in X$ por
+\[ f_n(t)=\begin{cases} 0, & 0\le t\le \tfrac12,\\[2pt] n\bigl(t-\tfrac12\bigr), & \tfrac12<t<\tfrac12+\tfrac1n,\\[2pt] 1, & \tfrac12+\tfrac1n\le t\le1.\end{cases} \]
+Cada $f_n$ é contínua e $0\le f_n\le1$.
+
+\emph{$(f_n)$ é de Cauchy:} se $m\ge n$, então $f_n$ e $f_m$ coincidem fora do intervalo $\bigl(\frac12,\frac12+\frac1n\bigr)$, onde ambas assumem valores em $[0,1]$; logo
+\[ d(f_n,f_m)=\int_{1/2}^{1/2+1/n}\abs{f_n-f_m}\,dt\le\frac1n\xrightarrow[n\to\infty]{}0. \]
+
+\emph{Não converge em $X$:} suponha $f\in C[0,1]$ com $d(f_n,f)\to0$. Como $f_n\equiv0$ em $[0,\frac12]$,
+\[ \int_0^{1/2}\abs{f(t)}\,dt=\int_0^{1/2}\abs{f_n-f}\,dt\le d(f_n,f)\to0, \]
+logo $\int_0^{1/2}\abs{f}=0$ e, sendo $\abs{f}$ contínua e não negativa, $f\equiv0$ em $[0,\frac12]$. Analogamente, fixe $a\in(\frac12,1]$. Para $n$ grande, $f_n\equiv1$ em $[a,1]$, e
+\[ \int_a^1\abs{f(t)-1}\,dt=\int_a^1\abs{f-f_n}\,dt\le d(f_n,f)\to0, \]
+donde $f\equiv1$ em $[a,1]$. Como $a>\frac12$ é arbitrário, $f\equiv1$ em $(\frac12,1]$. Mas então $f$ é descontínua em $t=\frac12$ (limites laterais $0$ e $1$), contradizendo $f\in C[0,1]$. Portanto $(X,d)$ não é completo.
+
+\begin{obs}
+O completamento de $(C[0,1],\norm{\cdot}_1)$ é $L^1[0,1]$. Cf.\ Exercício 47.
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{$Y=\{x\in C[a,b];\ x(a)=x(b)\}$ é completo.}
+\sol
+$C[a,b]$ com $\norm{\cdot}_\infty$ é um espaço de Banach; basta mostrar que $Y$ é fechado, pois todo subconjunto fechado de um espaço métrico completo é completo.
+
+Considere o funcional linear $\Lambda:C[a,b]\to\bbK$, $\Lambda(x)=x(a)-x(b)$. Ele é limitado:
+\[ \abs{\Lambda(x)}\le\abs{x(a)}+\abs{x(b)}\le2\norm{x}_\infty, \]
+logo contínuo. Portanto $Y=\Lambda^{-1}(\{0\})$ é a pré-imagem de um fechado por função contínua e, pela caracterização do Exercício 16(b) (\emph{$f$ é contínua se, e somente se, $f^{-1}(F)$ é fechado para todo fechado $F$}), $Y$ é fechado.
+
+\emph{Diretamente:} se $x_n\in Y$ e $\norm{x_n-x}_\infty\to0$, então $x_n(a)\to x(a)$ e $x_n(b)\to x(b)$; de $x_n(a)=x_n(b)$ para todo $n$ segue, por unicidade do limite, $x(a)=x(b)$, isto é, $x\in Y$.
+
+Assim $(Y,\norm{\cdot}_\infty)$ é um espaço de Banach (é ainda subespaço vetorial, pois $\Lambda$ é linear).
+\end{exercicio}
+
+\begin{exercicio}{Existe isometria entre $B(X\times Y,M)$ e $B(X,B(Y,M))$.}
+\sol
+Em $B(Z,M)=\{f:Z\to M;\ f \text{ limitada}\}$ usamos $d_0(f,g)=\sup_{z\in Z}d(f(z),g(z))$, que é finita quando $f,g$ têm imagem limitada. Defina
+\[ \Phi: B(X\times Y,M)\to B(X,B(Y,M)),\qquad \Phi(f)(x)(y)=f(x,y). \]
+
+\emph{$\Phi$ está bem definida.} Se $f\in B(X\times Y,M)$, sua imagem é limitada; em particular, para cada $x\in X$ fixo, $f_x:=f(x,\cdot)$ tem imagem limitada, logo $f_x\in B(Y,M)$. Além disso, escolhendo $p\in M$ e $R>0$ com $f(X\times Y)\subset \overline{B}(p,R)$, temos $d_0(f_x,\mathbf{p})\le R$ para todo $x$, onde $\mathbf{p}$ é a função constante $p$; logo $x\mapsto f_x$ é limitada como aplicação de $X$ no espaço métrico $B(Y,M)$, isto é, $\Phi(f)\in B(X,B(Y,M))$.
+
+\emph{$\Phi$ é isometria.} Para $f,g\in B(X\times Y,M)$,
+\[ d_0\bigl(\Phi(f),\Phi(g)\bigr)=\sup_{x\in X}d_0(f_x,g_x)=\sup_{x\in X}\ \sup_{y\in Y}d\bigl(f(x,y),g(x,y)\bigr)=\sup_{(x,y)\in X\times Y}d\bigl(f(x,y),g(x,y)\bigr)=d_0(f,g), \]
+onde usamos que o supremo iterado coincide com o supremo sobre o produto. Em particular $\Phi$ é injetiva.
+
+\emph{$\Phi$ é sobrejetiva.} Dado $F\in B(X,B(Y,M))$, defina $f(x,y):=F(x)(y)$. Fixe $x_0\in X$; como $F$ é limitada, $R:=\sup_x d_0(F(x),F(x_0))<\infty$, e como $F(x_0)\in B(Y,M)$, sua imagem está contida em alguma $\overline{B}(p,R_0)$. Assim, para todos $x,y$,
+\[ d(f(x,y),p)\le d\bigl(F(x)(y),F(x_0)(y)\bigr)+d\bigl(F(x_0)(y),p\bigr)\le R+R_0, \]
+isto é, $f\in B(X\times Y,M)$, e claramente $\Phi(f)=F$.
+
+Portanto $\Phi$ é uma isometria bijetiva entre $B(X\times Y,M)$ e $B(X,B(Y,M))$.
+
+\begin{obs}
+Trata-se da versão métrica da ``lei exponencial'' $M^{X\times Y}\cong(M^{Y})^{X}$ (ou \emph{currying}): fixar a primeira variável transforma uma função de duas variáveis numa função a valores em um espaço de funções. Note que a única sutileza é verificar que a limitação se propaga corretamente nos dois sentidos --- é exatamente aí que a hipótese ``$f$ limitada em $X\times Y$'' faz diferença em relação a ``$f_x$ limitada para cada $x$''.
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{Se $(X,d)$ é totalmente limitado, então $X$ é separável.}
+\sol
+Para cada $n\in\N$, a total limitação fornece um conjunto finito $F_n=\{x^n_1,\dots,x^n_{k_n}\}\subset X$ tal que
+\[ X=\bigcup_{i=1}^{k_n}B\bigl(x^n_i,\tfrac1n\bigr). \]
+Seja $D=\bigcup_{n\in\N}F_n$, que é enumerável (união enumerável de conjuntos finitos).
+
+$D$ é denso: dados $x\in X$ e $\eps>0$, tome $n$ com $\frac1n<\eps$. Como as bolas $B(x^n_i,\frac1n)$ cobrem $X$, existe $i$ com $x\in B(x^n_i,\frac1n)$, ou seja, $d(x,x^n_i)<\frac1n<\eps$, com $x^n_i\in D$. Logo $\overline{D}=X$ e $X$ é separável.
+
+\begin{obs}
+Combinando com o Exercício 19 (compacto $\iff$ completo $+$ totalmente limitado), segue que \emph{todo espaço métrico compacto é separável} --- e, pelo Exercício 43, também de Lindelöf. Já a recíproca do exercício é falsa: $\R$ é separável mas não é totalmente limitado (Exercício 39).
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{Todo conjunto totalmente limitado é limitado. Vale a recíproca?}
+\sol
+\emph{Totalmente limitado $\Rightarrow$ limitado.} Seja $A\neq\emptyset$ totalmente limitado e tome $\eps=1$: existem $x_1,\dots,x_k$ com $A\subset\bigcup_{i=1}^kB(x_i,1)$. Ponha $R=\max_{i,j}d(x_i,x_j)<\infty$. Se $a,b\in A$, existem $i,j$ com $d(a,x_i)<1$ e $d(b,x_j)<1$, logo
+\[ d(a,b)\le d(a,x_i)+d(x_i,x_j)+d(x_j,b)<R+2 . \]
+Portanto $\operatorname{diam}(A)\le R+2<\infty$.
+
+\emph{A recíproca é falsa.} Dois contraexemplos:
+\begin{itemize}[leftmargin=*]
+\item $X$ infinito com a métrica discreta: $\operatorname{diam}(X)=1$, logo $X$ é limitado; mas com $\eps=\frac12$ cada bola $B(x,\frac12)=\{x\}$ é um ponto, e finitas delas não cobrem um conjunto infinito.
+\item A bola unitária fechada $A$ de $\ell^\infty$: é limitada, mas os vetores $e_n\in A$ satisfazem $\norm{e_n-e_m}_\infty=1$ para $n\neq m$, de modo que nenhuma bola de raio $\frac12$ contém dois deles; finitas bolas de raio $\frac12$ não podem cobrir $A$.
+\end{itemize}
+Em $\R^n$ (ou em qualquer normado de dimensão finita), porém, limitado $\iff$ totalmente limitado.
+\end{exercicio}
+
+\begin{exercicio}{$X_1$ e $X_2$ isométricos e $X_1$ completo $\Rightarrow$ $X_2$ completo.}
+\sol
+Seja $\varphi:X_1\to X_2$ uma isometria bijetiva, isto é, $d_2(\varphi(u),\varphi(v))=d_1(u,v)$ para todos $u,v\in X_1$ (note que $\varphi^{-1}$ também é isometria).
+
+Seja $(y_n)$ de Cauchy em $X_2$ e ponha $x_n=\varphi^{-1}(y_n)$. Então
+\[ d_1(x_n,x_m)=d_2(\varphi(x_n),\varphi(x_m))=d_2(y_n,y_m), \]
+logo $(x_n)$ é de Cauchy em $X_1$, que é completo: $x_n\to x\in X_1$. Pondo $y=\varphi(x)\in X_2$,
+\[ d_2(y_n,y)=d_1(x_n,x)\longrightarrow0, \]
+isto é, $y_n\to y$ em $X_2$. Portanto $X_2$ é completo.
+
+\begin{obs}
+A sobrejetividade é essencial. A inclusão $\iota:(0,1)\hookrightarrow\R$ é uma isometria sobre sua imagem, com $\R$ completo e $(0,1)$ não completo; reciprocamente, $\N\hookrightarrow\mathbb{Q}$ mergulha isometricamente um espaço completo num espaço incompleto. Ou seja, isometrias que não são sobrejetivas nada dizem sobre a completude do espaço ambiente. O que sempre vale é: a imagem de um espaço completo por uma isometria é um subconjunto completo (logo fechado) do contradomínio.
+\end{obs}
+\end{exercicio}
+\begin{exercicio}{Os espaços $C[a,b]$ e $C[0,1]$ são isométricos.}
+\sol
+Suponha $a<b$ e considere a bijeção afim
+\[ \varphi:[0,1]\to[a,b],\qquad \varphi(s)=a+s(b-a), \]
+que é contínua com inversa contínua $\varphi^{-1}(t)=\frac{t-a}{b-a}$. Defina
+\[ T:C[a,b]\to C[0,1],\qquad (Tf)(s)=f(\varphi(s))=f\bigl(a+s(b-a)\bigr). \]
+$T$ está bem definida ($Tf$ é composição de contínuas) e é linear. É bijetiva, com inversa $(T^{-1}g)(t)=g(\varphi^{-1}(t))$.
+
+Como $\varphi$ é uma bijeção de $[0,1]$ sobre $[a,b]$, os conjuntos de valores $\{\abs{f(\varphi(s))};s\in[0,1]\}$ e $\{\abs{f(t)};t\in[a,b]\}$ coincidem; logo
+\[ \norm{Tf-Tg}_\infty=\sup_{s\in[0,1]}\abs{f(\varphi(s))-g(\varphi(s))}=\sup_{t\in[a,b]}\abs{f(t)-g(t)}=\norm{f-g}_\infty. \]
+Portanto $T$ é uma isometria linear sobrejetiva: $C[a,b]$ e $C[0,1]$ são isometricamente isomorfos. (Se $a=b$, ambos os espaços são unidimensionais e a afirmação é trivial.)
+\end{exercicio}
+
+\begin{exercicio}{$(X,d)$ completo, $T:X\to X$ contínua com $T^N$ contração para algum $N$. Então $T$ tem único ponto fixo.}
+\sol
+Seja $0\le\alpha<1$ tal que $d(T^Nu,T^Nv)\le\alpha\,d(u,v)$ para todos $u,v\in X$.
+
+Recordemos o \emph{Teorema do Ponto Fixo de Banach}: se $(X,d)$ é completo e $S:X\to X$ satisfaz $d(Su,Sv)\le\alpha\,d(u,v)$ com $\alpha<1$, então $S$ tem um único ponto fixo. De fato, fixado $x_0$ e pondo $x_{n+1}=Sx_n$, tem-se $d(x_{n+1},x_n)\le\alpha^n d(x_1,x_0)$, logo para $m>n$
+\[ d(x_m,x_n)\le\sum_{k=n}^{m-1}\alpha^k d(x_1,x_0)\le\frac{\alpha^n}{1-\alpha}d(x_1,x_0)\longrightarrow0; \]
+a sequência é de Cauchy, converge a algum $x$, e a continuidade de $S$ (que é Lipschitz) dá $Sx=\lim Sx_n=\lim x_{n+1}=x$. Se $Su=u$ e $Sv=v$, então $d(u,v)=d(Su,Sv)\le\alpha d(u,v)$, forçando $d(u,v)=0$.
+
+Aplicando isso a $T^N$, que é uma contração no espaço completo $X$, existe um único $x\in X$ com $T^Nx=x$.
+
+\emph{$x$ é ponto fixo de $T$:} aplicando $T$ à igualdade $T^Nx=x$ e usando que $T$ comuta com suas potências,
+\[ T^N(Tx)=T(T^Nx)=Tx, \]
+isto é, $Tx$ também é ponto fixo de $T^N$. Pela unicidade do ponto fixo de $T^N$, $Tx=x$.
+
+\emph{Unicidade:} se $Ty=y$, então $T^Ny=y$ por indução; novamente pela unicidade do ponto fixo de $T^N$, $y=x$.
+
+\begin{obs}
+Note que a continuidade de $T$ sequer foi utilizada --- ela é automática nas aplicações típicas. Este refinamento é útil, por exemplo, no estudo do operador de Volterra $ (Tf)(t)=\int_a^t f(s)ds$, em que $T$ não é contração mas $T^N$ é, para $N$ grande.
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{Todo espaço métrico separável é de Lindelöf.}
+\sol
+Seja $D=\{z_1,z_2,z_3,\dots\}$ denso e enumerável em $X$, e $\{A_\lambda\}_{\lambda\in\Lambda}$ uma cobertura aberta de $X$. Considere a família enumerável de bolas
+\[ \mathcal{B}=\Bigl\{B\bigl(z_i,\tfrac1n\bigr);\ i,n\in\N \Bigr\}, \]
+e seja $I=\{(i,n)\in\N\times\N;\ \exists\lambda\in\Lambda \text{ com } B(z_i,\tfrac1n)\subset A_\lambda\}$. Para cada $(i,n)\in I$ escolha um tal $\lambda(i,n)$. O conjunto $\{\lambda(i,n);(i,n)\in I\}$ é enumerável; mostremos que a subfamília correspondente cobre $X$.
+
+Seja $x\in X$. Existe $\lambda$ com $x\in A_\lambda$ e, como $A_\lambda$ é aberto, existe $\eps>0$ com $B(x,\eps)\subset A_\lambda$. Tome $n$ com $\frac2n<\eps$ e, pela densidade de $D$, tome $z_i$ com $d(x,z_i)<\frac1n$. Então, para $w\in B(z_i,\frac1n)$,
+\[ d(w,x)\le d(w,z_i)+d(z_i,x)<\tfrac1n+\tfrac1n=\tfrac2n<\eps, \]
+isto é, $B(z_i,\frac1n)\subset B(x,\eps)\subset A_\lambda$. Logo $(i,n)\in I$ e
+\[ x\in B\bigl(z_i,\tfrac1n\bigr)\subset A_{\lambda(i,n)}. \]
+Portanto $\{A_{\lambda(i,n)}\}_{(i,n)\in I}$ é uma subcobertura enumerável, e $X$ é de Lindelöf.
+
+\begin{obs}
+Em espaços métricos vale mais: separável $\iff$ Lindelöf $\iff$ satisfaz o segundo axioma de enumerabilidade.
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{Todo espaço normado com base de Schauder é separável.}
+\sol
+Seja $(e_n)_{n\ge1}$ base de Schauder de $E$: todo $x\in E$ se escreve de modo único como
+\[ x=\sum_{n=1}^{\infty}\alpha_ne_n,\qquad \text{isto é},\quad \Bigl\|x-\sum_{n=1}^{N}\alpha_ne_n\Bigr\|\xrightarrow[N\to\infty]{}0. \]
+Seja $\mathbb{F}$ um subconjunto enumerável denso do corpo de escalares ($\mathbb{Q}$ se $\bbK=\R$; $\mathbb{Q}+i\mathbb{Q}$ se $\bbK=\mathbb{C}$) e considere
+\[ D=\Bigl\{\sum_{n=1}^{N}q_ne_n;\ N\in\N,\ q_n\in\mathbb{F}\Bigr\}. \]
+$D$ é enumerável: é a união, sobre $N\in\N$, das imagens dos conjuntos enumeráveis $\mathbb{F}^N$.
+
+\emph{Densidade.} Sejam $x=\sum_n\alpha_ne_n$ e $\eps>0$. Escolha $N$ com $\norm{x-\sum_{n\le N}\alpha_ne_n}<\eps/2$. Como cada $\alpha_n$ pode ser aproximado por elementos de $\mathbb{F}$, escolha $q_1,\dots,q_N\in\mathbb{F}$ com
+\[ \abs{\alpha_n-q_n}<\frac{\eps}{2N(1+\norm{e_n})},\qquad n=1,\dots,N. \]
+Então
+\[ \Bigl\|\sum_{n\le N}\alpha_ne_n-\sum_{n\le N}q_ne_n\Bigr\|\le\sum_{n\le N}\abs{\alpha_n-q_n}\norm{e_n}<\frac\eps2, \]
+e, pela desigualdade triangular, $\norm{x-\sum_{n\le N}q_ne_n}<\eps$ com $\sum_{n\le N}q_ne_n\in D$. Logo $\overline{D}=E$ e $E$ é separável.
+
+\begin{obs}
+A recíproca é falsa: Enflo (1973) construiu um espaço de Banach separável sem base de Schauder. Como consequência do exercício, $\ell^\infty$ (não separável) não possui base de Schauder.
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{$Y,Z$ subespaços fechados de um Banach $X$ com $\operatorname{dist}(x,Y\cap Z)\le C\operatorname{dist}(x,Y)$ para todo $x$. Então $Y+Z$ é fechado.}
+\sol
+(Supomos, como é usual no enunciado, que $Y$ e $Z$ são \emph{fechados}.) Seja $W=Y\cap Z$, subespaço fechado de $X$, e considere os espaços quocientes $Z/W$ e $X/Y$ com as normas quociente (Exercício 49). Como $Z$ é fechado no Banach $X$, $Z$ é Banach; como $W$ é fechado em $Z$, o quociente $Z/W$ é Banach (Exercício 49(c)). Defina
+\[ S:Z/W\to X/Y,\qquad S\bigl([z]_W\bigr)=[z]_Y . \]
+
+\emph{$S$ está bem definida e é linear:} se $[z]_W=[z']_W$, então $z-z'\in W\subset Y$, logo $[z]_Y=[z']_Y$. A linearidade é imediata.
+
+\emph{$S$ é limitada:} como $W\subset Y$,
+\[ \norm{S[z]_W}_{X/Y}=\operatorname{dist}(z,Y)\le\operatorname{dist}(z,W)=\norm{[z]_W}_{Z/W}. \]
+
+\emph{$S$ é limitada inferiormente:} pela hipótese aplicada a $x=z\in Z$,
+\[ \norm{[z]_W}_{Z/W}=\operatorname{dist}(z,W)\le C\operatorname{dist}(z,Y)=C\norm{S[z]_W}_{X/Y}, \]
+isto é, $\norm{S\xi}\ge\frac1C\norm{\xi}$ para todo $\xi\in Z/W$.
+
+\emph{Imagem fechada.} Seja $\eta\in\overline{S(Z/W)}$ e tome $\xi_n\in Z/W$ com $S\xi_n\to\eta$. Então $(S\xi_n)$ é de Cauchy e, pela cota inferior,
+\[ \norm{\xi_n-\xi_m}\le C\norm{S\xi_n-S\xi_m}\longrightarrow0, \]
+logo $(\xi_n)$ é de Cauchy no espaço completo $Z/W$ e converge a algum $\xi$. Pela continuidade de $S$, $S\xi=\eta$. Portanto $S(Z/W)$ é fechado em $X/Y$.
+
+\emph{Conclusão.} Observe que
+\[ S(Z/W)=\{[z]_Y;\ z\in Z\}=\pi(Z)=\pi(Y+Z), \]
+onde $\pi:X\to X/Y$ é a projeção canônica (contínua, Exercício 49(d)), e ainda $\pi^{-1}\bigl(\pi(Y+Z)\bigr)=Y+Z$ pois $Y+Z\supset Y=\ker\pi$. Logo
+\[ Y+Z=\pi^{-1}\bigl(S(Z/W)\bigr) \]
+é a pré-imagem de um conjunto fechado por uma aplicação contínua, e portanto é fechado em $X$.
+\end{exercicio}
+
+\begin{exercicio}{$X$ Banach, $A\subset X$ compacto. O que ocorre se $\operatorname{int}(A)\neq\emptyset$?}
+\sol
+\textbf{Afirmação: necessariamente $\dim X<\infty$.}
+
+Se $\operatorname{int}(A)\neq\emptyset$, existem $x_0\in X$ e $r>0$ com $B(x_0,r)\subset A$. Então $\overline{B}(x_0,r/2)\subset B(x_0,r)\subset A$ é um subconjunto fechado de um compacto, logo compacto. A aplicação afim
+\[ \Psi(x)=x_0+\tfrac{r}{2}x \]
+é um homeomorfismo de $X$ que leva $\overline{B}(0,1)$ sobre $\overline{B}(x_0,r/2)$; logo $\overline{B}(0,1)=\Psi^{-1}\bigl(\overline{B}(x_0,r/2)\bigr)$ é compacta, sendo imagem de compacto por aplicação contínua ($\Psi^{-1}$).
+
+Resta o teorema de Riesz: \emph{se a bola unitária fechada de um normado $E$ é compacta, então $\dim E<\infty$.}
+
+\emph{Lema de Riesz.} Se $M\subsetneq E$ é subespaço fechado próprio e $0<\theta<1$, existe $u\in E$ com $\norm{u}=1$ e $\operatorname{dist}(u,M)\ge\theta$. \emph{Prova:} tome $v\notin M$; como $M$ é fechado, $\delta:=\operatorname{dist}(v,M)>0$. Como $\delta<\delta/\theta$, existe $m_0\in M$ com $\norm{v-m_0}\le\delta/\theta$. Ponha $u=\frac{v-m_0}{\norm{v-m_0}}$. Para $m\in M$,
+\[ \norm{u-m}=\frac{\norm{v-m_0-\norm{v-m_0}m}}{\norm{v-m_0}}\ge\frac{\delta}{\delta/\theta}=\theta, \]
+pois $m_0+\norm{v-m_0}m\in M$. \hfill$\square$
+
+\emph{Prova do teorema.} Se $\dim E=\infty$, construímos $u_1,u_2,\dots$ na esfera unitária com $\norm{u_n-u_m}\ge\frac12$ para $n\neq m$: tome $u_1$ qualquer com $\norm{u_1}=1$; dados $u_1,\dots,u_n$, o subespaço $M_n=\operatorname{span}\{u_1,\dots,u_n\}$ tem dimensão finita, logo é completo (todas as normas em dimensão finita são equivalentes --- Exercício 26 --- e $(\bbK^n,\norm{\cdot}_1)$ é completo) e portanto fechado em $E$; além disso é próprio, pois $\dim E=\infty$; pelo lema existe $u_{n+1}$ unitário com $\operatorname{dist}(u_{n+1},M_n)\ge\frac12$. A sequência $(u_n)$ vive na bola unitária fechada e não possui subsequência de Cauchy, contradizendo a compacidade. \hfill$\square$
+
+\textbf{Conclusão:} um compacto com interior não vazio só pode existir em espaços de dimensão finita. Em particular, em qualquer espaço de Banach de dimensão infinita todo compacto tem interior vazio (e, pelo Teorema de Baire, uma união enumerável de compactos nunca é o espaço todo).
+\end{exercicio}
+
+\begin{exercicio}{$C[a,b]$ não é completo com $\norm{x}_1=\int_a^b\abs{x}$; existe $C>0$ com $\norm{x}_1\le C\norm{x}_\infty$; pode existir $C$ com $\norm{x}_\infty\le C\norm{x}_1$?}
+\sol
+\textbf{Incompletude.} Seja $c=\frac{a+b}{2}$ e, para $n$ grande, defina $f_n\in C[a,b]$ por $f_n\equiv0$ em $[a,c]$, $f_n\equiv1$ em $[c+\frac1n,b]$ e afim em $[c,c+\frac1n]$. Se $m\ge n$, as funções $f_n$ e $f_m$ coincidem fora do intervalo $\bigl(c,c+\frac1n\bigr)$ e ambas tomam valores em $[0,1]$, logo
+\[ \norm{f_n-f_m}_1=\int_c^{c+1/n}\abs{f_n-f_m}\,dt\le\frac1n\xrightarrow[n\to\infty]{}0, \]
+e $(f_n)$ é de Cauchy em $(C[a,b],\norm{\cdot}_1)$.
+
+Suponha que exista $f\in C[a,b]$ com $\norm{f_n-f}_1\to0$. Como $f_n\equiv0$ em $[a,c]$,
+\[ \int_a^{c}\abs{f}\,dt=\int_a^{c}\abs{f_n-f}\,dt\le\norm{f_n-f}_1\to0, \]
+logo $\int_a^c\abs{f}=0$ e, sendo $\abs{f}$ contínua e não negativa, $f\equiv0$ em $[a,c]$. Fixado $\beta\in(c,b]$, para $n$ grande vale $f_n\equiv1$ em $[\beta,b]$, donde
+\[ \int_\beta^b\abs{f-1}\,dt=\int_\beta^b\abs{f-f_n}\,dt\le\norm{f_n-f}_1\to0 \]
+e $f\equiv1$ em $[\beta,b]$; como $\beta>c$ é arbitrário, $f\equiv1$ em $(c,b]$. Mas então $f$ teria limites laterais $0$ e $1$ em $t=c$, contradizendo a continuidade. Logo $(C[a,b],\norm{\cdot}_1)$ não é completo.
+
+\textbf{$\norm{\cdot}_1\le C\norm{\cdot}_\infty$.} Basta $C=b-a$:
+\[ \norm{x}_1=\int_a^b\abs{x(t)}\,dt\le\int_a^b\norm{x}_\infty\,dt=(b-a)\norm{x}_\infty. \]
+
+\textbf{Não existe $C$ com $\norm{x}_\infty\le C\norm{x}_1$.} Suponha $a<b$ e considere, para $n$ grande, a função ``pico'' $g_n\in C[a,b]$ dada por
+\[ g_n(t)=\max\Bigl\{0,\ 1-n\,(t-a)\Bigr\}, \]
+isto é, $g_n(a)=1$, $g_n$ decresce linearmente até se anular em $t=a+\frac1n$ e é nula depois. Então
+\[ \norm{g_n}_\infty=1 \qquad\text{e}\qquad \norm{g_n}_1=\int_a^{a+1/n}\bigl(1-n(t-a)\bigr)dt=\frac{1}{2n}\longrightarrow0. \]
+Se existisse $C$ com $\norm{x}_\infty\le C\norm{x}_1$, teríamos $1\le C/(2n)$ para todo $n$, absurdo. Portanto as normas $\norm{\cdot}_1$ e $\norm{\cdot}_\infty$ \emph{não} são equivalentes em $C[a,b]$ --- o que já era esperado, pois $(C[a,b],\norm{\cdot}_\infty)$ é completo e $(C[a,b],\norm{\cdot}_1)$ não é.
+\end{exercicio}
+
+\begin{exercicio}{$C^1[a,b]$ é Banach com $\norm{x}=\max_t\abs{x(t)}+\max_t\abs{x'(t)}$.}
+\sol
+Que $\norm{\cdot}=\norm{\cdot}_\infty+\norm{(\cdot)'}_\infty$ é norma é imediato (soma de uma norma com uma semi-norma; a separação vem da primeira parcela). Provemos a completude.
+
+Seja $(f_n)$ de Cauchy em $C^1[a,b]$. Como
+\[ \norm{f_n-f_m}_\infty\le\norm{f_n-f_m}\qquad\text{e}\qquad \norm{f_n'-f_m'}_\infty\le\norm{f_n-f_m}, \]
+as sequências $(f_n)$ e $(f_n')$ são de Cauchy em $(C[a,b],\norm{\cdot}_\infty)$, que é completo. Logo existem $f,g\in C[a,b]$ com
+\[ f_n\to f \quad\text{e}\quad f_n'\to g \qquad\text{uniformemente em } [a,b]. \]
+
+\emph{$f\in C^1$ e $f'=g$.} Pelo Teorema Fundamental do Cálculo, para todo $t\in[a,b]$,
+\[ f_n(t)=f_n(a)+\int_a^t f_n'(s)\,ds. \]
+Quando $n\to\infty$: $f_n(t)\to f(t)$, $f_n(a)\to f(a)$ e, pela convergência uniforme de $f_n'$,
+\[ \Bigl|\int_a^t f_n'(s)ds-\int_a^t g(s)ds\Bigr|\le (b-a)\norm{f_n'-g}_\infty\to0. \]
+Portanto
+\[ f(t)=f(a)+\int_a^t g(s)\,ds,\qquad t\in[a,b]. \]
+Como $g$ é contínua, o Teorema Fundamental do Cálculo garante que $f$ é derivável com $f'=g$ contínua; logo $f\in C^1[a,b]$.
+
+\emph{Convergência na norma de $C^1$.}
+\[ \norm{f_n-f}=\norm{f_n-f}_\infty+\norm{f_n'-g}_\infty\longrightarrow0. \]
+Portanto toda sequência de Cauchy converge em $C^1[a,b]$, que é um espaço de Banach.
+\end{exercicio}
+
+\begin{exercicio}{Espaços quocientes: (a) semi-norma e $M=\{\norm{x}=0\}$; (b) norma quociente; (c) completude; (d) continuidade de $\Pi$.}
+\sol
+\textbf{(a)} Seja $p=\norm{\cdot}$ uma semi-norma em $X$ e $M=\{x\in X;\ p(x)=0\}$.
+
+\emph{$M$ é subespaço:} se $p(x)=p(y)=0$ e $\lambda$ é escalar, então $0\le p(x+\lambda y)\le p(x)+\abs{\lambda}p(y)=0$.
+
+\emph{$M$ é fechado:} de $\abs{p(x)-p(y)}\le p(x-y)$ (mesma prova do Exercício 4, válida para semi-normas) segue que $p$ é contínua na pseudométrica $p(x-y)$; logo $M=p^{-1}(\{0\})$ é fechado.
+
+\emph{$\vert\!\vert\!\vert[x]\vert\!\vert\!\vert:=p(x)$ está bem definida:} se $[x]=[y]$, então $x-y\in M$ e $\abs{p(x)-p(y)}\le p(x-y)=0$.
+
+\emph{É norma em $X/M$:} homogeneidade e subaditividade são herdadas de $p$ (as operações no quociente são representadas por representantes); e $\vert\!\vert\!\vert[x]\vert\!\vert\!\vert=0$ significa $p(x)=0$, isto é, $x\in M$, ou seja, $[x]=[0]$.
+
+\textbf{(b)} Seja $M$ subespaço fechado do normado $X$ e $\norm{[x]}_Q=\operatorname{dist}(x,M)=\inf_{y\in M}\norm{x-y}$.
+
+\emph{Boa definição:} se $[x]=[x']$, então $x-x'=:m_0\in M$ e $\{x-y;y\in M\}=\{x'-y;y\in M\}$ (pois $M$ é subespaço), logo os ínfimos coincidem.
+
+\emph{Separação:} $\norm{[x]}_Q=0\iff\operatorname{dist}(x,M)=0\iff x\in\overline{M}=M\iff[x]=[0]$ (Exercício 8; aqui a hipótese de $M$ fechado é essencial).
+
+\emph{Homogeneidade:} para $\lambda\neq0$, como $y\mapsto\lambda y$ é bijeção de $M$,
+\[ \norm{\lambda[x]}_Q=\inf_{y\in M}\norm{\lambda x-y}=\inf_{y'\in M}\norm{\lambda x-\lambda y'}=\abs{\lambda}\inf_{y'\in M}\norm{x-y'}=\abs{\lambda}\norm{[x]}_Q; \]
+para $\lambda=0$ ambos os lados são nulos.
+
+\emph{Triangular:} dados $\eps>0$, tome $y,z\in M$ com $\norm{x-y}<\norm{[x]}_Q+\eps$ e $\norm{w-z}<\norm{[w]}_Q+\eps$. Como $y+z\in M$,
+\[ \norm{[x+w]}_Q\le\norm{(x+w)-(y+z)}\le\norm{x-y}+\norm{w-z}<\norm{[x]}_Q+\norm{[w]}_Q+2\eps, \]
+e faz-se $\eps\to0$.
+
+\textbf{(c)} Usamos o critério: \emph{um espaço normado $E$ é Banach se, e somente se, toda série absolutamente convergente converge em $E$.} (Prova da implicação que usaremos: se toda série absolutamente convergente converge e $(u_n)$ é de Cauchy, escolha $n_1<n_2<\cdots$ com $\norm{u_{n_{k+1}}-u_{n_k}}\le2^{-k}$; a série telescópica $u_{n_1}+\sum_k(u_{n_{k+1}}-u_{n_k})$ é absolutamente convergente, logo $(u_{n_k})$ converge e, pelo Exercício 28, $(u_n)$ converge.)
+
+Seja então $\sum_n\norm{[x_n]}_Q<\infty$. Para cada $n$ escolha um representante $y_n\in[x_n]$ com
+\[ \norm{y_n}\le\norm{[x_n]}_Q+2^{-n} \]
+(possível pela definição de ínfimo). Assim $\sum_n\norm{y_n}<\infty$ e, sendo $X$ Banach, $s=\sum_{n=1}^\infty y_n$ converge em $X$. Como $\Pi$ é linear e $\norm{\Pi(u)}_Q\le\norm{u}$ (item (d)),
+\[ \Bigl\|\sum_{n=1}^{N}[x_n]-[s]\Bigr\|_Q=\Bigl\|\Pi\Bigl(\sum_{n=1}^{N}y_n-s\Bigr)\Bigr\|_Q\le\Bigl\|\sum_{n=1}^{N}y_n-s\Bigr\|\xrightarrow[N\to\infty]{}0. \]
+Logo $\sum_n[x_n]$ converge em $X/M$ e, pelo critério, $(X/M,\norm{\cdot}_Q)$ é Banach.
+
+\textbf{(d)} $\Pi$ é linear e, tomando $y=0\in M$ na definição do ínfimo,
+\[ \norm{\Pi(x)}_Q=\operatorname{dist}(x,M)\le\norm{x-0}=\norm{x}. \]
+Logo $\Pi$ é limitada com $\norm{\Pi}\le1$, portanto contínua. (De fato $\Pi$ é aberta e $\norm{\Pi}=1$ quando $M\neq X$.)
+\end{exercicio}
+
+\begin{exercicio}{$M$ fechado em $X$ normado. Se $M$ e $X/M$ são completos, então $X$ é Banach.}
+\sol
+Seja $(x_n)$ de Cauchy em $X$. Como $\norm{[x_n]-[x_m]}_Q=\norm{[x_n-x_m]}_Q\le\norm{x_n-x_m}$, a sequência $([x_n])$ é de Cauchy em $X/M$, que é completo: existe $x\in X$ com
+\[ \eps_n':=\norm{[x_n]-[x]}_Q=\operatorname{dist}(x_n-x,M)\longrightarrow0. \]
+Pela definição de ínfimo, escolha $m_n\in M$ com
+\[ \norm{x_n-x-m_n}\le\eps_n'+\tfrac1n=:\eps_n\longrightarrow0. \]
+
+\emph{$(m_n)$ é de Cauchy em $M$:}
+\[ \norm{m_n-m_k}\le\norm{m_n-(x_n-x)}+\norm{x_n-x_k}+\norm{(x_k-x)-m_k}\le\eps_n+\eps_k+\norm{x_n-x_k}, \]
+e o lado direito tende a $0$ quando $n,k\to\infty$ (pois $(x_n)$ é de Cauchy). Como $M$ é completo, existe $m\in M$ com $m_n\to m$.
+
+\emph{Conclusão:}
+\[ \norm{x_n-(x+m)}\le\norm{x_n-x-m_n}+\norm{m_n-m}\le\eps_n+\norm{m_n-m}\longrightarrow0, \]
+isto é, $x_n\to x+m\in X$. Portanto toda sequência de Cauchy em $X$ converge e $X$ é um espaço de Banach.
+
+\begin{obs}
+Junto com o Exercício 49(c), obtemos: para $M$ subespaço fechado, $X$ é Banach $\iff$ $M$ e $X/M$ são Banach. É o análogo, para completude, das ``sequências exatas curtas'' $0\to M\to X\to X/M\to 0$.
+\end{obs}
+\end{exercicio}

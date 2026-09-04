@@ -1,0 +1,284 @@
+\chapter{Hahn-Banach e Categoria de Baire}
+
+\section{Ordens Parciais, Cadeias e o Lema de Zorn}
+
+\dfn{Ordem Parcial e Ordem Total}{Uma ordem parcial num conjunto $X$ é uma relação binária $\prec$ que
+satisfaz, para cada $x,y,z\in X$,
+\begin{align*}
+	(i)   & \quad x\prec x\text{;}                                          \\
+	(ii)  & \quad x\prec y \text{ e } y\prec x \implies x=y\text{;}         \\
+	(iii) & \quad x\prec y \text{ e } y\prec z \implies x\prec z\text{.}
+\end{align*}
+Quando também vale $(iv)$ $\forall x,y\in X$, $x\prec y$ ou $y\prec x$, dizemos que $\prec$ é uma relação
+de ordem total. Um subconjunto $Y\subset X$ totalmente ordenado é denominado \emph{cadeia}.}
+
+\ex{Ordens parciais e totais}{
+	\begin{enumerate}
+		\item $\Omega\neq\emptyset$ um conjunto, $X=\mcP(\Omega)$; $E,F\in X$, $E\prec F :\iff E\subseteq
+		      F$ é uma relação de ordem parcial.
+		\item $X=\bbR$, $x,y\in\bbR$, $x\prec y :\iff x\leq y$ é uma relação de ordem total.
+	\end{enumerate}}
+
+\dfn{Elemento Maximal e Limitante Superior}{Seja $(X,\prec)$ um conjunto parcialmente ordenado. Um
+elemento $x\in X$ é maximal em $X$ quando, se $y\in X$ é tal que $x\prec y$, então $x=y$. Dado
+$Y\subset X$, um elemento $x\in X$ é limitante superior (cota superior) de $Y$ se $y\prec x$,
+$\forall y\in Y$.}
+
+\ex{}{$X=\{2,3,4,6,9\}$, $x\prec y :\iff x\mid y$ ($x$ divide $y$).
+	\begin{itemize}
+		\item $4$ é maximal (se $y\in X$ é tal que $4\prec y$, então $y=4$); analogamente, $6$ e $9$ são
+		      maximais de $X$.
+		\item $Y=\{2,3\}$: $6$ é limitante superior de $Y$.
+		\item $Y=\{2,3,6\}$: $6$ é limitante superior e também maximal de $Y$.
+	\end{itemize}}
+
+\nt{Ideia: o Lema de Zorn é a ferramenta usada quando queremos construir um objeto ``o maior possível''
+(uma base, uma extensão de funcional) sem conseguir descrevê-lo explicitamente. A estratégia típica é
+sempre a mesma: organizar os candidatos parciais numa ordem de extensão, mostrar que toda cadeia (uma
+sequência de extensões cada vez maiores) tem um limitante superior (a própria união), e concluir que existe
+um candidato maximal — que, por maximalidade, já é o objeto procurado. As Seções 4.2 e 4.3 seguem
+exatamente esse roteiro.}
+
+\thm{Lema de Zorn}{Um conjunto não vazio, parcialmente ordenado, no qual toda cadeia possui limitante
+superior, possui ao menos um elemento maximal.}
+
+\nt{O Lema de Zorn é assumido como axioma (é equivalente ao Axioma da Escolha).}
+
+\section{Existência de Base de Hamel}
+
+\thm{}{Todo espaço vetorial não nulo $V$ sobre o corpo $\bbK$ possui base de Hamel.}
+\begin{myproof}
+	Seja $V\neq\{0\}$ espaço vetorial e $\mcE=\{A\subset V \mid A \text{ é LI}\}$, parcialmente ordenado
+	pela inclusão de conjuntos. Seja $\mcC$ uma cadeia em $\mcE$; dessa forma, se $A,B\in\mcC$, então
+	$A\subseteq B$ ou $B\subseteq A$. Seja $D=\bigcup_{A\in\mcC}A$.
+
+	\textit{$D$ é LI:} sejam $\{x_j\}_{j=1}^{m}\subseteq D$; existem $\{A_j\}_{j=1}^{m}\subseteq\mcC$
+	tais que $x_j\in A_j$, $\forall j$. Se $\sum_j\alpha_jx_j=0$, podemos assumir, sem perda de
+	generalidade, que $A_1\subseteq A_2\subseteq\dots\subseteq A_m$; logo
+	$\{x_j\}_{j=1}^{m}\subseteq A_m$ e, como $A_m$ é LI, $\alpha_j=0$, $\forall j\in\{1,\dots,m\}$.
+
+	Portanto $D$ é um limitante superior de $\mcC$ e, pelo Lema de Zorn, $\mcE$ possui elemento maximal
+	$B$, i.e., $B$ é LI e maximal em relação à inclusão.
+
+	\textit{Afirmação: $\text{Span}\,B=V$.} Suponha que não; existe $v_0\in V\setminus\text{Span}\,B$.
+	Então $\tilde B=B\cup\{v_0\}$ é LI e $B\subsetneq\tilde B$, contrariando a maximalidade de $B$.
+	Portanto $B$ é uma base (de Hamel) de $V$.
+\end{myproof}
+
+\section{O Teorema de Hahn-Banach (Caso Real)}
+
+\dfn{Funcional Sublinear}{Seja $X$ espaço vetorial real. Um funcional sublinear em $X$ é uma função
+$p:X\to\bbR$ tal que
+$$p(x+y)\leq p(x)+p(y)\text{,}\quad\forall x,y\in X\text{,}\qquad p(\lambda x)=\lambda p(x)\text{,}\quad
+\forall x\in X,\ \lambda\in\bbR,\ \lambda>0\text{.}$$}
+
+\ex{}{Se $X$ é normado, $p:X\to\bbR$, $x\mapsto\|x\|$, é um funcional sublinear.}
+
+\nt{Ideia: o Teorema de Hahn-Banach garante que um funcional linear $f$, definido apenas num subespaço $M$
+e dominado ali por um majorante sublinear $p$, sempre pode ser estendido a todo o espaço $X$ sem violar
+essa dominação em lugar nenhum. A demonstração aplica o roteiro do Lema de Zorn: entre todas as extensões
+possíveis de $f$ que ainda respeitam $f\leq p$, toma-se uma maximal (via Zorn) e mostra-se, por
+contradição, que seu domínio já é $X$ — se não fosse, seria possível estendê-la a mais um vetor $x_0$
+(Seção 4.3), contrariando a maximalidade.}
+
+\thm{Teorema de Hahn-Banach (1929)}{Seja $X$ espaço vetorial real, $p:X\to\bbR$ funcional sublinear,
+$M\subset X$ subespaço e $f:M\to\bbR$ funcional linear. Se $f(x)\leq p(x)$, $\forall x\in M$, então existe
+um funcional linear $F:X\to\bbR$ tal que $F(x)\leq p(x)$, $\forall x\in X$, e $F|_M=f$.}
+\begin{myproof}
+	Seja $H=\{h_j\}$ a coleção das funções lineares que estendem $f$, definidas em subespaços
+	$D(h_j)\subset X$: $h_j:D(h_j)\to\bbR$ linear, $M\subset D(h_j)$, $h_j|_M=f$ e $h_j\leq p$ em
+	$D(h_j)$. Note que $H\neq\emptyset$, pois $f\in H$. Definimos em $H$ a ordem parcial
+	$$h_i\prec h_j :\iff D(h_i)\subseteq D(h_j) \text{ e } h_j|_{D(h_i)}=h_i\text{.}$$
+
+	Seja $Z=\{h_j\}_{j\in J}$ uma cadeia em $H$. Defina $D(h)=\bigcup_{j\in J}D(h_j)$ e $h:D(h)\to\bbR$
+	por $h(x)=h_j(x)$, onde $j\in J$ é tal que $x\in D(h_j)$; segue que $h$ está bem definida, é uma
+	extensão de $f$ com $h\leq p$ em $D(h)$, logo $h\in H$ é limitante superior de $Z$. Pelo Lema de
+	Zorn, $H$ possui elemento maximal $F:\tilde X\to\bbR$, $\tilde X\subset X$ subespaço.
+
+	\textit{Vejamos que $\tilde X=X$.} Suponha que não, e considere $x_0\in X\setminus\tilde X$. Seja
+	$Y=\tilde X+\bbR x_0=\{x+tx_0 \mid x\in\tilde X,\ t\in\bbR\}$, subespaço de $X$. Defina
+	$g:Y\to\bbR$ por $g(x+tx_0)=F(x)+t\alpha$, com $\alpha$ uma constante a ser escolhida. Então $g$ é
+	linear e $g|_M=f$. Resta escolher $\alpha$ de modo que
+	$$(2)\qquad g(x+tx_0)=F(x)+t\alpha\leq p(x+tx_0)\text{,}\quad\forall x\in\tilde X,\ \forall t\in\bbR\text{.}$$
+	Para $t=0$, $(2)$ vale trivialmente. Para $t>0$ (respectivamente $t<0$), dividindo por $|t|$, $(2)$
+	equivale a
+	$$F(x)+\alpha\leq p(x+x_0) \quad\text{e}\quad F(x)-\alpha\leq p(x-x_0)\text{,}\quad\forall x\in\tilde
+	X\text{,}$$
+	i.e.,
+	$$(\star)\qquad F(x)-p(x-x_0)\leq\alpha\leq p(x+x_0)-F(x)\text{,}\quad\forall x\in\tilde X\text{,}$$
+	ou, equivalentemente, $\eta_1:=\sup_{y\in\tilde X}\{F(y)-p(y-x_0)\}\leq\alpha\leq
+	\inf_{x\in\tilde X}\{p(x+x_0)-F(x)\}=:\eta_2$. Como
+	$$F(x)+F(y)=F(x+y)\leq p(x+y)=p\big((x+x_0)+(y-x_0)\big)\leq p(x+x_0)+p(y-x_0)\text{,}\quad\forall
+	x,y\in\tilde X\text{,}$$
+	segue que $F(y)-p(y-x_0)\leq p(x+x_0)-F(x)$, $\forall x,y\in\tilde X$, logo $\eta_1\leq\eta_2$ e é
+	possível escolher $\alpha\in[\eta_1,\eta_2]$, garantindo $(\star)$ e, portanto, $(2)$.
+
+	Assim $g\in H$ estende $F$ estritamente, contrariando a maximalidade de $F$. Logo $\tilde X=X$.
+\end{myproof}
+
+\qslista[2]{24}{$p$ semi-norma em $X$ real e $x_0\in X$. Existe funcional linear $f$ em $X$ com
+$f(x_0)=p(x_0)$ e $|f(x)|\leq p(x)$ para todo $x$.}
+\nt{Caso particular do Teorema de Hahn-Banach acima: $p$ seminorma é, em particular, sublinear.}
+
+\section{O Teorema de Hahn-Banach (Caso Complexo)}
+
+\thm{Teorema de Hahn-Banach (Complexo)}{Seja $X$ espaço vetorial complexo, $p$ seminorma em $X$,
+$M\subset X$ subespaço e $f:M\to\bbC$ linear tal que $|f(x)|\leq p(x)$, $\forall x\in M$. Então existe
+$F:X\to\bbC$ linear tal que $F|_M=f$ e $|F(x)|\leq p(x)$, $\forall x\in X$.}
+\begin{myproof}
+	Denote por $M_{\bbR}$ e $X_{\bbR}$ os espaços vetoriais reais obtidos ao restringir a multiplicação
+	por escalares reais em $M$ e $X$. Escreva $f(x)=u(x)+iv(x)$, $x\in M$, com $u,v$ a valores reais.
+	Como $f(ix)=if(x)$, temos $u(ix)+iv(ix)=iu(x)-v(x)$, donde $v(x)=-u(ix)$, $\forall x\in M$, e
+	$$f(x)=u(x)-iu(ix)\text{,}\quad\forall x\in M\text{.}$$
+	Note que $u(x)\leq|u(x)|\leq|f(x)|\leq p(x)$, $\forall x\in M_{\bbR}$, logo $u$ é linear e $u\leq p$
+	em $M_{\bbR}$. Pelo Teorema de Hahn-Banach (versão real), existe $\tilde u:X_{\bbR}\to\bbR$ tal que
+	$\tilde u|_{M_{\bbR}}=u$ e $\tilde u\leq p$ em $X_{\bbR}$.
+
+	Defina $F:X\to\bbC$, $F(x)=\tilde u(x)-i\tilde u(ix)$. Se $x\in M$, $F(x)=u(x)-iu(ix)=f(x)$, logo
+	$F|_M=f$.
+
+	\textit{$F$ é linear no espaço $X$ (complexo):} a aditividade é imediata da aditividade de $\tilde
+	u$. Para $\lambda=a+ib$,
+	\begin{align*}
+		F(\lambda x) & = \tilde u\big((a+ib)x\big)-i\tilde u(iax-bx)                                  \\
+		              & = \tilde u(ax)+\tilde u(ibx)-i\tilde u(iax)+i\tilde u(bx)                       \\
+		              & = a\tilde u(x)+b\tilde u(ix)-ai\tilde u(ix)+bi\tilde u(x)                       \\
+		              & = \lambda\tilde u(x)-i\lambda\tilde u(ix) = \lambda F(x)\text{,}\quad
+		\forall\lambda\in\bbC,\ \forall x\in X\text{.}
+	\end{align*}
+
+	\textit{$|F(x)|\leq p(x)$, $\forall x\in X$:} se $x\in N(F)$, a desigualdade é imediata. Caso
+	contrário, escrevendo $F(x)=|F(x)|e^{i\arg F(x)}$, temos $|F(x)|=F\big(xe^{-i\arg F(x)}\big)\in\bbR$,
+	logo
+	$$F\big(xe^{-i\arg F(x)}\big)=\tilde u\big(xe^{-i\arg F(x)}\big)\leq p\big(xe^{-i\arg F(x)}\big)=
+	\big|e^{-i\arg F(x)}\big|p(x)\leq p(x)\text{,}$$
+	i.e., $|F(x)|\leq p(x)$.
+\end{myproof}
+
+\section{Corolários do Teorema de Hahn-Banach}
+
+\cor{}{Sejam $M\subset X$, $X$ normado real, $f:M\to\bbR$ linear e contínua. Então existe $F:X\to\bbR$
+linear e contínua ($F\in X'$) tal que $F|_M=f$ e $\|F\|_{X'}=\|f\|_{M'}$.}
+\begin{myproof}
+	Seja $p(x)=\|f\|\,\|x\|$, $x\in X$, sublinear em $X$; note que $f(x)\leq|f(x)|\leq\|f\|\,\|x\|=p(x)$,
+	$\forall x\in M$. Pelo Teorema de Hahn-Banach, existe $F:X\to\bbR$ linear tal que $F(x)\leq p(x)$,
+	$\forall x\in X$, e $F|_M=f$. Como $-F(x)=F(-x)\leq p(-x)=\|f\|\,\|x\|$, segue $|F(x)|\leq\|f\|\,\|x\|$,
+	$\forall x\in X$, logo $F$ é contínua e $\|F\|\leq\|f\|$. A desigualdade oposta é imediata, pois
+	$$\|f\|=\sup_{\substack{x\in M\\x\neq 0}}\frac{|f(x)|}{\|x\|}=\sup_{\substack{x\in M\\x\neq
+	0}}\frac{|F(x)|}{\|x\|}\leq\sup_{\substack{x\in X\\x\neq 0}}\frac{|F(x)|}{\|x\|}=\|F\|\text{.}$$
+\end{myproof}
+
+\cor{}{Seja $X$ normado. Dado qualquer $x_0\in X$, $x_0\neq 0$, existe $f\in X'$ tal que $\|f\|=1$ e
+$f(x_0)=\|x_0\|$.}
+\begin{myproof}
+	Seja $M=\text{Span}\{x_0\}$ e $\tilde f:M\to\bbK$ dado por $\tilde f(\alpha x_0)=\alpha\|x_0\|$; como
+	$\dim M<\infty$, $\tilde f$ é contínua. Pelo corolário anterior, existe $f:X\to\bbK$ tal que
+	$f|_M=\tilde f$ e $\|f\|=\|\tilde f\|$. Como $f(x_0)=\tilde f(x_0)=\|x_0\|$ e
+	$|\tilde f(\alpha x_0)|=|\alpha|\,\|x_0\|=\|\alpha x_0\|$, temos
+	$1=|\tilde f(x)|/\|x\|$, $\forall x\neq 0$, $x\in M$, logo $\|\tilde f\|=1$ e portanto $\|f\|=1$.
+\end{myproof}
+
+\nt{Dado $x\in X$, $|f(x)|\leq\|f\|\,\|x\|$, $\forall f\in X'$, logo
+$\sup_{f\in X',f\neq 0}|f(x)|/\|f\|\leq\|x\|$; pelo corolário anterior, essa desigualdade é uma
+igualdade:
+$$\|x\|=\sup_{\substack{h\in X'\\h\neq 0}}\frac{|h(x)|}{\|h\|}\text{,}\quad\forall x\in X\text{.}$$
+Em particular, $\bigcap_{f\in X'}N(f)=\{0\}$. (Existe também uma versão geométrica do Teorema de
+Hahn-Banach.)}
+
+\qslista[2]{17}{(a) Para cada $x\in X$ existe $f\in X'$ com $\|f\|=\|x\|$ e $f(x)=\|x\|^2$. (b)
+$\|x\|=\sup_{f\in X'\setminus\{0\}}\dfrac{|f(x)|}{\|f\|}$.}
+\nt{Cf. corolários e observação acima.}
+
+\qslista[2]{22}{$Y\subset X$ subespaço. Então $D(x_0,Y)=\sup\{f(x_0);\ f\in Y^\perp,\ \|f\|=1\}$.}
+
+\qslista[2]{23}{$T\in\mathcal{L}(X,Y)$. Então $\|T\|=\sup_{\|x\|=1}\ \sup_{\|f\|=1}|f(Tx)|$, com
+$f\in Y'$.}
+
+\section{Categoria de Baire e o Teorema de Baire}
+
+\dfn{Nunca Denso, Primeira e Segunda Categoria}{Seja $(X,d)$ espaço métrico.
+\begin{itemize}
+	\item $A\subset X$ é \emph{nunca denso} quando $\text{int}(\bar A)=\emptyset$. (União finita de
+	      conjuntos nunca densos ainda é nunca densa; a união arbitrária pode não ser.)
+	\item $A\subset X$ é de \emph{primeira categoria} (ou magro) em $X$ quando $A$ é uma união enumerável
+	      de conjuntos nunca densos de $X$; $A$ é de \emph{segunda categoria} quando não for de primeira
+	      categoria.
+\end{itemize}}
+
+\nt{$(X,d)$ é de segunda categoria nela mesma se, e somente se, em qualquer representação de $X$ por uma
+união enumerável de fechados, algum desses fechados contém uma bola aberta.}
+
+\thm{Teorema de Baire}{Todo espaço métrico completo é de segunda categoria nele mesmo.}
+\begin{myproof}
+	Suponha, por contradição, que $X$ seja de primeira categoria, i.e., existem fechados $\{F_j\}$ tais
+	que $X=\bigcup_{j=1}^{\infty}F_j$ e $\text{int}(F_j)=\emptyset$, $\forall j\in\bbN$.
+
+	Sejam $x_1$ e $\eps_1\in(0,1)$ tais que $B(x_1,\eps_1)\subset X\setminus F_1$ (aberto, pois
+	$\text{int}(F_1)=\emptyset$). Como $B(x_1,\eps_1)\not\subset F_2$ (por hipótese), existe
+	$x_2\in B(x_1,\eps_1/2)$ e $0<\eps_2<1/2$ tais que $B(x_2,\eps_2)\subset B(x_1,\eps_1/2)$.
+	Indutivamente, existem $x_n$ e $0<\eps_n<1/2^n$ tais que
+	$$B(x_n,\eps_n)\subset B\big(x_{n-1},\eps_{n-1}/2\big) \quad\text{e}\quad B(x_n,\eps_n)\cap F_n=\emptyset\text{.}$$
+
+	A sequência $(x_n)$ é de Cauchy, pois $x_m\in B(x_n,\eps_n/2)$, $\forall m>n$, e $\eps_n\to 0$. Pela
+	completude de $X$, $x_n\to x\in X$. Para cada $n$ fixado, $x\in B(x_n,\eps_n) \implies x\notin F_n$,
+	$\forall n\in\bbN$. Entretanto, $X=\bigcup_{n=1}^{\infty}F_n\not\ni x$, uma contradição.
+\end{myproof}
+
+\section{O Teorema de Banach-Steinhaus}
+
+\nt{Ideia: este é o primeiro dos ``três princípios fundamentais'' da Análise Funcional que usa
+completude de forma essencial (via o Teorema de Baire). A hipótese só fala de limitação \emph{pontual}
+(para cada $x$ fixado, os valores $\|T_\alpha x\|$ não explodem); a conclusão é uma limitação
+\emph{uniforme} das normas dos operadores $\|T_\alpha\|$. A prova encontra essa uniformidade localizando,
+via Baire, uma bola inteira onde os operadores já são uniformemente limitados, e depois transportando essa
+limitação para toda a bola unitária por linearidade.}
+
+\thm{Banach-Steinhaus (Princípio da Limitação Uniforme)}{Sejam $X$ espaço de Banach, $Y$ normado, e
+$\{T_\alpha\}_{\alpha\in J}\subset\mathcal{L}(X,Y)$ uma família de operadores lineares contínuos. Se, para
+cada $x\in X$, existe $C_x>0$ tal que $\sup_{\alpha\in J}\|T_\alpha x\|\leq C_x$, então existe $C>0$ tal
+que $\sup_{\alpha\in J}\|T_\alpha\|\leq C$.}
+\begin{myproof}
+	Para cada $k\in\bbN$, seja $E_k=\{x\in X \mid \|T_\alpha x\|\leq k,\ \forall\alpha\in J\}\subset X$.
+	Como $E_k=\bigcap_{\alpha\in J}T_\alpha^{-1}\big(\overline{B}_k(0)\big)$ e cada
+	$T_\alpha^{-1}(\overline{B}_k(0))$ é fechado (pois $T_\alpha$ é contínuo), $E_k$ é fechado. Além
+	disso, $X=\bigcup_{k\in\bbN}E_k$, pois $\forall x\in X$, $\sup_{\alpha\in J}\|T_\alpha x\|\leq
+	C_x\leq K$ para algum $K\in\bbN$.
+
+	Como $X$ é completo, segue do Teorema de Baire que existe $m\in\bbN$ com $\text{int}(E_m)\neq\emptyset$.
+	Seja $B(x_0,r)\subset E_m$; logo $\sup_{\alpha\in J}\|T_\alpha x\|\leq m$, $\forall x\in B(x_0,r)$.
+
+	Dado $x\in X$ com $\|x\|=1$, considere $\tilde x=x_0+\tfrac12 rx$; então $\|x_0-\tilde x\|=r/2<r$,
+	logo $\tilde x\in B(x_0,r)$. Assim,
+	$$\|T_\alpha x\|=\left\|T_\alpha\Big(\frac{2}{r}(\tilde x-x_0)\Big)\right\|\leq
+	\frac{2}{r}\big(\|T_\alpha\tilde x\|+\|T_\alpha x_0\|\big)\leq \frac{4}{r}m\text{,}\quad
+	\forall\alpha\in J\text{,}$$
+	pois $x_0,\tilde x\in E_m$. Tomando o supremo sobre $\|x\|=1$ e $\alpha\in J$,
+	$$\frac{4m}{r}\geq\sup_{\substack{x\in X\\\|x\|=1}}\|T_\alpha x\|=\|T_\alpha\|\text{,}\quad\forall
+	\alpha\in J\text{.}$$
+\end{myproof}
+
+\cor{}{Sejam $X$ Banach e $Y$ normado, e $(T_n)\subset\mathcal{L}(X,Y)$. Suponha que, $\forall x\in X$,
+existe $Tx=\lim_{n\to\infty}T_nx$. Então $\sup_n\|T_n\|<\infty$, $T\in\mathcal{L}(X,Y)$ e
+$\|T\|\leq\liminf_n\|T_n\|$.}
+\begin{myproof}
+	Para cada $x\in X$, como existe $\lim_n T_n(x)$, a sequência $(T_nx)$ é limitada, i.e.,
+	$\sup_n\|T_nx\|\leq C_x$ para algum $C_x>0$. Pelo Princípio da Limitação Uniforme, existe $C>0$ tal
+	que $\sup_n\|T_n\|<C$.
+
+	$T$ é linear por definição; vejamos que $T$ é limitado. Como $\|T_n(x)\|\leq\|T_n\|\,\|x\|\leq
+	C\|x\|$, $\forall n\in\bbN$, $\forall x\in X$, fazendo $n\to\infty$, $\|T(x)\|\leq C\|x\|$, logo $T$
+	é limitado.
+
+	Mais ainda, para $x\neq 0$, $\|T(x)\|=\lim_n\|T_n(x)\|=\liminf_n\|T_n(x)\|\leq\big(\liminf_n
+	\|T_n\|\big)\|x\|$, donde $\|T(x)\|/\|x\|\leq\liminf_n\|T_n\|$, e portanto
+	$\|T\|\leq\liminf_n\|T_n\|$.
+
+	Reunindo os três fatos estabelecidos acima, concluímos que $\sup_n\|T_n\|<\infty$,
+	$T\in\mathcal{L}(X,Y)$ e $\|T\|\leq\liminf_n\|T_n\|$, como queríamos demonstrar.
+\end{myproof}
+
+\qslista[2]{26}{$X$ Banach e $(x_n)\subset X$ com $\{f(x_n)\}$ limitada para toda $f\in X'$. Então
+$(x_n)$ é limitada.}
+
+\qslista[2]{27}{Use o Princípio da Limitação Uniforme para provar que $E=\{x:[0,1]\to\bbR;\ x \text{
+polinômio}\}$, com $\|x\|=\max_{j}|a_j|$, não é completo.}

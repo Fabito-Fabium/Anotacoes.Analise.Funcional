@@ -1,0 +1,383 @@
+\chapter{Dimensão Finita e Operadores Lineares Limitados}
+
+\section{Normas Equivalentes}
+
+\dfn{Normas Equivalentes}{Seja $X$ espaço vetorial. Duas normas $\|\cdot\|_1,\|\cdot\|_2$ em $X$ são
+equivalentes quando existem $\alpha,\beta>0$ tais que
+$$\alpha\|x\|_2\leq\|x\|_1\leq\beta\|x\|_2\text{,}\quad\forall x\in X\text{.}$$}
+
+\nt{Normas equivalentes geram os mesmos abertos de $X$; a recíproca não vale em geral, i.e., existem
+espaços métricos com os mesmos abertos cujas métricas não provêm de normas equivalentes.}
+
+\qslista[2]{2}{Se $\dim X<+\infty$, então todas as normas em $X$ são equivalentes.}
+\begin{myproof}
+	Seja $\{e_1,\dots,e_n\}$ base de $X$ e $\|\cdot\|$ uma norma qualquer em $X$. Escrevendo
+	$x=\sum_k\alpha_ke_k$, defina $\|x\|_1:=\sum_k|\alpha_k|$; como a equivalência de normas é
+	transitiva, basta mostrar que $\|\cdot\|$ e $\|\cdot\|_1$ são equivalentes.
+
+	Pela desigualdade triangular, $\|x\|\leq\sum_k|\alpha_k|\,\|e_k\|\leq\beta\|x\|_1$, onde
+	$\beta:=\max_k\|e_k\|$. Considere agora $\varphi:\bbK^n\to\bbR$, $\varphi(\alpha)=\|\sum_k\alpha_ke_k\|$.
+	Pela desigualdade anterior, $|\varphi(\alpha)-\varphi(\alpha')|\leq\beta\|\alpha-\alpha'\|_1$, logo
+	$\varphi$ é (Lipschitz) contínua na topologia usual de $\bbK^n$.
+
+	A esfera $S=\{\alpha\in\bbK^n \mid \|\alpha\|_1=1\}$ é compacta, e $\varphi(\alpha)>0$ para todo
+	$\alpha\in S$, pois $\{e_k\}$ é LI. Por compacidade, $\varphi$ atinge um mínimo
+	$c:=\min_{\alpha\in S}\varphi(\alpha)>0$. Dado $x\neq 0$, seja $t=\|\alpha\|_1>0$ e
+	$\tilde\alpha=\alpha/t\in S$; por homogeneidade, $\|x\|=\varphi(\alpha)=t\,\varphi(\tilde\alpha)\geq
+	tc=c\|x\|_1$.
+
+	Logo $c\|x\|_1\leq\|x\|\leq\beta\|x\|_1$, $\forall x\in X$, i.e., $\|\cdot\|$ e $\|\cdot\|_1$ são
+	equivalentes. Como $\|\cdot\|$ era arbitrária, todas as normas em $X$ são equivalentes entre si.
+\end{myproof}
+
+\qslista[2]{1}{Se $\dim X<\infty$, então toda transformação linear $T:X\to Y$ é contínua.}
+\nt{Consequência da Questão 3.1.1 (acima): escrevendo $Tx=\sum_k\alpha_kTe_k$ na base de $X$ e usando a
+equivalência entre $\|\cdot\|$ e $\|\cdot\|_1:=\sum_k|\alpha_k|$, obtém-se $\|Tx\|\leq M\|x\|_1\leq
+MC\|x\|$.}
+
+\qslista{26}{Dizemos que duas normas $\|\cdot\|_0$ e $\|\cdot\|_1$ são equivalentes num
+espaço vetorial $V$ se existem constantes $C_1,C_2>0$ tais que
+$$C_1\|x\|_1\leq \|x\|_0\leq C_2\|x\|_1\text{,}\quad \forall x\in V\text{.}$$
+Mostre que, se $V$ tem dimensão finita, então todas as normas são equivalentes.}
+\nt{Cf. Questão 3.1.1, já demonstrada acima.}
+
+\section{Subespaços de Dimensão Finita}
+
+\mprop{}{Seja $(X,\|\cdot\|)$ espaço normado e $\{x_1,\dots,x_n\}\subset X$ linearmente independente.
+Então existe $c>0$ tal que
+$$\left\|\sum_{k=1}^{n}\alpha_kx_k\right\|\geq c\sum_{k=1}^{n}|\alpha_k|\text{,}\quad \forall
+(\alpha_k)_{k=1}^{n}\subset\bbK^n\text{.}$$}
+
+\begin{myproof}
+	Considere $\varphi:\bbK^n\to\bbR$, $\varphi(\alpha)=\big\|\sum_k\alpha_kx_k\big\|$. Pela desigualdade
+	triangular, $|\varphi(\alpha)-\varphi(\alpha')|\leq\big(\max_k\|x_k\|\big)\|\alpha-\alpha'\|_1$, logo
+	$\varphi$ é contínua na topologia usual de $\bbK^n$. A esfera $S=\{\alpha\in\bbK^n \mid
+	\sum_k|\alpha_k|=1\}$ é compacta, e $\varphi(\alpha)>0$ para todo $\alpha\in S$, pois
+	$\{x_1,\dots,x_n\}$ é LI (nenhuma combinação não trivial se anula). Por compacidade, $\varphi$ atinge
+	um mínimo $c:=\min_{\alpha\in S}\varphi(\alpha)>0$.
+
+	Dado $(\alpha_k)_{k=1}^{n}\neq 0$, seja $t=\sum_k|\alpha_k|>0$ e $\tilde\alpha=\alpha/t\in S$; por
+	homogeneidade da norma,
+	$$\left\|\sum_k\alpha_kx_k\right\|=\varphi(\alpha)=t\,\varphi(\tilde\alpha)\geq tc=c\sum_k|\alpha_k|\text{,}$$
+	e para $(\alpha_k)=0$ a desigualdade é trivial.
+\end{myproof}
+
+\thm{}{Seja $X$ espaço normado e $Y\subset X$ com $\dim Y<\infty$. Então $Y$ é completo.}
+\begin{myproof}
+	Seja $(y_n)\subset Y$ sequência de Cauchy e $\{e_1,\dots,e_N\}$ base de $Y$. Para cada $n\in\bbN$,
+	escrevemos $y_n=\sum_{k=1}^{N}\alpha_k^{(n)}e_k$. Dado $\eps>0$, existe $n_0\in\bbN$ tal que
+	$\|y_n-y_m\|<\eps$, $\forall n,m\geq n_0$.
+
+	Pela proposição anterior, para $n,m\geq n_0$,
+	$$\eps>\|y_n-y_m\|=\left\|\sum_{j=1}^{N}\big(\alpha_j^{(n)}-\alpha_j^{(m)}\big)e_j\right\|\geq
+	c\sum_{j=1}^{N}\big|\alpha_j^{(n)}-\alpha_j^{(m)}\big|\text{,}$$
+	logo $\big|\alpha_j^{(n)}-\alpha_j^{(m)}\big|<\eps/c$ para cada $j\in\{1,\dots,N\}$, i.e.,
+	$\big(\alpha_j^{(k)}\big)_{k\in\bbN}$ é de Cauchy em $\bbR$. Portanto existe $\alpha_j\in\bbR$ tal que
+	$\alpha_j^{(n)}\to\alpha_j$. Seja $y=\sum_{j=1}^{N}\alpha_je_j$. Com isso,
+	$$\|y_n-y\|=\left\|\sum_{j=1}^{N}\big(\alpha_j^{(n)}-\alpha_j\big)e_j\right\|\leq
+	\sum_{j=1}^{N}\big|\alpha_j^{(n)}-\alpha_j\big|\,\|e_j\|\xrightarrow{n\to\infty}0\text{.}$$
+\end{myproof}
+
+\cor{}{Seja $X$ espaço normado e $Y\subset X$ com $\dim Y<\infty$. Então $Y$ é fechado em $X$.}
+
+\section{Compacidade em Dimensão Finita}
+
+\thm{}{Seja $X$ espaço normado com $\dim X<\infty$. Dado $M\subset X$, são equivalentes: (i) $M$ é
+sequencialmente compacto; (ii) $M$ é fechado e limitado.}
+\begin{myproof}
+	$(i)\Rightarrow(ii)$: Seja $x\in\bar M$. Existe $(x_n)\subset M$ tal que $x_n\to x$ em $X$. Como $M$ é
+	sequencialmente compacto, existe $(y_n)\subset(x_n)$ tal que $y_n\to y\in M$; pela unicidade do
+	limite, $x=y\in M$. Logo $M=\bar M$.
+
+	Vejamos que $M$ é limitado. Suponha o contrário: $\forall n\in\bbN$, existe $x_n\in M$ tal que
+	$\|x_n\|>n$. Então $(x_n)\subset M$ não possui subsequência convergente, uma contradição. (Note que
+	esta implicação não usa $\dim X<\infty$.)
+
+	$(ii)\Rightarrow(i)$: Seja $N=\dim X$ e $\{e_1,\dots,e_N\}$ base de $X$. Dada $(x_n)\subset M$, para
+	cada $n\in\bbN$, $x_n=\sum_{k=1}^{N}\alpha_k^{(n)}e_k$. Como $M$ é limitado, existe $K>0$ tal que
+	$\|x_n\|\leq K$, $\forall n\in\bbN$. Pela proposição da Seção 3.2,
+	$$K>\|x_m\|=\left\|\sum_{j=1}^{N}\alpha_j^{(m)}e_j\right\|\geq c\sum_{j=1}^{N}\big|\alpha_j^{(m)}\big|\text{,}$$
+	logo $\big|\alpha_j^{(m)}\big|<K/c$, $\forall m\in\bbN$, $\forall j\in\{1,\dots,N\}$, i.e.,
+	$\big(\alpha_j^{(m)}\big)_{m\in\bbN}$ é limitada para todo $j$.
+
+	Pelo Teorema de Bolzano--Weierstrass, extraímos sucessivamente (para $j=1,\dots,N$) subsequências
+	$$\big(x_{n_k}^{(N)}\big)_{k\in\bbN}\subseteq\big(x_{n_k}^{(N-1)}\big)_{k\in\bbN}\subseteq\dots\subseteq(x_n)$$
+	tais que, para cada $j$, o $j$-ésimo coeficiente converge: $\alpha_j^{(n_k,j)}\xrightarrow{k\to\infty}\alpha_j$. Com isso,
+	$$x_{n_k}^{(N)}=\sum_{j=1}^{N}\alpha_j^{(n_k,N)}e_j \xrightarrow{k\to\infty} \sum_{j=1}^{N}\alpha_je_j=:x
+	\quad\text{em } X\text{.}$$
+	Como $M$ é fechado, $x\in M$.
+\end{myproof}
+
+\nt{Se $\dim X=\infty$, em geral $(ii)$ não implica $(i)$. Exemplo: $X=\ell^p$, $1\leq p<\infty$, com
+$(e_n)$ a base canônica ($\|e_n\|_p=1$, $\|e_n-e_m\|_p\geq 1$, $\forall n\neq m$). O conjunto
+$M=\{e_n\mid n\in\bbN\}$ é limitado e fechado, mas não é compacto, pois $(e_n)$ não possui subsequência
+convergente.}
+
+\qslista{22}{Seja $(E,\|\cdot\|)$ um espaço normado de dimensão finita. Prove que um
+subconjunto de $E$ é compacto se, e somente se, é fechado e limitado.}
+\nt{Cf. Teorema 3.3.1, já demonstrado acima.}
+
+\qslista{23}{Dê um exemplo de um subconjunto em um espaço normado que é fechado e
+limitado, mas não é compacto.}
+\nt{Cf. observação acima (base canônica de $\ell^p$).}
+
+\section{Lema de Riesz}
+
+\thm{Lema de Riesz}{Seja $X$ espaço normado e $Y,Z\subset X$ subespaços vetoriais com $Y$ fechado e
+$Y\subsetneq Z$ (subespaço próprio). Para todo $\theta\in(0,1)$, existe $z\in Z$ tal que $\|z\|=1$ e
+$\|z-y\|\geq\theta$, $\forall y\in Y$ (i.e., a distância de $z$ a $Y$, induzida pela norma, satisfaz
+$D(z,Y)\geq\theta$).}
+\begin{myproof}
+	Seja $v\in Z\setminus Y$ arbitrário e $a:=D(v,Y)=\inf_{y\in Y}\|v-y\|>0$ (pois $Y$ é fechado e
+	$v\notin Y$). Dado $\theta\in(0,1)$, existe $y_0\in Y$ tal que $a\leq\|v-y_0\|\leq a/\theta$.
+
+	Seja $z=c(v-y_0)$, $c=1/\|v-y_0\|$; logo $\|z\|=1$. Para todo $y\in Y$,
+	$$\|z-y\|=\|c(v-y_0)-y\|=|c|\,\big\|v-(y_0+c^{-1}y)\big\|\geq ca\geq\theta\text{,}$$
+	pois $y_0+c^{-1}y\in Y$ (logo $\|v-(y_0+c^{-1}y)\|\geq a$) e $c\geq\theta/a$. Portanto
+	$\inf_{y\in Y}\|z-y\|\geq\theta$.
+\end{myproof}
+
+\qslista[2]{3}{No Lema de Riesz, se $\dim Y=\infty$ o parâmetro $\theta$ não pode ser tomado igual
+a $1$; se $\dim Y<\infty$, existe $z$ com $\|z\|=1$ e $\|z-y\|\geq1$ para todo $y\in Y$.}
+
+\thm{}{Seja $X$ espaço normado. $\dim X<\infty \iff \overline{B}_1(0)=\{x\in X\mid \|x\|\leq 1\}$ é
+compacta em $X$.}
+\begin{myproof}
+	($\Rightarrow$) Suponha $\dim X<\infty$. Pelas proposições anteriores, $\overline{B}_1(0)$ é fechada e
+	limitada, logo compacta.
+
+	($\Leftarrow$) Suponha $\overline{B}_1(0)$ compacta. Por contradição, suponha também $\dim X=\infty$.
+	Seja $x_1\in X$ com $\|x_1\|=1$ e $X_1=\text{Span}\{x_1\}$, que é fechado e subespaço próprio de $X$.
+	Pelo Lema de Riesz, existe $x_2\in X$ tal que $\|x_2\|=1$ e $\|x_2-x\|\geq 1/2$, $\forall x\in X_1$; em
+	particular, $\|x_2-x_1\|\geq 1/2$.
+
+	Seja $X_2=\text{Span}\{x_1,x_2\}$, fechado e subespaço próprio de $X$. Novamente pelo Lema de Riesz,
+	existe $x_3\in X$ tal que $\|x_3\|=1$ e $\|x_3-x\|\geq 1/2$, $\forall x\in X_2$.
+
+	Indutivamente, obtemos uma sequência $(x_n)$ satisfazendo $\|x_n\|=1$, $\forall n\in\bbN$, e
+	$\|x_m-x_n\|\geq 1/2$, $\forall m\neq n$. Assim, $(x_n)\subset \overline{B}_1(0)$ não possui
+	subsequência convergente, uma contradição.
+\end{myproof}
+
+\qslista{46}{Seja $X$ um espaço de Banach e $A\subset X$ um subconjunto compacto. O que
+deve ocorrer quando $\text{int}(A)\neq\emptyset$?}
+
+\section{Transformações Lineares Limitadas}
+
+Sejam $X,Y$ espaços vetoriais.
+
+\dfn{Transformação Linear}{Uma transformação linear de $X$ para $Y$ é uma aplicação $T:X\to Y$
+satisfazendo, para cada $x,y\in X$ e $\lambda\in\bbK$,
+$$T(x+y)=T(x)+T(y)\text{,}\qquad T(\lambda x)=\lambda T(x)\text{.}$$
+Denotamos $N(T)=\{x\in X\mid Tx=0\}=T^{-1}(\{0\})$ (núcleo) e $R(T)=\{Tx\mid x\in X\}$ (imagem).}
+
+\nt{$N(T)$ e $R(T)$ são subespaços vetoriais. Além disso:
+\begin{itemize}
+	\item se $\dim X<\infty$, então $\dim R(T)<\infty$;
+	\item a inversa $T^{-1}:Y\to X$ existe se, e somente se, $N(T)=\{0\}$;
+	\item se $T^{-1}$ existe, então ela também é linear;
+	\item se $T^{-1}$ existe e $\dim X<\infty$, então $\dim R(T)=\dim X$.
+\end{itemize}}
+
+A partir daqui, $X,Y$ são espaços normados.
+
+\dfn{Transformação Linear Limitada}{Uma transformação linear $T:X\to Y$ é limitada quando existe $c>0$
+tal que $\|Tx\|_Y\leq c\|x\|_X$, $\forall x\in X$; equivalentemente, $\|Tx\|\leq c$, $\forall x\in X$ com
+$\|x\|=1$.}
+
+\thm{}{Sejam $X,Y$ normados e $T:X\to Y$ uma transformação linear. São equivalentes: (1) $T$ é contínua;
+(2) $T$ é contínua na origem; (3) $T$ é limitada.}
+\begin{myproof}
+	$(1)\Rightarrow(2)$: imediato da definição.
+
+	$(2)\Rightarrow(3)$: Para $\eps=1$, existe $\delta>0$ tal que $\|x\|\leq\delta \implies
+	\|T(x)-T(0)\|<1$. Fixe $0<\delta'<\delta$. Para cada $x\in X$, $x\neq 0$,
+	$$\left\|\delta'\frac{x}{\|x\|}\right\|=\delta'<\delta \implies
+	\left\|T\Big(\delta'\frac{x}{\|x\|}\Big)\right\|<1 \implies \|T(x)\|<\frac{\|x\|}{\delta'}\text{,}$$
+	logo $\|T(x)\|\leq(1/\delta')\|x\|$, $\forall x\in X$.
+
+	$(3)\Rightarrow(1)$: Existe $c>0$ tal que $\|T(x)\|\leq c\|x\|$, $\forall x\in X$, logo
+	$$\|T(x)-T(y)\|=\|T(x-y)\|\leq c\|x-y\|\text{,}\quad\forall x,y\in X\text{,}$$
+	i.e., $T$ é (uniformemente) contínua.
+\end{myproof}
+
+\section{O Espaço $\mathcal{L}(X,Y)$}
+
+\dfn{Espaço dos Operadores Lineares Limitados}{$\mathcal{L}(X,Y)=\{T:X\to Y \mid T \text{ é linear e
+limitada}\}$. Para $T\in\mathcal{L}(X,Y)$, definimos
+$$\|T\|_{\text{op}}=\sup_{\substack{x\in X\\x\neq 0}}\frac{\|Tx\|_Y}{\|x\|_X}=\sup_{\|x\|=1}\|Tx\|\text{.}$$
+$\|\cdot\|_{\text{op}}$ de fato define uma norma em $\mathcal{L}(X,Y)$.}
+
+\ex{}{$\|T\|=\inf\{c>0 \mid \|Tx\|\leq c\|x\|,\ \forall x\in X\}$. Em particular,
+$\|Tx\|_Y\leq\|T\|_{\text{op}}\|x\|_X$, $\forall x\in X$.}
+
+\qslista[2]{4}{Se $T\in\mathcal{L}(X,Y)$, então $\|T\|=\inf\{C>0;\ \|Tx\|\leq C\|x\|,\ \forall x\in
+X\}$; conclua que $\|Tx\|\leq\|T\|\|x\|$.}
+\nt{Cf. o exemplo acima, já demonstrado.}
+
+\qslista[2]{5}{$T\in\mathcal{L}(X,Y)$. (a) $x_n\to x$ implica $Tx_n\to Tx$. (b) $N(T)$ é fechado em
+$X$.}
+
+\qslista[2]{19}{$T:X\to Y$ linear é limitada se, e somente se, leva conjuntos limitados em conjuntos
+limitados.}
+
+\thm{}{Sejam $X,Y$ normados. Se $Y$ é Banach, então $\mathcal{L}(X,Y)$ é Banach.}
+\begin{myproof}
+	Seja $(T_n)\subset\mathcal{L}(X,Y)$ sequência de Cauchy. Para cada $x\in X$,
+	$\|T_nx-T_mx\|\leq\|T_n-T_m\|\,\|x\|\to 0$, $n,m\to\infty$, logo $(T_nx)\subset Y$ é de Cauchy. Como
+	$Y$ é Banach, $T_nx\to y\in Y$. Defina $T:X\to Y$ por $T(x):=y=\lim_n T_n(x)$.
+
+	\textit{$T$ é linear:} sejam $x_1,x_2\in X$, $y_1=\lim_n T_n(x_1)$, $y_2=\lim_n T_n(x_2)$. Então
+	$$T(x_1)+T(x_2)=y_1+y_2=\lim_n T_n(x_1)+\lim_n T_n(x_2)=\lim_n T_n(x_1+x_2)=T(x_1+x_2)\text{,}$$
+	e, similarmente, $T(\lambda x)=\lambda T(x)$.
+
+	\textit{$T\in\mathcal{L}(X,Y)$:} basta verificar que $T$ é limitada. Como toda sequência de Cauchy é
+	limitada,
+	$$\|Tx\|=\|\lim_n T_nx\|=\lim_n\|T_nx\|\leq \Big(\limsup_n \|T_n\|\Big)\|x\|\text{,}\quad\forall x\in X\text{.}$$
+
+	\textit{$T_n\to T$ em $\mathcal{L}(X,Y)$:} dado $\eps>0$, existe $N\in\bbN$ tal que, para
+	$n,m\geq N$, $\|T_nx-T_mx\|\leq\|T_n-T_m\|\,\|x\|<(\eps/2)\|x\|$, $\forall x\in X$. Fazendo
+	$m\to\infty$, $\|T_nx-Tx\|<(\eps/2)\|x\|$, $\forall x\in X$, logo
+	$$\sup_{x\in X}\frac{\|T_n(x)-T(x)\|}{\|x\|}\leq\frac{\eps}{2}<\eps \implies \|T_n-T\|<\eps\text{.}$$
+\end{myproof}
+
+\nt{Vale a recíproca do teorema anterior — $\mathcal{L}(X,Y)$ Banach implica $Y$ Banach — como
+consequência do Teorema de Hahn-Banach.}
+
+\qslista[2]{18}{$X\neq\{0\}$ e $Y$ normados. Se $\mathcal{L}(X,Y)$ é Banach, então $Y$ é Banach.}
+\nt{Esta é a recíproca mencionada acima; a demonstração usa a Questão 4.5.2 (Hahn-Banach).}
+
+\qslista[2]{8}{Se $X$ é completo e $T\in\mathcal{L}(X,Y)$, então $N(T)$ é um subespaço completo.}
+
+\qslista[2]{13}{$X$ Banach, $T\in\mathcal{L}(X)$ com $\|T\|<1$. Então $S=\sum_{j\geq0}T^j$ está bem
+definido, $S\in\mathcal{L}(X)$ e $S=(I-T)^{-1}$.}
+
+\ex{Operador linear não limitado}{Seja $X$ o espaço dos polinômios sobre $[0,1]$ com a norma do máximo, e
+$T:X\to X$ dado por $T(p)=dp/dx$. $T$ é linear, porém não é limitado: considerando $x_n(t)=t^n$, temos
+$Tx_n(t)=nt^{n-1}$, $\|x_n\|=1$, $\|Tx_n\|=n$, $\forall n\in\bbN$, logo
+$\|Tx_n\|/\|x_n\|=n\xrightarrow{n\to\infty}\infty$.}
+
+\qslista[2]{14}{$T:\ell^\infty\to \ell^\infty$, $Tx=\big(x_1,\frac{x_2}{2},\dots,\frac{x_n}{n},\dots\big)$.
+Mostre que $T$ é linear e limitado, $R(T)$ não é fechada e $T^{-1}:R(T)\to \ell^\infty$ existe mas não é
+limitada.}
+
+\qslista[2]{20}{A inversa $T^{-1}:R(T)\to X$ de uma transformação linear limitada nem sempre é
+limitada.}
+\nt{Cf. exercício anterior.}
+
+\section{Extensão de Operadores Lineares Limitados}
+
+\thm{}{Sejam $X,Y$ normados com $Y$ completo, $Z\subset X$ subespaço e $T\in\mathcal{L}(Z,Y)$. Então
+existe $\tilde T:\bar Z\to Y$, $\tilde T\in\mathcal{L}(\bar Z,Y)$, satisfazendo $\tilde T|_Z=T$. Além
+disso, $\|\tilde T\|=\|T\|$.}
+\begin{myproof}
+	Seja $x\in\bar Z$ e $(x_n)\subset Z$ tal que $x_n\to x$ em $X$. Então
+	$\|Tx_n-Tx_m\|\leq\|T\|\,\|x_n-x_m\|\to 0$, logo $(Tx_n)\subset Y$ é de Cauchy e, como $Y$ é completo,
+	$Tx_n\to y\in Y$. Defina $\tilde T:\bar Z\to Y$, $x\mapsto\tilde T(x)=\lim_n Tx_n$.
+
+	\textit{Boa definição:} sejam $(x_n),(z_n)\subset Z$ tais que $x_n\to x$ e $z_n\to x$. Considerando
+	$(v_n)=(x_1,z_1,x_2,z_2,\dots)$, tem-se $v_n\to x$ e, analogamente, $Tv_n\to y\in Y$; logo $Tx_n\to y$
+	e $Tz_n\to y$. Note que, se $x\in Z$, tomando $(x_n)=(x,x,\dots)$ segue $\tilde T(x)=T(x)$, i.e.,
+	$\tilde T$ de fato estende $T$.
+
+	\textit{Linearidade:} imediata, pois $T$ é linear e contínua.
+
+	\textit{Limitação:} dado $x\in\bar Z$, seja $(x_n)\subset Z$, $x_n\to x$. Como
+	$\|T(x_n)\|\leq\|T\|\,\|x_n\|$, $\forall n$, fazendo $n\to\infty$, $\|\tilde Tx\|\leq\|T\|\,\|x\|$,
+	$\forall x\in\bar Z$, logo $\|\tilde T\|\leq\|T\|$; a desigualdade $\|\tilde T\|\geq\|T\|$ é imediata
+	pela definição.
+\end{myproof}
+
+\cor{}{Sejam $X,Y$ normados, $Y$ Banach, e $Z\subset X$ subespaço tal que $\bar Z=X$. Se $T:Z\to Y$ é
+linear e limitada, então existe uma única $\tilde T:X\to Y$ limitada tal que $\tilde T|_Z=T$. Além disso,
+$\|\tilde T\|=\|T\|$.}
+
+\section{Funcionais Lineares e Dual Topológico}
+
+Seja $X$ espaço vetorial sobre $\bbK$.
+
+\dfn{Funcional Linear e Dual Algébrico}{Um funcional linear sobre $X$ é uma transformação linear
+$f:X\to\bbK$. O conjunto $X^*=\{f:X\to\bbK \mid f \text{ é linear}\}$ é chamado dual algébrico de $X$.}
+
+\dfn{Dual Topológico}{Seja $X$ espaço normado. Denotamos por $X'$ o espaço
+$X'=\{f:X\to\bbK \mid f\in\mathcal{L}(X,\bbK)\}$, chamado dual topológico de $X$.}
+
+\nt{Como $X'=\mathcal{L}(X,\bbK)$ e $\bbK$ é completo com a topologia usual, $X'$ é espaço de Banach.
+Além disso, $f\in X'$ se, e somente se, existe $c>0$ tal que $|f(x)|\leq c\|x\|$, $\forall x\in X$; nesse
+caso, $\|f\|=\sup_{\|x\|=1}|f(x)|$ (notação usual: $f(x)=\langle f,x\rangle$).}
+
+\qslista[2]{6}{$\psi(f)=f(0)$ em $C[-1,1]$; use $g_n(t)=g(nt)$ para $|t|<1/n$ e $g_n(t)=0$ para
+$|t|\geq1/n$ para provar que $\psi$ não é contínuo.}
+
+\qslista[2]{7}{$f\in X'$ e $x_0\in X\setminus N(f)$. Então todo $x\in X$ se escreve de maneira única
+como $x=\lambda x_0+y$, com $\lambda$ escalar e $y\in N(f)$.}
+
+\qslista[2]{9}{$f,g$ funcionais lineares em $X$. Então $N(f)=N(g)$ se, e somente se, existe $c$ com
+$g=cf$.}
+
+\qslista[2]{10}{Se $Y\subset X$ é subespaço com $f(Y)\neq\bbK$, então $Y\subset N(f)$.}
+
+\qslista[2]{15}{$f$ funcional linear em $X$ normado. Então $f$ é contínua se, e somente se, $N(f)$ é
+fechado.}
+
+\qslista[2]{25}{$f\in X'$, $f\neq0$, e $H=\{x\in X;\ f(x)=1\}$. Então $\|f\|=\dfrac{1}{D(0,H)}$.}
+
+\ex{Funcionais lineares em $\ell^2$}{Seja $X=\ell^2$ e $a=(a_j)\in\ell^2$. Define-se $f:X\to\bbR$,
+$x=(x_j)\mapsto f(x)=\sum_{j\in\bbN}a_jx_j$, que é linear. Pela desigualdade de Hölder,
+$$|f(x)|\leq\sum_{j=1}^{\infty}|a_jx_j|=\|ax\|\leq\|a\|_2\|x\|_2\text{,}$$
+logo $|f(x)|/\|x\|_2\leq\|a\|_2$, $\forall x\neq 0$, donde $\|f\|\leq\|a\|_2$. Por outro lado,
+$f(a)=\sum_{j=1}^{\infty}a_j^2=\|a\|_2^2$ (o supremo é atingido em $x=a$), logo
+$|f(a)|/\|a\|_2=\|a\|_2$, i.e., $\|f\|=\|a\|_2$.}
+
+\qslista[2]{11}{Isomorfismos isométricos: (a) $(\bbR^n)'\simeq\bbR^n$; (b) $(\ell^p)'\simeq \ell^q$,
+$p>1$, $\frac1p+\frac1q=1$; (c) $(\ell^1)'\simeq \ell^\infty$; (d) $(c_0)'\simeq \ell^1$.}
+
+\qslista[2]{16}{$a\in \ell^1$ e $f:c_0\to\bbR$, $f(x)=\sum_{j\geq1}a_jx_j$. Mostre que $f$ é linear e
+limitado e calcule $\|f\|$.}
+
+\qslista[2]{21}{$V$ com produto interno, $u\in V$ e $f_u(x)=\langle x,u\rangle$. Então $f_u\in V'$ e
+$\|f_u\|=\|u\|$.}
+\nt{Cf. exemplo acima ($X=\ell^2$), caso particular deste resultado com $V=\ell^2$.}
+
+\qslista[2]{12}{$f_1,\dots,f_m$ funcionais em $X$ com $\dim X=n>m$. Então existe $x\neq0$ em
+$\bigcap_{j=1}^m N(f_j)$. Consequências para equações lineares?}
+
+\subsection*{Base Dual}
+
+Seja $X$ normado com $\dim X<\infty$ e $\beta=\{e_1,\dots,e_n\}$ base de $X$. Para cada $x\in X$,
+$x=\sum_{k=1}^{n}x_ke_k$; dado $f\in X'$, $f(x)=\sum_{k=1}^{n}x_kf(e_k)$ (a boa definição de $f$ segue
+diretamente da sequência de valores conhecidos $(f(e_k))_{k=1}^{n}$).
+
+Considere $\beta'=\{\beta_1,\dots,\beta_n\}\subset X'$, com $\beta_k=f_k$ definido por
+$f_k(e_j)=\delta_{jk}=\begin{cases}1\text{,}&j=k\text{,}\\0\text{,}&j\neq k\text{.}\end{cases}$
+
+\begin{itemize}
+	\item $\beta'$ é linearmente independente em $X'$.
+	\item $\text{Span}\,\beta'=X'$: dado $f\in X'$ e $x=\sum_{j=1}^{n}x_je_j\in X$,
+	      $$f_k(x)=f_k\Big(\sum_{j=1}^{n}x_je_j\Big)=x_kf_k(e_k)=x_k\beta_k \implies
+	      f(x)=\sum_{k=1}^{n}x_k\beta_k\text{.}$$
+\end{itemize}
+
+$\beta'$ é dita base dual de $X'$ com relação a $\beta$.
+
+\section{Espaços Quociente}
+
+\dfn{Relação de Equivalência e Espaço Quociente}{Seja $X$ espaço vetorial e $M\subset X$ um subespaço
+vetorial. Definimos em $X$ a relação de equivalência $x\sim y :\iff x-y\in M$. Dado $x\in X$, denotamos
+por $[x]$ a classe de equivalência de $x$, e por $X/M$ o conjunto quociente — o espaço vetorial das
+classes $[x]$, com as operações usuais $[x]+[y]=[x+y]$ e $\lambda[x]=[\lambda x]$.}
+
+\qslista{49}{Seja $X$ espaço vetorial e $M\subset X$ subespaço vetorial fechado, com a
+notação de $\sim$, $[x]$ e $X/M$ acima.
+\begin{enumerate}
+	\item Seja $\|\cdot\|$ uma seminorma em $X$ e $M=\{x\in X \mid \|x\|=0\}$. Prove que $M$ é subespaço
+	      fechado de $X$ e que $\|\!|[x]|\!\|:=\|x\|$ é uma norma em $X/M$.
+	\item Se $(X,\|\cdot\|)$ é espaço normado e $M$ é subespaço próprio fechado de $X$, prove que
+	      $$\|[x]\|_Q = d(x,M)=\inf_{y\in M}\|x-y\|$$
+	      é uma norma em $X/M$.
+	\item Se, no item (b), $X$ é espaço de Banach, então $(X/M,\|\cdot\|_Q)$ é também espaço de Banach.
+	\item Nas hipóteses do item (b), mostre que $\Pi:X\to X/M$ dada por $\Pi(x)=[x]$ é contínua.
+\end{enumerate}}
+
+\qslista{50}{Seja $M$ um subespaço fechado do espaço normado $X$. Mostre que, se $M$ e o
+espaço quociente $X/M$ são completos, então $X$ é um espaço de Banach.}

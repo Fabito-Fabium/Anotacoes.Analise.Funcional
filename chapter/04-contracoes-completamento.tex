@@ -1,0 +1,247 @@
+\chapter{Contrações, Completamento e Espaços de Banach}
+
+\section{Contrações e o Teorema do Ponto Fixo de Banach}
+
+\dfn{Contração}{Sejam $(X,d_1)$, $(Y,d_2)$ espaços métricos. Uma contração de $X$ em $Y$ é uma aplicação
+$T:X\to Y$ tal que existe $0<\alpha<1$ satisfazendo
+$$d_2(T(x),T(y))\leq \alpha\, d_1(x,y)\text{,}\quad \forall x,y\in X\text{.}$$}
+
+\nt{Toda contração é uniformemente contínua.}
+
+\thm{Ponto Fixo de Banach}{Sejam $(X,d)$ espaço métrico completo e $T:X\to X$ uma contração. Então existe
+um único ponto $x\in X$ tal que $Tx=x$.}
+\begin{myproof}
+	Seja $\alpha\in(0,1)$ tal que $d(T(x),T(y))\leq\alpha\, d(x,y)$, $\forall x,y\in X$.
+
+	Seja $x_0\in X$ e defina a sequência $(x_n)=(x_0,x_1,\dots,x_n)$, $x_n=T(x_{n-1})=T^n(x_0)$,
+	$\forall n\in\bbN$. Para cada $m\in\bbN$,
+	$$d(x_m,x_{m+1})\leq \alpha\, d(x_{m-1},x_m)\leq\dots\leq \alpha^m d(x_0,x_1)\text{.}$$
+	Para $n,m\in\bbN$ com $m>n$,
+	\begin{align*}
+		d(x_n,x_m) & \leq \sum_{k=1}^{m-n}d(x_{n+k-1},x_{n+k}) \leq \sum_{k=1}^{m-n}\alpha^{n+k-1}d(x_0,x_1) \\
+		           & = \alpha^n\left(\sum_{k=1}^{m-n}\alpha^{k-1}\right)d(x_0,x_1) < \alpha^n\cdot\frac{1}{1-\alpha}\,d(x_0,x_1)\xrightarrow{n\to\infty}0\text{.}
+	\end{align*}
+	Portanto $(x_n)$ é de Cauchy. Como $X$ é completo, existe $x\in X$ tal que $x_n\to x$. Note que
+	$$T(x)=T\Big(\lim_n x_n\Big)=\lim_n T(x_n)=\lim_n x_{n+1}=x\text{.}$$
+
+	\textit{Unicidade:} suponha $x,y\in X$ tais que $T(x)=x$, $T(y)=y$. Então
+	$$d(x,y)=d(Tx,Ty)\leq\alpha\, d(x,y) \implies (1-\alpha)\,d(x,y)\leq 0 \implies d(x,y)=0 \implies x=y\text{.}$$
+\end{myproof}
+
+\qslista{42}{Sejam $(X,d)$ um espaço métrico completo e $T$ uma aplicação contínua em $X$.
+Supondo que $T^N$ é uma contração para algum $N\in\bbN$, prove que $T$ possui um único ponto fixo.}
+
+\section{Aplicação: Existência e Unicidade Local de EDOs}
+
+Sejam $\Omega\subset\bbR^{n+1}$ aberto e $f:\Omega\to\bbR^n$ contínua tal que existe $M>0$ satisfazendo
+$$(A)\qquad |f(t,x_1)-f(t,x_2)|\leq M|x_1-x_2|\text{,}\quad \forall (t,x_1),(t,x_2)\in\Omega\text{.}$$
+
+Considere a EDO
+$$(1)\qquad \frac{d}{dt}x=f(t,x)\text{.}$$
+Uma solução dessa EDO passando por $(t_0,x_0)$ é uma função $\varphi:J\to\bbR^n$ que satisfaz
+$\varphi(t_0)=x_0$ e $\dfrac{d\varphi(t)}{dt}=f(t,\varphi(t))$, $\forall t\in J$ (algum aberto $J$,
+$t_0\in J$). Essa $\varphi$ pode ser escrita, equivalentemente, como
+$$\varphi(t)=x_0+\int_{t_0}^{t}f(s,\varphi(s))\,ds\text{.}$$
+
+\thm{Teorema de Picard}{Seja $f$ como acima. Para cada $(t_0,x_0)\in\Omega$, a EDO $(1)$ possui uma única
+solução local passando por $(t_0,x_0)$.}
+\begin{myproof}
+	Seja $\tilde\Omega\subset\Omega$ aberto tal que $f$ é limitada em $\tilde\Omega$, i.e., existe $A>0$
+	tal que $|f(t,x)|\leq A$, $\forall(t,x)\in\tilde\Omega$.
+
+	Tome $\delta>0$ tal que $R=[t_0-\delta,t_0+\delta]\times B[x_0,\delta]\subset\tilde\Omega$, com
+	$\delta<1$ e $M\delta<1$. Denote $J=[t_0-\delta,t_0+\delta]$ e defina
+	$$B=\Big\{\psi:J\to\bbR^n \ \Big|\ \psi \text{ contínua},\ \psi(t_0)=x_0,\ |\psi(t)-x_0|\leq A\delta,\ \forall t\in J\Big\}\text{.}$$
+
+	Vejamos que $B\subset C(J,\bbR^n)$ é fechado, sendo $C(J,\bbR^n)$ completo com a métrica
+	$d_\infty(x,y)=\sup_{t\in J}|x(t)-y(t)|$. Seja $(\psi_n)\subset B$ tal que $\psi_n\to\psi$ em
+	$C(J,\bbR^n)$; em particular $\psi_n\to\psi$ uniformemente, logo $\psi$ é contínua. De fato,
+	$|\psi_n(t_0)-\psi(t_0)|\leq d_\infty(\psi_n,\psi)\to 0 \implies \psi(t_0)=x_0$, e
+	$$|\psi(t)-x_0|=\lim_n|\psi_n(t)-x_0|\leq \lim_n A\delta = A\delta\text{,}$$
+	logo $\psi\in B$ e $B$ é fechado. Como $B\subset C(J,\bbR^n)$ é fechado e $C(J,\bbR^n)$ é completo, $B$
+	é completo com a métrica induzida.
+
+	Considere $T:B\to C(J,\bbR^n)$ dada por $(T\psi)(t)=x_0+\int_{t_0}^{t}f(s,\psi(s))\,ds$. Vejamos que
+	$T:B\to B$:
+	\begin{itemize}
+		\item $(T\psi)(t_0)=x_0$;
+		\item $|(T\psi)(t)-x_0|\leq \int_{t_0}^{t}A\,ds=A(t-t_0)<A\delta$.
+	\end{itemize}
+
+	\textit{Afirmação: $T$ é contração.} De fato,
+	\begin{align*}
+		|(T\psi_1)(t)-(T\psi_2)(t)| & \leq \left|\int_{t_0}^{t}f(s,\psi_1(s))-f(s,\psi_2(s))\,ds\right|                     \\
+		                            & \leq \int_{t_0}^{t}|f(s,\psi_1(s))-f(s,\psi_2(s))|\,ds \leq M\int_{t_0}^{t}|\psi_1(s)-\psi_2(s)|\,ds \\
+		                            & \leq \underbrace{M\delta}_{<1}\, d_\infty(\psi_1,\psi_2)\text{.}
+	\end{align*}
+	Portanto $T:B\to B$ é contração. Pelo Teorema do Ponto Fixo de Banach, existe um único $\psi\in B$ tal
+	que $T(\psi)=\psi$, ou seja, existe uma única
+	$$\varphi(t)=x_0+\int_{t_0}^{t}f(s,\varphi(s))\,ds$$
+	que é a solução local de $(1)$ passando por $(t_0,x_0)$.
+\end{myproof}
+
+\section{Completamento de Espaços Métricos}
+
+\dfn{Imersão Isométrica e Isometria}{Sejam $(X,d_1)$, $(Y,d_2)$ espaços métricos. Uma imersão isométrica
+entre $X$ e $Y$ é uma aplicação $T:X\to Y$ tal que $d_2(T(x),T(y))=d_1(x,y)$, $\forall x,y\in X$. Quando
+$T$ é bijetiva, dizemos que $T$ é uma isometria e que $X$ e $Y$ são isométricos.}
+
+\nt{Toda imersão isométrica é injetiva.}
+
+\dfn{Completamento}{Seja $(X,d)$ espaço métrico. Um completamento de $X$ é um par $(\hat X,\varphi)$ tal
+que $\hat X=(\hat X,\hat d)$ é espaço métrico completo e $\varphi:X\to\hat X$ é uma imersão isométrica tal
+que $\overline{\varphi(X)}=\hat X$.}
+
+\thm{Teorema do Completamento}{Todo espaço métrico $(X,d)$ admite um completamento. Esse completamento é
+único a menos de isometrias.}
+\begin{myproof}
+	Organizamos a demonstração em quatro etapas: (a) construção de $(\hat X,\hat d)$; (b) definição de
+	$T:X\to\hat X$ imersão isométrica com $\overline{T(X)}=\hat X$; (c) $(\hat X,\hat d)$ é completo; (d)
+	unicidade de $\hat X$ a menos de isometria.
+
+	\textbf{(a)} Seja $X^*$ o conjunto das sequências de Cauchy em $X$. \textit{Afirmação:}
+	$(x_n),(y_n)\in X^* \implies d(x_n,y_n)$ converge em $\bbR$. De fato,
+	$|d(x_n,y_n)-d(x_m,y_m)|\leq d(x_n,x_m)+d(y_n,y_m)$, logo $(d(x_n,y_n))_{n\in\bbN}$ é de Cauchy em
+	$\bbR$, portanto convergente.
+
+	Definimos em $X^*$ a relação $(x_n)\sim(y_n) :\iff d(x_n,y_n)\to 0$, $n\to\infty$, que é reflexiva,
+	simétrica (imediato) e transitiva (pela desigualdade triangular), i.e., uma relação de equivalência.
+	Seja $\hat x=[x]$, $x=(x_n)\in X^*$, a classe de equivalência de $x$, e $\hat X=X^*/\!\sim$.
+
+	Definimos $\hat d:\hat X\times\hat X\to[0,+\infty)$, $(\hat x,\hat y)\mapsto \hat
+	d(\hat x,\hat y)=\lim_n d(x_n,y_n)$, $(x_n)\in\hat x$, $(y_n)\in\hat y$. $\hat d$ está bem definida:
+	se $(x_n),(x_n')\in\hat x$ e $(y_n),(y_n')\in\hat y$, então
+	$d(x_n',y_n')\leq d(x_n',x_n)+d(x_n,y_n)+d(y_n,y_n')$, logo $\lim_n d(x_n',y_n')\leq \lim_n
+	d(x_n,y_n)$ e, por simetria, vale a igualdade.
+
+	$\hat d$ é métrica: $(M_1)$ $\hat d(\hat x,\hat y)=0 \iff \lim_n d(x_n,y_n)=0 \iff (x_n)\sim(y_n) \iff
+	\hat x=\hat y$; $(M_2)$ segue da simetria de $d$; $(M_3)$ dados $\hat x,\hat y,\hat z\in\hat X$,
+	$d(x_n,y_n)\leq d(x_n,z_n)+d(z_n,y_n)$ e, passando ao limite, $\hat d(\hat x,\hat y)\leq \hat
+	d(\hat x,\hat z)+\hat d(\hat z,\hat y)$. Logo $(\hat X,\hat d)$ é espaço métrico.
+
+	\textbf{(b)} Definimos $T:X\to\hat X$, $x\mapsto T(x)=[(x,x,x,\dots)]$. Então
+	$\hat d(T(x),T(y))=\lim_n d(x,y)=d(x,y)$, logo $T$ preserva a métrica.
+
+	$\overline{T(X)}=\hat X$: dado $\eps>0$ e $\hat x=[(x_n)]\in\hat X$, como $(x_n)\in X^*$ é de Cauchy,
+	existe $N\in\bbN$ tal que $d(x_n,x_N)<\eps/2$, $\forall n>N$. Seja $y=[(x_N,x_N,\dots)]\in T(X)$. Logo
+	$\hat d(\hat x,y)=\lim_n d(x_n,x_N)\leq \eps/2<\eps$, i.e., $\hat x\in\overline{T(X)}$. Portanto
+	$\overline{T(X)}=\hat X$.
+
+	\textbf{(c)} Seja $(\hat x_n)$ sequência de Cauchy em $\hat X$. Como $\overline{T(X)}=\hat X$, para
+	cada $n\in\bbN$ tome $\hat z_n\in T(X)$ tal que $\hat d(\hat z_n,\hat x_n)<1/n$, $\hat z_n=T(z_n)$,
+	$z_n\in X$. Verifiquemos que $(z_n)$ é de Cauchy em $X$:
+	$$d(z_n,z_m)=\hat d(\hat z_n,\hat z_m)\leq \hat d(\hat z_n,\hat x_n)+\hat d(\hat x_n,\hat x_m)+\hat
+	d(\hat x_m,\hat z_m) < \frac1n+\eps+\frac1m\text{,}\quad \forall n,m\geq N\text{.}$$
+	Seja $\hat x=[(z_n)]\in\hat X$. Então
+	$$\hat d(\hat x,\hat x_n)\leq \hat d(\hat x,\hat z_n)+\hat d(\hat z_n,\hat x_n) < \Big(\lim_{m\to\infty}d(z_m,z_n)\Big)+\frac1n \xrightarrow{n\to\infty}0\text{,}$$
+	logo $\hat x_n\to\hat x$ em $\hat X$, i.e., $(\hat X,\hat d)$ é completo.
+
+	\textbf{(d)} Sejam $(\hat X,\hat d)$ e $(\tilde X,\tilde d)$ completos, com $T:X\to\hat X$ e
+	$S:X\to\tilde X$ imersões isométricas satisfazendo $\overline{T(X)}=\hat X$, $\overline{S(X)}=\tilde
+	X$. Usamos o seguinte resultado auxiliar: se $(X,d)$ é métrico, $(Y,\tilde d)$ é métrico completo,
+	$D\subset X$ com $\bar D=X$ e $\varphi:D\to Y$ é imersão isométrica, então $\varphi$ se estende
+	unicamente a uma imersão isométrica $F:X\to Y$ (ver Elon Lages Lima, \emph{Espaços Métricos},
+	pág.\ 178).
+
+	Para cada $y\in T(X)$, existe um único $x\in X$ tal que $y=T(x)$; definimos
+	$\psi:T(X)\to\tilde X$, $y\mapsto\psi(y)=S(x)$. $\psi$ está bem definida e preserva distância: se
+	$y_i=T(x_i)$, $i=1,2$,
+	$$\tilde d(\psi(y_1),\psi(y_2))=\tilde d(S(x_1),S(x_2))=d(x_1,x_2)=\hat d(T(x_1),T(x_2))=\hat d(y_1,y_2)\text{.}$$
+	Pelo resultado auxiliar, existe uma única $F:\hat X\to\tilde X$ isométrica tal que $F|_{T(X)}=\psi$;
+	verificando que $F$ é bijetiva, concluímos que $\hat X$ e $\tilde X$ são isométricos.
+\end{myproof}
+
+\ex{Completamentos usuais}{
+	\begin{enumerate}
+		\item $(\bbR,|\cdot|)$ é o completamento de $(\bbQ,|\cdot|)$.
+		\item Considerando $C[a,b]$ com a métrica $d_p(x,y)=\left(\int_a^b|x(t)-y(t)|^p\,dt\right)^{1/p}$,
+		      $1\leq p<\infty$, o espaço $L^p[a,b]$ é o completamento de $C[a,b]$ com essa métrica.
+	\end{enumerate}}
+
+\qslista{37}{Sejam $X$ um conjunto e $(M,d)$ um espaço métrico. Considere
+$B(X,M)=\{f:X\to M \mid f \text{ é limitada}\}$ com a métrica $d_0(f,g)=\sup_{x\in X}d(f(x),g(x))$. Prove
+que existe uma isometria entre os espaços $B(X\times Y,M)$ e $B(X,B(Y,M))$.}
+
+\qslista{40}{Se $X_1$ e $X_2$ são espaços métricos isométricos e $X_1$ é completo, mostre
+que $X_2$ também é completo.}
+
+\qslista{41}{Mostre que os espaços $C[a,b]$ e $C[0,1]$ são isométricos.}
+
+\section{Completamento de Espaços Normados}
+
+\thm{Completamento de um Espaço Normado}{Seja $(E,\|\cdot\|)$ espaço normado. Então existe um espaço de
+Banach $(\hat E,\|\cdot\|_{\hat E})$ e uma imersão isométrica linear $T:E\to\hat E$
+($\|T(x)\|_{\hat E}=\|x\|_E$, $\forall x\in E$) tal que $\overline{T(E)}=\hat E$. O espaço
+$(\hat E,\|\cdot\|_{\hat E})$ é único a menos de isometrias.}
+
+\nt{A construção de $(\hat E,\|\cdot\|_{\hat E})$ é análoga à do completamento de espaços métricos,
+aplicada à métrica induzida pela norma de $E$.}
+
+\section{Séries em Espaços de Banach}
+
+\dfn{Convergência Absoluta}{Dizemos que a série $\sum_{k\geq 1}x_k$, $x_k\in E$, é absolutamente
+convergente quando $\sum_k\|x_k\|$ converge em $\bbR$.}
+
+\thm{}{$(E,\|\cdot\|)$ é de Banach sse toda série absolutamente convergente em $E$ converge em $E$.}
+\begin{myproof}
+	($\Rightarrow$) Suponha $E$ Banach. Seja $(x_n)\subset E$ tal que $\sum_{n=1}^{\infty}\|x_n\|<\infty$.
+	Considere $S_N=\sum_{k=1}^{N}x_k$. Vejamos que $(S_N)$ é de Cauchy em $E$: para $N>M$,
+	$$\|S_N-S_M\|\leq \sum_{k=M+1}^{N}\|x_k\|\xrightarrow{M,N\to\infty}0\text{,}$$
+	logo $(S_N)$ converge em $E$.
+
+	($\Leftarrow$) Seja $(x_n)\subset E$ sequência de Cauchy. Para cada $j\in\bbN$, existe $n_j\in\bbN$
+	tal que $\|x_n-x_m\|<1/2^j$, $\forall n,m\geq n_j$; podemos supor $(n_j)$ crescente. Defina
+	$y_1=x_{n_1}$, $y_j=x_{n_j}-x_{n_{j-1}}$, $j\geq 2$, de modo que $\sum_{j=1}^{k}y_j=x_{n_k}$. Note que
+	$$\sum_{j=1}^{k}\|y_j\| = \|x_{n_1}\|+\sum_{j=2}^{k}\|x_{n_j}-x_{n_{j-1}}\| < \|x_{n_1}\|+\sum_{j\in\bbN}\frac{1}{2^j}=\|x_{n_1}\|+1\text{,}$$
+	logo $\sum_{j=1}^{\infty}\|y_j\|<\infty$. Por hipótese, a série $\sum_{j=1}^{\infty}y_j$ converge, i.e.,
+	$(x_{n_k})$ converge em $E$. Como $(x_n)$ é Cauchy e possui subsequência convergente, $(x_n)$ converge
+	em $E$.
+\end{myproof}
+
+\section{Base, Dimensão e Base de Schauder}
+
+Seja $X$ espaço vetorial sobre $\bbK$ ($\bbR$ ou $\bbC$).
+
+\dfn{Independência Linear e Base de Hamel}{$B\subset X$ é linearmente independente (LI) quando, para todo
+$L\subset B$ finito, $\sum_{\ell\in L}\alpha_\ell\,\ell=0 \implies \alpha_\ell=0$, $\forall \ell\in L$; caso
+contrário, $B$ é linearmente dependente (LD). O \emph{span} de $B$ é
+$\text{Span}\,B=\big\{\sum_{k=1}^{M}\alpha_kx_k \mid \alpha_k\in\bbK,\ M\in\bbN,\ x_k\in B\big\}$. Uma base
+de $X$ (ou base de Hamel) é um conjunto $B\subset X$ LI tal que $\text{Span}\,B=X$.}
+
+\dfn{Dimensão Finita e Infinita}{Dizemos que $X$ tem dimensão finita quando existe $B\subset X$ finito,
+LI, tal que qualquer outro conjunto com mais elementos que $B$ é LD (nesse caso, qualquer $A\subset X$ LI
+possui no máximo $|B|$ elementos). Caso contrário, $X$ tem dimensão infinita.}
+
+\nt{A existência de uma base de Hamel para todo espaço vetorial não nulo é demonstrada na Seção 4.2
+(Teorema 4.2.1), via o Lema de Zorn.}
+
+\dfn{Base de Schauder}{Seja $(E,\|\cdot\|)$ espaço normado. Se existe $(e_n)\subset E$ LI tal que, para
+todo $x\in E$, existe uma sequência de escalares $(\alpha_n)$ satisfazendo
+$$\left\|x-\sum_{j=1}^{n}\alpha_je_j\right\|\xrightarrow{n\to\infty}0\text{,}$$
+dizemos que $(e_n)$ é uma base de Schauder para $E$.}
+
+\ex{Base canônica de $\ell^p$}{$E=\ell^p$, $(e_n)$ tal que $(e_n)_j=\begin{cases}0\text{,}&j\neq n\text{,}\\1\text{,}&j=n\text{.}\end{cases}$
+Dado $x=(x_n)\in\ell^p$,
+$$\left\|x-\sum_{k=1}^{N}x_ke_k\right\|_p^p=\sum_{k=N+1}^{\infty}|x_k|^p\xrightarrow{N\to\infty}0\text{,}$$
+logo $(e_n)$ é base de Schauder para $\ell^p$.}
+
+\thm{}{Se $(E,\|\cdot\|)$ possui base de Schauder, então $E$ é separável.}
+\begin{myproof}
+	Seja $(e_n)$ base de Schauder de $E$ e considere
+	$$D=\left\{\sum_{j=1}^{n}q_je_j \ \middle|\ n\in\bbN,\ q_j\in\bbQ \text{ (ou } \bbQ+i\bbQ \text{, no
+	caso complexo)}\right\}\text{,}$$
+	que é enumerável, por ser uma união enumerável (em $n$) de conjuntos enumeráveis ($\bbQ^n$).
+
+	Vejamos que $\bar D=E$. Dados $x\in E$ e $\eps>0$, pela definição de base de Schauder existe
+	$N\in\bbN$ tal que $\|x-\sum_{j=1}^{N}\alpha_je_j\|<\eps/2$. Pela densidade de $\bbQ$ em $\bbR$,
+	escolha $q_j\in\bbQ$ tal que $|\alpha_j-q_j|<\dfrac{\eps}{2N\max_j\|e_j\|}$, $j=1,\dots,N$; então
+	$$\left\|\sum_{j=1}^{N}(\alpha_j-q_j)e_j\right\|\leq\sum_{j=1}^{N}|\alpha_j-q_j|\,\|e_j\|<\frac{\eps}{2}\text{.}$$
+	Logo, com $y=\sum_{j=1}^{N}q_je_j\in D$,
+	$$\|x-y\|\leq\left\|x-\sum_{j=1}^{N}\alpha_je_j\right\|+\left\|\sum_{j=1}^{N}(\alpha_j-q_j)e_j\right\|<\frac{\eps}{2}+\frac{\eps}{2}=\eps\text{,}$$
+	i.e., $x\in\bar D$. Portanto $D$ é enumerável e denso em $E$, logo $E$ é separável.
+\end{myproof}
+
+\nt{Em particular, $\ell^\infty$ não possui base de Schauder, pois $\ell^\infty$ não é separável.}
+
+\qslista{44}{Mostre que todo espaço normado que possui base de Schauder é separável.}
+\nt{Cf. Teorema 2.6.1, já demonstrado acima.}

@@ -1,0 +1,202 @@
+\chapter{Espaços Métricos e Normados}
+
+\nt{Bibliografia sugerida:
+\begin{itemize}
+  \item Kreyszig, \emph{Introductory Functional Analysis with Applications},
+    1978;
+  \item Brezis, \emph{Functional Analysis, Sobolev Spaces and PDEs}, 2011 
+(mais avançado). 
+\end{itemize}
+Avaliação: 3 provas,
+possivelmente com lista de exercícios resolvidos.}
+
+\section{Espaços Métricos}
+
+\dfn{Espaço Métrico}{Sejam $X$ um conjunto e $d:X\times X\to\bbR^+$ satisfazendo, para cada $x,y,z\in X$,
+\begin{align*}
+	(M_1) & \quad d(x,y)=0 \iff x=y \text{;}                    \\
+	(M_2) & \quad d(x,y)=d(y,x) \text{;}                        \\
+	(M_3) & \quad d(x,z) \leq d(x,y)+d(y,z) \text{.}
+\end{align*}
+Dizemos então que $(X,d)$ é um espaço métrico.}
+
+\ex{Métrica usual em $C[a,b]$}{$X=C[a,b]=\{x:[a,b]\to\bbR \mid x \text{ é contínua}\}$, com
+$$d(x,y)=\max_{t\in[a,b]}|x(t)-y(t)|\text{.}$$}
+
+\qslista{1}{Seja $(X,d)$ um espaço métrico. Mostre a validade das desigualdades a seguir:
+$$|d(x,z)-d(z,y)|\leq d(x,y)\text{,}\quad \forall x,y,z\in X\text{,}$$
+$$|d(x_1,y_1)-d(x_2,y_2)|\leq d(x_1,x_2)+d(y_1,y_2)\text{,}\quad \forall x_1,x_2,y_1,y_2\in X\text{.}$$}
+
+\qslista{2}{Sejam $(X,d)$ um espaço métrico e $A,B\subset X$. Considere as distâncias
+$$D(A,B):=\inf_{x\in A,\,y\in B}d(x,y)\text{,}\qquad D(x,B):=\inf_{y\in B}d(x,y)\text{.}$$
+\begin{enumerate}
+	\item Mostre que $D$ não é uma métrica no conjunto das partes de $X$.
+	\item Mostre que $|D(x,B)-D(z,B)|\leq d(x,z)$, $\forall x,z\in X$.
+\end{enumerate}}
+
+\qslista{7}{Seja $X=X_1\times X_2$ o produto cartesiano dos espaços métricos $(X_1,d_1)$ e
+$(X_2,d_2)$. Mostre que $X$ é também um espaço métrico em relação a cada uma das seguintes métricas,
+sendo $x=(x_1,x_2)$, $y=(y_1,y_2)\in X$:
+\begin{itemize}
+	\item $d(x,y)=\sqrt{d_1(x_1,y_1)^2+d_2(x_2,y_2)^2}$;
+	\item $d(x,y)=d_1(x_1,y_1)+d_2(x_2,y_2)$;
+	\item $d(x,y)=\max\{d_1(x_1,y_1),d_2(x_2,y_2)\}$.
+\end{itemize}}
+
+\section{Os Espaços de Sequências $\ell^p$}
+
+Denotamos $\bbR^{\bbN}=\{f:\bbN\to\bbR\}$ como espaço
+das sequências reais (analogamente $\bbC^{\bbN}$ para as
+complexas). Definimos
+\begin{align*}
+	\ell^p       & = \Big\{x=(x_n)\in\bbR^{\bbN}\ (\text{ou }\bbC^{\bbN}) \ \Big|\ \sum_n |x_n|^p<\infty\Big\}\text{,} \\
+	\ell^{\infty} & = \Big\{x=(x_n)\ \Big|\ \sup_{n\in\bbN}|x_n|<\infty\Big\}\text{.}
+\end{align*}
+$\ell^p$ é usualmente munido da métrica $d(x,y)=\left[\sum_j |x_j-y_j|^p\right]^{1/p}$, e $\ell^\infty$
+da métrica $d(x,y)=\sup_j|x_j-y_j|$.
+
+\nt{Roteiro para provar a desigualdade triangular em $\ell^p$: 
+\begin{center}
+  Desigualdade de Young $\to$ Desigualdade
+de Hölder $\to$ Desigualdade de Minkowski.
+\end{center}
+}
+
+\begin{itemize}
+	\item \textbf{Young:} $\displaystyle \alpha\beta \leq \frac{\alpha^p}{p}+\frac{\beta^q}{q}\text{,}\quad \alpha,\beta>0\text{.}$
+	\item \textbf{Hölder:} $\displaystyle \sum_j |x_jy_j|\leq \|x\|_p\|y\|_q\text{,}\quad x\in\ell^p,\ y\in\ell^q\text{.}$
+	\item \textbf{Minkowski:} desigualdade triangular da norma $\ell^p$.
+\end{itemize}
+
+\qslista{10}{Mostre que a desigualdade de Hölder é satisfeita para $p=1$ e $q=\infty$, i.e.,
+se $x=(x_j)\in\ell^1$ e $y=(y_j)\in\ell^\infty$, então
+$$\sum_{j=1}^{\infty}|x_jy_j|\leq \|x\|_1\|y\|_\infty\text{.}$$}
+
+\qslista{14}{Se $1<p<q<\infty$, mostre que valem as inclusões
+$$\ell^1\subset\ell^p\subset\ell^q\subset\ell^\infty\text{,}$$
+e que essas inclusões são próprias.}
+
+\qslista{15}{Dado $1\leq p<\infty$, mostre que $\ell^p\subset c_0\subset\ell^\infty$, onde
+$c_0$ denota o espaço das sequências que convergem a zero. Mostre também que existe um elemento em $c_0$
+que não pertence a nenhum $\ell^p$, $1\leq p<\infty$.}
+
+\qslista{24}{Verifique que em $\ell^\infty$ a expressão
+$$\|\!|x|\!\|=\limsup_n |x_n|\text{,}\quad \forall x=(x_1,x_2,\dots)\in\ell^\infty\text{,}$$
+é uma seminorma, e que $c_0=\{x\in\ell^\infty \mid \|\!|x|\!\|=0\}$.}
+
+\section{Espaços Normados}
+
+\dfn{Norma}{Seja $E$ um espaço vetorial em $\bb K$. Uma norma em $E$ é uma função
+$\|\cdot\|:E\to[0,+\infty)$ tal que
+\begin{align*}
+	(N_1) & \quad \|x\|=0 \iff x=0\text{;}\\
+	(N_2) & \quad \|\alpha x\|=|\alpha|\|x\|\text{,}\ \forall \alpha \in \bb K, \forall x\in E\text{;} \\
+	(N_3) & \quad \|x+y\|\leq \|x\|+\|y\|\text{.}
+\end{align*}
+$(E,\|\cdot\|)$ é chamado espaço normado.}
+
+\nt{Todo espaço normado é um espaço métrico, considerando a métrica induzida pela norma.}
+
+\ex{Normas usuais}{
+	\begin{enumerate}
+		\item $\|\cdot\|_p$ é a norma usual em $\ell^p$, $1\leq p\leq\infty$.
+		\item Em $E=C[a,b]$, $\|x\|=\max\limits_{t\in[a,b]}|x(t)|$ é uma norma para $E$.
+	\end{enumerate}}
+
+\qslista{4}{Mostre que, num espaço normado $X$, vale a desigualdade
+$$\big|\|x\|-\|y\|\big|\leq \|x\pm y\|\text{,}\quad \forall x,y\in X\text{.}$$}
+
+\qslista{25}{Seja $X$ espaço normado e $A,B\subset X$. Prove que:
+\begin{enumerate}
+	\item Se $A$ é aberto, então $A+B=\{x+y \mid x\in A,\ y\in B\}$ é aberto.
+	\item Se $A$ e $B$ são fechados, então não necessariamente $A+B$ é fechado (dê um contraexemplo).
+	\item Se $A$ é fechado e $B$ é compacto, então $A+B$ é fechado.
+\end{enumerate}}
+
+\section{Espaços com Produto Interno}
+
+\dfn{Produto Interno}{Seja $E$ um espaço vetorial sobre $\bbK$ ($\bbR$ ou $\bbC$). Um produto interno em
+$E$ é uma aplicação $\langle\cdot,\cdot\rangle:E\times E\to\bbK$ que satisfaz, para cada $x,y,z\in E$ e
+$\alpha,\beta\in\bbK$,
+\begin{align*}
+	(P_1) & \quad \langle x,x\rangle\geq 0\text{;}\quad \langle x,x\rangle=0 \iff x=0\text{;} \\
+	(P_2) & \quad \langle x+y,z\rangle=\langle x,z\rangle+\langle y,z\rangle\text{;}           \\
+	(P_3) & \quad \langle \alpha x,y\rangle=\alpha\langle x,y\rangle\text{;}                   \\
+	(P_4) & \quad \langle x,y\rangle=\overline{\langle y,x\rangle}\text{.}
+\end{align*}
+$(E,\langle\cdot,\cdot\rangle)$ é chamado espaço de produto interno.}
+
+Utilizando $(P_2)$, $(P_3)$ e $(P_4)$, é possível verificar a antilinearidade na segunda entrada:
+$$\langle x,\alpha y+z\rangle = \overline{\alpha}\langle x,y\rangle+\langle x,z\rangle\text{.}$$
+
+De fato,
+\begin{align*}
+	\langle x,\alpha y+z\rangle & = \overline{\langle \alpha y+z,x\rangle}                            &  & \text{por $(P_4)$,}                  \\
+	                            & = \overline{\langle \alpha y,x\rangle+\langle z,x\rangle}            &  & \text{por $(P_2)$,}                  \\
+	                            & = \overline{\alpha\langle y,x\rangle}+\overline{\langle z,x\rangle}  &  & \text{por $(P_3)$,}                  \\
+	                            & = \overline{\alpha}\,\overline{\langle y,x\rangle}+\langle x,z\rangle &  & \text{por $(P_4)$ (na segunda parcela),} \\
+	                            & = \overline{\alpha}\langle x,y\rangle+\langle x,z\rangle             &  & \text{por $(P_4)$ (na primeira parcela).}
+\end{align*}
+
+\mprop{Norma induzida por um produto interno}{Todo espaço de produto interno $(E,\langle\cdot,\cdot\rangle)$
+é um espaço normado, considerando $\|x\|=\sqrt{\langle x,x\rangle}$, $x\in E$.}
+
+\ex{Produtos internos usuais}{
+	\begin{enumerate}
+		\item O produto interno usual de $\ell^2$.
+		\item Dado $(\Omega,\mcM,\mu)$, em $L^2(\Omega,\mcM,\mu)$ temos que
+		      $\langle f,g\rangle=\int_\Omega f\bar g \, d\mu$ é um produto interno.
+	\end{enumerate}}
+
+\section{Métricas Provenientes de Normas}
+
+\qs{Métrica induzida por norma}{Seja $E$ um espaço vetorial sobre $\bbK$. Se $d:E\times E\to[0,\infty)$ é
+uma métrica em $E$ satisfazendo, para cada $x,y,z\in E$,
+\begin{align*}
+	(1) & \quad d(x+z,y+z)=d(x,y) \quad \text{(invariância por translação);} \\
+	(2) & \quad d(\alpha x,\alpha y)=|\alpha|d(x,y)\text{,}\ \forall\alpha\in\bbK \quad \text{(homotetia);}
+\end{align*}
+então existe uma norma em $E$ que induz a métrica $d$.}
+\begin{myproof}
+	Defina $\|x\|:=d(x,0)$, $x\in E$. Vejamos que $\|\cdot\|$ é norma:
+	\begin{itemize}
+		\item $(N_1)$ $\|x\|=0 \iff d(x,0)=0 \iff x=0$, por $(M_1)$;
+		\item $(N_2)$ $\|\alpha x\|=d(\alpha x,0)=d(\alpha x,\alpha\cdot 0)=|\alpha|\,d(x,0)=|\alpha|\,\|x\|$,
+		      por $(2)$;
+		\item $(N_3)$ Por $(1)$ (com $z=-y$), $d(x+y,y)=d(x,0)=\|x\|$; logo, pela desigualdade triangular
+		      de $d$,
+		      $$\|x+y\|=d(x+y,0)\leq d(x+y,y)+d(y,0)=\|x\|+\|y\|\text{.}$$
+	\end{itemize}
+	Resta ver que $\|\cdot\|$ induz $d$: por $(1)$ (com $z=-y$), $d(x,y)=d(x-y,0)=\|x-y\|$, $\forall
+	x,y\in E$.
+\end{myproof}
+
+\nt{Ver Kreyszig, pág.\ 63, para um exemplo de métrica que não provém de uma norma. Exemplo mais fácil:
+a métrica zero-um não satisfaz $(2)$.}
+
+\qslista{11}{Sejam $E$ um espaço vetorial e $d$ uma métrica em $E$. Mostre que, se para
+todo $x,y,z\in E$ e todo escalar $\lambda$ valem as leis
+$$d(x+z,y+z)=d(x,y) \quad \text{(invariância por translações)}$$
+$$d(\lambda x,\lambda y)=|\lambda|d(x,y) \quad \text{(homotetia),}$$
+então existe uma norma em $E$ tal que a métrica $d$ é induzida por essa norma.}
+\nt{Este é essencialmente o enunciado da Questão 1.5.1, já demonstrada acima.}
+
+\qslista{13}{Seja $S$ o espaço de todas as sequências de números reais. Mostre que
+$$d(x,y)=\sum_{j=1}^{\infty}\frac{1}{2^j}\frac{|x_j-y_j|}{1+|x_j-y_j|}\text{,}\quad x=(x_j),\ y=(y_j)\in
+S\text{,}$$
+é uma métrica em $S$. Mostre também que essa métrica não é induzida por nenhuma norma.}
+
+\section{Normas Provenientes de Produtos Internos}
+
+\mprop{Lei do Paralelogramo}{Se $\|\cdot\|$ é induzida por $\langle\cdot,\cdot\rangle$, então
+$$\|x+y\|^2+\|x-y\|^2=2\big(\|x\|^2+\|y\|^2\big)\text{,}\quad \forall x,y\in E\text{.}$$}
+
+\mprop{Lei de Polarização}{Se vale a Lei do Paralelogramo em $(E,\|\cdot\|)$, então $\|\cdot\|$ é induzida
+por um produto interno:
+\begin{align*}
+	\langle x,y\rangle & = \frac14\big(\|x+y\|^2-\|x-y\|^2\big)                                                     & \text{(caso real);}    \\
+	\langle x,y\rangle & = \frac14\big(\|x+y\|^2-\|x-y\|^2\big)+\frac{i}{4}\big(\|x+iy\|^2-\|x-iy\|^2\big) & \text{(caso complexo).}
+\end{align*}}
+
+\qslista{12}{Mostre que a norma $\|x\|_p=\big(\sum_{j=1}^{\infty}|x_j|^p\big)^{1/p}$ em
+$\ell^p$ é induzida por um produto interno se, e somente se, $p=2$.}

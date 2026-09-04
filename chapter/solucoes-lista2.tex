@@ -1,0 +1,554 @@
+\section{Lista 2}
+\renewcommand{\currentlista}{2}
+\setcounter{ex}{0}
+
+\newcommand{\K}{\bbK}
+\renewcommand{\eps}{\varepsilon}
+\newcommand{\Ker}{\mathcal{N}}
+\newcommand{\Ima}{\operatorname{Im}}
+\newcommand{\dist}{\operatorname{dist}}
+\renewcommand{\sol}{\textcolor{myr}{\textbf{[RASCUNHO --- substituir]}}\par\smallskip}
+
+\begin{tcolorbox}[
+  enhanced,
+  breakable,
+  colback=mytheorembg,
+  colframe=doc!80!black,
+  boxrule=0sp,
+  borderline west={2.5pt}{0pt}{doc!80!black},
+  sharp corners,
+  title=\textbf{Notação e Convenções},
+  coltitle=doc!80!black,
+  fonttitle=\bfseries\sffamily,
+  detach title,
+  before upper=\tcbtitle\par\smallskip
+]
+$X,Y,Z$ denotam espaços normados sobre $\K\in\{\R,\mathbb{C}\}$ e
+\[ \mathcal{L}(X,Y)=\{T:X\to Y;\ T \text{ linear e limitada}\},\qquad \norm{T}=\sup_{\norm{x}\le1}\norm{Tx}=\sup_{x\neq0}\frac{\norm{Tx}}{\norm{x}}, \]
+com $\mathcal{L}(X)=\mathcal{L}(X,X)$ e $X'=\mathcal{L}(X,\K)$ (o \emph{dual topológico}). Escrevemos $\Ker(T)=\{x;\ Tx=0\}$ para o núcleo, $\Ima(T)=T(X)$ para a imagem e, dado $Y\subset X$ subespaço,
+\[ Y^{\perp}=\{f\in X';\ f|_Y=0\}. \]
+Para $1\le p<\infty$, $\ell^p$ e $\ell^\infty$ são os espaços de sequências usuais, $c_0$ o das que convergem a zero, $c_{00}$ o das que têm finitos termos não nulos e $e_j$ o $j$-ésimo vetor canônico. Usamos livremente que \emph{$T$ linear é contínua se, e somente se, é limitada}.
+\end{tcolorbox}
+
+\begin{tcolorbox}[
+  enhanced,
+  breakable,
+  colback=myexamplebg,
+  colframe=myexampleti,
+  boxrule=0sp,
+  borderline west={2.5pt}{0pt}{myexampleti},
+  sharp corners,
+  title=\textbf{Roteiro Temático da Lista},
+  coltitle=myexampleti,
+  fonttitle=\bfseries\sffamily,
+  detach title,
+  before upper=\tcbtitle\par\smallskip
+]
+A lista percorre, em ordem, seis temas fundamentais:
+\begin{itemize}[leftmargin=1.4em,itemsep=2pt]
+\item \textbf{Dimensão finita} (1, 2, 3, 12): equivalência de normas, continuidade automática de operadores lineares, o Lema de Riesz e o que muda quando $\theta=1$.
+\item \textbf{A norma de operador} (4, 5, 19, 23): a norma como ínfimo de constantes admissíveis, a desigualdade fundamental $\norm{Tx}\le\norm{T}\norm{x}$ e a caracterização de limitação via conjuntos limitados.
+\item \textbf{Funcionais lineares e seus núcleos} (6, 7, 9, 10, 15, 25): um funcional é contínuo exatamente quando seu núcleo é fechado; núcleos determinam funcionais a menos de constante; e a leitura geométrica $\norm{f}=1/d(0,H)$.
+\item \textbf{Duais concretos} (11, 16, 21): $(\ell^p)'\simeq \ell^q$, $(\ell^1)'\simeq \ell^\infty$, $(c_0)'\simeq \ell^1$, e o funcional $\langle\cdot,u\rangle$ em espaços com produto interno.
+\item \textbf{Hahn--Banach} (17, 18, 22, 24): existência de funcionais normalizados, a fórmula dual $\norm{x}=\sup_{\norm{f}=1}\abs{f(x)}$ e a distância a um subespaço.
+\item \textbf{Completude, inversas e limitação uniforme} (8, 13, 14, 20, 26, 27): a série de Neumann; um operador injetivo com inversa ilimitada e imagem não fechada; e duas aplicações do Princípio da Limitação Uniforme.
+\end{itemize}
+\medskip
+\noindent\footnotesize\textit{Nota: Sempre que um exercício é usado em outro, a dependência vem indicada.}
+\end{tcolorbox}
+\vspace{4mm}
+\begin{exercicio}{Se $\dim X<\infty$, então toda transformação linear $T:X\to Y$ é contínua.}
+\sol
+Seja $\{e_1,\dots,e_n\}$ uma base de $X$ e escreva $x=\sum_{i=1}^n\xi_ie_i$. Pela linearidade,
+\[ \norm{Tx}=\Bigl\|\sum_{i=1}^n\xi_iTe_i\Bigr\|\le\sum_{i=1}^n\abs{\xi_i}\norm{Te_i}\le M\sum_{i=1}^n\abs{\xi_i}=M\norm{x}_1, \]
+onde $M=\max_i\norm{Te_i}$ e $\norm{x}_1:=\sum_i\abs{\xi_i}$ é uma norma em $X$ (a decomposição na base é única).
+
+Pelo Exercício 2, $\norm{\cdot}_1$ é equivalente à norma original de $X$: existe $C>0$ com $\norm{x}_1\le C\norm{x}$. Logo
+\[ \norm{Tx}\le MC\norm{x},\qquad \forall x\in X, \]
+isto é, $T$ é limitada e portanto contínua.
+
+\begin{obs}
+A hipótese sobre $X$ é indispensável, e não há hipótese alguma sobre $Y$. Em dimensão infinita sempre existem funcionais lineares descontínuos: tomando uma base de Hamel $\{e_\lambda\}$ com $\norm{e_\lambda}=1$ e uma sequência $e_{\lambda_1},e_{\lambda_2},\dots$ de elementos distintos, defina $f(e_{\lambda_n})=n$ e $f=0$ nos demais elementos da base; $f$ é linear e ilimitada. O Exercício 6 exibe um exemplo concreto.
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{Quaisquer normas num espaço vetorial de dimensão finita são equivalentes.}
+\sol
+Seja $\dim V=n$ com base $\{e_1,\dots,e_n\}$. Como ``ser equivalente a'' é uma relação de equivalência (a transitividade se obtém multiplicando as constantes), basta mostrar que uma norma arbitrária $\norm{\cdot}$ é equivalente a
+\[ \norm{x}_1:=\sum_{i=1}^n\abs{\xi_i},\qquad x=\sum_{i=1}^n\xi_ie_i. \]
+
+\emph{Cota superior.} Com $C_2=\max_i\norm{e_i}>0$,
+\[ \norm{x}\le\sum_i\abs{\xi_i}\norm{e_i}\le C_2\norm{x}_1. \]
+
+\emph{Cota inferior.} A desigualdade acima mostra que $f(x)=\norm{x}$ é contínua em $(V,\norm{\cdot}_1)$, pois
+\[ \bigl|\norm{x}-\norm{y}\bigr|\le\norm{x-y}\le C_2\norm{x-y}_1. \]
+A esfera $S=\{x\in V;\ \norm{x}_1=1\}$ corresponde, via coordenadas, à esfera unitária de $(\K^n,\norm{\cdot}_1)$, que é fechada e limitada, logo compacta (Bolzano--Weierstrass). Assim $f$ atinge mínimo em $S$: existe $x_0\in S$ com $C_1:=\norm{x_0}=\min_{x\in S}\norm{x}$. Como $x_0\neq0$, temos $C_1>0$. Para $x\neq0$, $x/\norm{x}_1\in S$, donde $\norm{x}\ge C_1\norm{x}_1$ (o caso $x=0$ é trivial).
+
+Portanto $C_1\norm{x}_1\le\norm{x}\le C_2\norm{x}_1$.
+
+\begin{obs}
+Consequências imediatas: em dimensão finita as noções de convergência, sequência de Cauchy, aberto, limitado e compacto independem da norma; todo espaço normado de dimensão finita é completo; e todo subespaço de dimensão finita de um normado é fechado (fato usado nos Exercícios 1 e 3).
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{No Lema de Riesz, se $\dim Y=\infty$ o parâmetro $\theta$ não pode ser tomado igual a $1$; se $\dim Y<\infty$, existe $z$ com $\norm{z}=1$ e $\norm{z-y}\ge1$ para todo $y\in Y$.}
+\sol
+Recordemos o \emph{Lema de Riesz}: se $Y\subsetneq Z$ é subespaço fechado próprio do normado $Z$ e $0<\theta<1$, existe $z\in Z$ com $\norm{z}=1$ e $\dist(z,Y)\ge\theta$.
+
+\textbf{(i) $\theta=1$ pode falhar.} Tome
+\[ Z=\{x\in C[0,1];\ x(0)=0\}\ \ (\text{com } \norm{\cdot}_\infty), \qquad Y=\Bigl\{x\in Z;\ \int_0^1x(t)\,dt=0\Bigr\}. \]
+$Z$ é fechado em $C[0,1]$, logo Banach, e $Y=\Ker(\varphi)$ com $\varphi(x)=\int_0^1x$, funcional linear contínuo em $Z$; portanto $Y$ é subespaço fechado, próprio (pois $\varphi\neq0$) e de dimensão infinita.
+
+\emph{Afirmação: $\norm{\varphi}=1$, mas o supremo não é atingido.} De $\abs{\varphi(x)}\le\int_0^1\abs{x}\le\norm{x}_\infty$ vem $\norm{\varphi}\le1$; e $x_n(t)=\min\{nt,1\}$ satisfaz $x_n\in Z$, $\norm{x_n}_\infty=1$ e $\varphi(x_n)=1-\frac{1}{2n}\to1$, logo $\norm{\varphi}=1$. Se houvesse $x\in Z$ com $\norm{x}_\infty=1$ e $\abs{\varphi(x)}=1$, então $\int_0^1(1-\abs{x})=0$ com $1-\abs{x}\ge0$ contínua, forçando $\abs{x}\equiv1$ --- impossível, pois $x(0)=0$.
+
+Agora use o Exercício 25 na forma $\dist(x,\Ker\varphi)=\abs{\varphi(x)}/\norm{\varphi}$. Se $\norm{x}_\infty=1$, então
+\[ \dist(x,Y)=\abs{\varphi(x)}<1, \]
+pela afirmação acima. Logo \emph{nenhum} $z$ unitário satisfaz $\dist(z,Y)\ge1$: o valor $\theta=1$ é inalcançável.
+
+\textbf{(ii) $\dim Y<\infty$.} Seja $Y\subsetneq Z$ com $\dim Y<\infty$ e tome $v\in Z\setminus Y$. Como $Y$ tem dimensão finita, é fechado (Exercício 2), logo $\delta:=\dist(v,Y)>0$. Afirmamos que \emph{a distância é atingida}: o conjunto $K=\{y\in Y;\ \norm{v-y}\le 2\delta\}$ é não vazio, fechado e limitado em $Y$ (pois $\norm{y}\le\norm{v}+2\delta$), portanto compacto por ter dimensão finita; a função contínua $y\mapsto\norm{v-y}$ atinge mínimo em $K$, e esse mínimo é $\delta$, já que fora de $K$ os valores excedem $2\delta$. Seja $y_0\in Y$ com $\norm{v-y_0}=\delta$ e defina
+\[ z=\frac{v-y_0}{\delta},\qquad \norm{z}=1. \]
+Para $y\in Y$, como $y_0+\delta y\in Y$,
+\[ \norm{z-y}=\frac{\norm{v-y_0-\delta y}}{\delta}\ge\frac{\delta}{\delta}=1. \]
+\end{exercicio}
+
+\begin{exercicio}{Se $T\in\mathcal{L}(X,Y)$, então $\norm{T}=\inf\{C>0;\ \norm{Tx}\le C\norm{x},\ \forall x\in X\}$; conclua que $\norm{Tx}\le\norm{T}\norm{x}$.}
+\sol
+Seja $\mathcal{C}=\{C>0;\ \norm{Tx}\le C\norm{x}\ \forall x\in X\}$, que é não vazio pois $T$ é limitada, e ponha
+\[ m=\norm{T}=\sup_{x\neq0}\frac{\norm{Tx}}{\norm{x}}. \]
+
+\emph{$\inf\mathcal{C}\ge m$:} se $C\in\mathcal{C}$, então $\frac{\norm{Tx}}{\norm{x}}\le C$ para todo $x\neq0$, ou seja, $C$ é cota superior do conjunto de quocientes; logo $C\ge m$. Tomando o ínfimo, $\inf\mathcal{C}\ge m$.
+
+\emph{$\inf\mathcal{C}\le m$:} para todo $x\neq0$ vale $\norm{Tx}\le m\norm{x}$ pela definição de supremo, e para $x=0$ ambos os lados são nulos. Assim $m$ satisfaz a condição que define $\mathcal{C}$ (se $m>0$, então $m\in\mathcal{C}$ e $\inf\mathcal{C}\le m$; se $m=0$, então $T=0$ e qualquer $C>0$ serve, donde $\inf\mathcal{C}=0=m$).
+
+Portanto $\norm{T}=\inf\mathcal{C}$ e, como acabamos de ver, a desigualdade
+\[ \norm{Tx}\le\norm{T}\norm{x},\qquad \forall x\in X, \]
+vale --- isto é, o ínfimo é de fato um mínimo (quando $T\neq0$).
+\end{exercicio}
+
+\begin{exercicio}{$T\in\mathcal{L}(X,Y)$. (a) $x_n\to x$ implica $Tx_n\to Tx$. (b) $\Ker(T)$ é fechado em $X$.}
+\sol
+\textbf{(a)} Pela linearidade e pelo Exercício 4,
+\[ \norm{Tx_n-Tx}=\norm{T(x_n-x)}\le\norm{T}\norm{x_n-x}\longrightarrow0. \]
+(Em particular $T$ é Lipschitz, com constante $\norm{T}$.)
+
+\textbf{(b)} $\Ker(T)=T^{-1}(\{0\})$ é a imagem inversa de um fechado por uma aplicação contínua, logo fechado. Diretamente: se $x_n\in\Ker(T)$ e $x_n\to x$, então por (a) $Tx=\lim Tx_n=0$, isto é, $x\in\Ker(T)$.
+
+\begin{obs}
+A recíproca de (b) é o conteúdo do Exercício 15, válida para funcionais: $f$ linear é contínua se, e somente se, $\Ker(f)$ é fechado. Para operadores em geral a recíproca é falsa.
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{$\psi(f)=f(0)$ em $C[-1,1]$; use $g_n(t)=g(nt)$ para $\abs{t}<1/n$ e $g_n(t)=0$ para $\abs{t}\ge1/n$ para provar que $\psi$ não é contínuo.}
+\sol
+Aqui $C[-1,1]$ está munido da norma integral $\norm{f}_1=\int_{-1}^{1}\abs{f(t)}\,dt$ (com a norma do supremo $\psi$ seria contínua, com $\norm{\psi}=1$; veja a observação).
+
+\emph{$g_n$ é contínua.} Nos pontos $t=\pm1/n$ os dois ramos coincidem, pois $g(\pm1)=0$; nos demais pontos $g_n$ é composição de contínuas. Além disso $g_n\in C[-1,1]$ e
+\[ \psi(g_n)=g_n(0)=g(0)\neq0 \qquad\text{para todo } n. \]
+
+\emph{Mas $\norm{g_n}_1\to0$.} Com a mudança de variável $s=nt$,
+\[ \norm{g_n}_1=\int_{-1/n}^{1/n}\abs{g(nt)}\,dt=\frac1n\int_{-1}^{1}\abs{g(s)}\,ds=\frac{\norm{g}_1}{n}\xrightarrow[n\to\infty]{}0. \]
+Note que $\norm{g}_1>0$, pois $g$ é contínua e $g(0)\neq0$.
+
+\emph{Conclusão.} Se $\psi$ fosse contínua, existiria $C>0$ com $\abs{\psi(f)}\le C\norm{f}_1$ para todo $f$; aplicando a $g_n$,
+\[ \abs{g(0)}=\abs{\psi(g_n)}\le C\,\frac{\norm{g}_1}{n}\xrightarrow[n\to\infty]{}0, \]
+o que contradiz $g(0)\neq0$. Equivalentemente, $\dfrac{\abs{\psi(g_n)}}{\norm{g_n}_1}=\dfrac{n\abs{g(0)}}{\norm{g}_1}\to\infty$, de modo que $\psi$ é ilimitada. Logo $\psi$ não é contínua.
+
+\begin{obs}
+O exemplo mostra que a continuidade de um funcional depende da norma, não apenas da fórmula: $g_n\to0$ em $\norm{\cdot}_1$ mas $\norm{g_n}_\infty=\norm{g}_\infty$ não tende a zero. É o mesmo fenômeno de ``concentração'' que aparece na Lista I (Exercício 47): a norma $\norm{\cdot}_1$ não vê picos estreitos.
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{$f\in X'$ e $x_0\in X\setminus\Ker(f)$. Então todo $x\in X$ se escreve de maneira única como $x=\lambda x_0+y$, com $\lambda$ escalar e $y\in\Ker(f)$.}
+\sol
+Como $x_0\notin\Ker(f)$, temos $f(x_0)\neq0$.
+
+\emph{Existência.} Dado $x\in X$, ponha
+\[ \lambda=\frac{f(x)}{f(x_0)},\qquad y=x-\lambda x_0. \]
+Então $x=\lambda x_0+y$ e
+\[ f(y)=f(x)-\lambda f(x_0)=f(x)-f(x)=0, \]
+isto é, $y\in\Ker(f)$.
+
+\emph{Unicidade.} Se $\lambda x_0+y=\lambda'x_0+y'$ com $y,y'\in\Ker(f)$, então $(\lambda-\lambda')x_0=y'-y\in\Ker(f)$. Aplicando $f$: $(\lambda-\lambda')f(x_0)=0$; como $f(x_0)\neq0$, segue $\lambda=\lambda'$ e daí $y=y'$.
+
+Em outras palavras, $X=\operatorname{span}\{x_0\}\oplus\Ker(f)$: o núcleo de um funcional não nulo tem \emph{codimensão $1$}. Esse fato é a chave do Exercício 9.
+\end{exercicio}
+\begin{exercicio}{Se $X$ é completo e $T\in\mathcal{L}(X,Y)$, então $\Ker(T)$ é um subespaço completo.}
+\sol
+$\Ker(T)$ é subespaço vetorial: se $Tx=Tz=0$ e $\lambda$ é escalar, então $T(x+\lambda z)=Tx+\lambda Tz=0$.
+
+Pelo Exercício 5(b), $\Ker(T)$ é fechado em $X$. Como todo subconjunto fechado de um espaço métrico completo é completo (uma sequência de Cauchy em $\Ker(T)$ é de Cauchy em $X$, converge a algum $x\in X$, e $x\in\Ker(T)$ por ser este fechado), segue que $\Ker(T)$ é completo.
+
+Portanto $\bigl(\Ker(T),\norm{\cdot}\bigr)$ é um espaço de Banach.
+\end{exercicio}
+
+\begin{exercicio}{$f,g$ funcionais lineares em $X$. Então $\Ker(f)=\Ker(g)$ se, e somente se, existe $c$ com $g=cf$.}
+\sol
+\textbf{($\Rightarrow$)} Se $f=0$, então $\Ker(f)=X=\Ker(g)$ dá $g=0=0\cdot f$. Suponha $f\neq0$ e tome $x_0$ com $f(x_0)=1$ (basta reescalar qualquer vetor fora do núcleo). Pelo Exercício 7, todo $x\in X$ se escreve como
+\[ x=f(x)\,x_0+y,\qquad y\in\Ker(f)=\Ker(g). \]
+Aplicando $g$ e usando $g(y)=0$:
+\[ g(x)=f(x)\,g(x_0)=c\,f(x),\qquad c:=g(x_0). \]
+
+\textbf{($\Leftarrow$)} Se $g=cf$ com $c\neq0$, então $g(x)=0\iff f(x)=0$, isto é, $\Ker(f)=\Ker(g)$.
+
+\begin{obs}
+O caso $c=0$ merece atenção: aí $g\equiv0$ e $\Ker(g)=X$, o que só coincide com $\Ker(f)$ quando $f\equiv0$. Assim, a recíproca deve ser lida como ``$g=cf$ com $c\neq0$'' ou, alternativamente, o enunciado deve supor $f,g\neq0$. Geometricamente o resultado diz que um funcional não nulo é determinado pelo seu hiperplano-núcleo a menos de um fator de escala.
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{Se $Y\subset X$ é subespaço com $f(Y)\neq\K$, então $Y\subset\Ker(f)$.}
+\sol
+Como $f$ é linear e $Y$ é subespaço, $f(Y)$ é um subespaço vetorial de $\K$. Mas $\K$, visto como espaço vetorial sobre si mesmo, tem dimensão $1$: seus únicos subespaços são $\{0\}$ e $\K$.
+
+De fato, se $f(Y)\neq\{0\}$, existe $y_0\in Y$ com $\alpha:=f(y_0)\neq0$; então, para $\beta\in\K$ arbitrário, $\frac{\beta}{\alpha}y_0\in Y$ e $f\bigl(\frac{\beta}{\alpha}y_0\bigr)=\beta$, ou seja, $f(Y)=\K$.
+
+Por hipótese $f(Y)\neq\K$, logo $f(Y)=\{0\}$, isto é, $Y\subset\Ker(f)$.
+
+\begin{obs}
+Consequência: um funcional linear não nulo é \emph{sobrejetivo}, e seu núcleo é um subespaço maximal --- não existe subespaço estritamente entre $\Ker(f)$ e $X$. Isso reencontra a codimensão $1$ do Exercício 7.
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{Isomorfismos isométricos: (a) $(\R^n)'\simeq\R^n$; (b) $(\ell^p)'\simeq \ell^q$, $p>1$, $\frac1p+\frac1q=1$; (c) $(\ell^1)'\simeq \ell^\infty$; (d) $(c_0)'\simeq \ell^1$.}
+\sol
+Todos os itens seguem o mesmo esquema: associa-se a $f$ a sequência de seus valores na base canônica,
+\[ \Phi(f)=\bigl(f(e_1),f(e_2),\dots\bigr), \]
+mostra-se que $\Phi(f)$ pertence ao espaço-alvo com norma $\le\norm{f}$, e que a fórmula $f(x)=\sum_jb_jx_j$ vale por continuidade e densidade de $c_{00}$. A recíproca (que cada $b$ define um funcional com $\norm{f_b}\le\norm{b}$) é sempre uma aplicação da desigualdade de Hölder.
+
+\textbf{(a)} Em $\R^n$ com a norma euclidiana, defina $\Phi(f)=a=(f(e_1),\dots,f(e_n))$. Então $\Phi$ é linear e bijetiva (a inversa é $a\mapsto\langle\cdot,a\rangle$), pois todo $f$ satisfaz $f(x)=\sum_i x_if(e_i)=\langle x,a\rangle$. Por Cauchy--Schwarz, $\abs{f(x)}\le\norm{a}_2\norm{x}_2$, logo $\norm{f}\le\norm{a}_2$; e, se $a\neq0$, tomando $x=a/\norm{a}_2$ obtemos $f(x)=\norm{a}_2$, donde $\norm{f}=\norm{a}_2$. Portanto $\Phi$ é uma isometria linear bijetiva.
+
+\textbf{(b)} Seja $1<p<\infty$ e $\frac1p+\frac1q=1$.
+
+\emph{Cada $b\in \ell^q$ define $f_b\in(\ell^p)'$ com $\norm{f_b}\le\norm{b}_q$:} por Hölder, $\abs{\sum_jb_jx_j}\le\norm{b}_q\norm{x}_p$.
+
+\emph{Reciprocamente,} seja $f\in(\ell^p)'$ e $b_j=f(e_j)$. Fixe $N$ e defina $x^{(N)}$ por
+\[ x^{(N)}_j=\begin{cases} \abs{b_j}^{q}/b_j, & j\le N,\ b_j\neq0,\\ 0,&\text{caso contrário}.\end{cases} \]
+Como $(q-1)p=q$, temos $\abs{x_j^{(N)}}^p=\abs{b_j}^{(q-1)p}=\abs{b_j}^q$, logo $\norm{x^{(N)}}_p=\bigl(\sum_{j\le N}\abs{b_j}^q\bigr)^{1/p}$. Por outro lado $f(x^{(N)})=\sum_{j\le N}\abs{b_j}^q$. Da desigualdade $\abs{f(x^{(N)})}\le\norm{f}\norm{x^{(N)}}_p$ resulta
+\[ \sum_{j\le N}\abs{b_j}^q\le\norm{f}\Bigl(\sum_{j\le N}\abs{b_j}^q\Bigr)^{1/p} \quad\Longrightarrow\quad \Bigl(\sum_{j\le N}\abs{b_j}^q\Bigr)^{1/q}\le\norm{f}, \]
+pois $1-\frac1p=\frac1q$. Fazendo $N\to\infty$, $b\in \ell^q$ com $\norm{b}_q\le\norm{f}$.
+
+\emph{$f=f_b$:} para $x\in c_{00}$ isso é a linearidade; como $c_{00}$ é denso em $\ell^p$ (as truncaduras $x^{(N)}$ satisfazem $\norm{x-x^{(N)}}_p^p=\sum_{j>N}\abs{x_j}^p\to0$) e ambos os funcionais são contínuos, vale em todo $\ell^p$.
+
+Juntando, $\norm{f}=\norm{b}_q$ e $\Phi:f\mapsto b$ é uma bijeção linear isométrica de $(\ell^p)'$ sobre $\ell^q$.
+
+\textbf{(c)} O mesmo esquema com $p=1$. Se $b\in \ell^\infty$, então $\abs{\sum_jb_jx_j}\le\norm{b}_\infty\norm{x}_1$, logo $\norm{f_b}\le\norm{b}_\infty$. Reciprocamente, dado $f\in(\ell^1)'$ e $b_j=f(e_j)$, de $\norm{e_j}_1=1$ vem
+\[ \abs{b_j}=\abs{f(e_j)}\le\norm{f}\quad\forall j\quad\Longrightarrow\quad b\in \ell^\infty,\ \norm{b}_\infty\le\norm{f}. \]
+Como $c_{00}$ é denso em $\ell^1$, segue $f=f_b$ e $\norm{f}=\norm{b}_\infty$.
+
+\textbf{(d)} Agora o domínio é $c_0$ com $\norm{\cdot}_\infty$. Se $b\in \ell^1$, então $\abs{\sum_jb_jx_j}\le\norm{b}_1\norm{x}_\infty$ e $\norm{f_b}\le\norm{b}_1$. Reciprocamente, dado $f\in(c_0)'$ e $b_j=f(e_j)$, tome
+\[ x^{(N)}=\sum_{j\le N}\sigma_je_j,\qquad \sigma_j=\begin{cases}\overline{b_j}/\abs{b_j},& b_j\neq0\\ 0,& b_j=0,\end{cases} \]
+que pertence a $c_{00}\subset c_0$ e tem $\norm{x^{(N)}}_\infty\le1$. Então
+\[ \sum_{j\le N}\abs{b_j}=f\bigl(x^{(N)}\bigr)\le\norm{f}, \]
+e fazendo $N\to\infty$ obtemos $b\in \ell^1$ com $\norm{b}_1\le\norm{f}$. Como $c_{00}$ é denso em $c_0$ (Lista I, Exercício 32), $f=f_b$ e $\norm{f}=\norm{b}_1$.
+
+\begin{obs}
+O item (d) \emph{não} se estende a $\ell^\infty$: o mesmo argumento quebra porque $c_{00}$ não é denso em $\ell^\infty$. De fato $(\ell^\infty)'\supsetneq \ell^1$ --- existem funcionais (os ``limites de Banach'', construídos via Hahn--Banach) que se anulam em $c_0$ sem serem nulos. Assim a cadeia $c_0\to \ell^1\to \ell^\infty$ de duais não fecha o ciclo, e $\ell^1$ não é reflexivo.
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{$f_1,\dots,f_m$ funcionais em $X$ com $\dim X=n>m$. Então existe $x\neq0$ em $\bigcap_{j=1}^m\Ker(f_j)$. Consequências para equações lineares?}
+\sol
+Considere a aplicação linear
+\[ T:X\to\K^m,\qquad Tx=\bigl(f_1(x),\dots,f_m(x)\bigr). \]
+Pelo Teorema do Núcleo e da Imagem,
+\[ \dim\Ker(T)=\dim X-\dim\Ima(T)\ge n-m\ge1, \]
+já que $\Ima(T)\subset\K^m$ tem dimensão no máximo $m$. Logo $\Ker(T)\neq\{0\}$; e, por construção,
+\[ \Ker(T)=\bigcap_{j=1}^{m}\Ker(f_j). \]
+Portanto existe $x\neq0$ com $f_j(x)=0$ para todo $j$.
+
+\emph{Consequência.} Todo sistema linear homogêneo com mais incógnitas do que equações possui solução não trivial: escrevendo $f_j(x)=\sum_{i=1}^{n}a_{ji}\xi_i$, o sistema $f_1(x)=\cdots=f_m(x)=0$ com $m<n$ sempre admite $x\neq0$. Em particular, $n$ funcionais linearmente independentes num espaço de dimensão $n$ têm interseção de núcleos igual a $\{0\}$ --- e um sistema quadrado só tem solução única quando o posto é máximo.
+\end{exercicio}
+
+\begin{exercicio}{$X$ Banach, $T\in\mathcal{L}(X)$ com $\norm{T}<1$. Então $S=\sum_{j\ge0}T^j$ está bem definido, $S\in\mathcal{L}(X)$ e $S=(I-T)^{-1}$.}
+\sol
+\emph{Convergência.} Como $X$ é Banach, $\mathcal{L}(X)$ também é (com a norma de operador). Da submultiplicatividade $\norm{AB}\le\norm{A}\norm{B}$ segue $\norm{T^j}\le\norm{T}^j$, logo
+\[ \sum_{j=0}^{\infty}\norm{T^j}\le\sum_{j=0}^{\infty}\norm{T}^j=\frac{1}{1-\norm{T}}<\infty, \]
+pois $\norm{T}<1$. Num espaço de Banach toda série absolutamente convergente converge; portanto $S=\sum_{j\ge0}T^j$ converge em $\mathcal{L}(X)$ e
+\[ \norm{S}\le\frac{1}{1-\norm{T}}. \]
+
+\emph{$S=(I-T)^{-1}$.} Seja $S_N=\sum_{j=0}^{N}T^j$. Por telescopagem,
+\[ (I-T)S_N=S_N(I-T)=I-T^{N+1}. \]
+Como $\norm{T^{N+1}}\le\norm{T}^{N+1}\to0$, temos $T^{N+1}\to0$ em $\mathcal{L}(X)$. Além disso $S_N\to S$ e a multiplicação é contínua ($\norm{AS_N-AS}\le\norm{A}\norm{S_N-S}$), logo passando ao limite,
+\[ (I-T)S=S(I-T)=I. \]
+Portanto $I-T$ é invertível com inversa contínua $S$.
+
+\begin{obs}
+Este é o \emph{argumento da série de Neumann}. Ele mostra que o conjunto dos operadores invertíveis é aberto em $\mathcal{L}(X)$: se $A$ é invertível e $\norm{B-A}<\norm{A^{-1}}^{-1}$, então $B=A\bigl(I-A^{-1}(A-B)\bigr)$ é invertível, pois $\norm{A^{-1}(A-B)}<1$.
+\end{obs}
+\end{exercicio}
+\begin{exercicio}{$T:\ell^\infty\to \ell^\infty$, $Tx=\bigl(x_1,\frac{x_2}{2},\dots,\frac{x_n}{n},\dots\bigr)$. Mostre que $T$ é linear e limitado, $\Ima(T)$ não é fechada e $T^{-1}:\Ima(T)\to \ell^\infty$ existe mas não é limitado.}
+\sol
+\emph{Linearidade e limitação.} A linearidade é imediata (as operações são coordenada a coordenada). Além disso
+\[ \norm{Tx}_\infty=\sup_{n}\frac{\abs{x_n}}{n}\le\sup_n\abs{x_n}=\norm{x}_\infty, \]
+logo $\norm{T}\le1$; e $Te_1=e_1$ com $\norm{e_1}_\infty=1$ dá $\norm{T}=1$.
+
+\emph{$T$ é injetiva.} Se $Tx=0$, então $x_n/n=0$ para todo $n$, isto é, $x=0$. Logo $T^{-1}:\Ima(T)\to \ell^\infty$ existe e é dada por $T^{-1}y=(n\,y_n)_n$.
+
+\emph{$T^{-1}$ não é limitada.} Tome $y^{(n)}=Te_n=\frac1ne_n\in\Ima(T)$. Então
+\[ \norm{y^{(n)}}_\infty=\frac1n, \qquad \norm{T^{-1}y^{(n)}}_\infty=\norm{e_n}_\infty=1, \qquad \frac{\norm{T^{-1}y^{(n)}}_\infty}{\norm{y^{(n)}}_\infty}=n\longrightarrow\infty. \]
+
+\emph{$\Ima(T)$ não é fechada.} Observe primeiro que
+\[ \Ima(T)=\bigl\{y\in \ell^\infty;\ \sup_n\,n\abs{y_n}<\infty\bigr\}, \]
+pois $y=Tx$ com $x\in \ell^\infty$ equivale a $x_n=ny_n$ limitada. Considere
+\[ y=\Bigl(\frac{1}{\sqrt n}\Bigr)_{n\ge1}. \]
+Então $y\in \ell^\infty$, mas $n\,y_n=\sqrt n$ é ilimitada, logo $y\notin\Ima(T)$. Por outro lado, as truncaduras $y^{[N]}=(y_1,\dots,y_N,0,0,\dots)$ pertencem a $\Ima(T)$ (têm finitos termos não nulos) e
+\[ \norm{y-y^{[N]}}_\infty=\sup_{n>N}\frac{1}{\sqrt n}=\frac{1}{\sqrt{N+1}}\longrightarrow0. \]
+Portanto $y\in\overline{\Ima(T)}\setminus\Ima(T)$ e a imagem não é fechada.
+
+\begin{obs}
+Os três fenômenos estão ligados: se $\Ima(T)$ fosse fechada, seria um Banach e o Teorema da Aplicação Aberta forçaria $T^{-1}$ a ser limitada. Note ainda que $\Ima(T)\subset c_0$ e $c_{00}\subset\Ima(T)$, donde $\overline{\Ima(T)}=c_0$: a imagem é densa em $c_0$, mas está longe de ser todo o $\ell^\infty$.
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{$f$ funcional linear em $X$ normado. Então $f$ é contínua se, e somente se, $\Ker(f)$ é fechado.}
+\sol
+\textbf{($\Rightarrow$)} É o Exercício 5(b): $\Ker(f)=f^{-1}(\{0\})$ é imagem inversa de fechado por aplicação contínua.
+
+\textbf{($\Leftarrow$)} Suponha $N=\Ker(f)$ fechado. Se $f=0$ nada há a provar; suponha $f\neq0$ e, por absurdo, $f$ ilimitada. Então existe uma sequência $(x_n)$ com
+\[ \norm{x_n}=1 \qquad\text{e}\qquad \abs{f(x_n)}\ge n. \]
+Fixe $x_0\in X$ com $f(x_0)=1$ (existe pois $f\neq0$; basta reescalar). Defina
+\[ z_n=x_0-\frac{x_n}{f(x_n)} . \]
+Então
+\[ f(z_n)=f(x_0)-\frac{f(x_n)}{f(x_n)}=1-1=0, \]
+isto é, $z_n\in N$ para todo $n$. Mas
+\[ \norm{z_n-x_0}=\frac{\norm{x_n}}{\abs{f(x_n)}}\le\frac1n\longrightarrow0, \]
+logo $z_n\to x_0$. Como $N$ é fechado, $x_0\in N$, ou seja, $f(x_0)=0$ --- contradizendo $f(x_0)=1$.
+
+Portanto $f$ é limitada, isto é, contínua.
+
+\begin{obs}
+A dicotomia é radical: para um funcional linear, ou $\Ker(f)$ é fechado (e $f$ é contínua), ou $\Ker(f)$ é \emph{denso} em $X$. Com efeito, $\Ker(f)$ é maximal (Exercício 10), logo $\overline{\Ker(f)}$, sendo subespaço que o contém, é $\Ker(f)$ ou $X$. Isso explica por que funcionais descontínuos são tão patológicos --- e reencontra o Exercício 6.
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{$a\in \ell^1$ e $f:c_0\to\R$, $f(x)=\sum_{j\ge1}a_jx_j$. Mostre que $f$ é linear e limitado e calcule $\norm{f}$.}
+\sol
+\emph{Boa definição e limitação.} Para $x\in c_0$,
+\[ \sum_{j=1}^{\infty}\abs{a_jx_j}\le\norm{x}_\infty\sum_{j=1}^{\infty}\abs{a_j}=\norm{a}_1\norm{x}_\infty<\infty, \]
+logo a série converge absolutamente e $\abs{f(x)}\le\norm{a}_1\norm{x}_\infty$. A linearidade segue da linearidade das séries convergentes. Assim $f\in(c_0)'$ com
+\[ \norm{f}\le\norm{a}_1. \]
+
+\emph{A norma é exatamente $\norm{a}_1$.} Fixe $N\in\N$ e tome
+\[ x^{(N)}=\sum_{j\le N}\sigma_je_j,\qquad \sigma_j=\operatorname{sgn}(a_j)\ \ (\sigma_j=0 \text{ se } a_j=0). \]
+Então $x^{(N)}\in c_{00}\subset c_0$, $\norm{x^{(N)}}_\infty\le1$ e
+\[ f\bigl(x^{(N)}\bigr)=\sum_{j\le N}\sigma_ja_j=\sum_{j\le N}\abs{a_j}. \]
+Logo $\norm{f}\ge\sum_{j\le N}\abs{a_j}$ para todo $N$ e, fazendo $N\to\infty$, $\norm{f}\ge\norm{a}_1$.
+
+Portanto $\boxed{\norm{f}=\norm{a}_1}$.
+
+\begin{obs}
+Note que o supremo que define $\norm{f}$ em geral \emph{não} é atingido em $c_0$: seria preciso $x=(\sigma_1,\sigma_2,\dots)$, que não tende a zero (a menos que $a$ tenha finitos termos não nulos). Este exercício é a metade ``fácil'' do Exercício 11(d); a metade recíproca mostra que \emph{todo} funcional contínuo em $c_0$ é desta forma.
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{(a) Para cada $x\in X$ existe $f\in X'$ com $\norm{f}=\norm{x}$ e $f(x)=\norm{x}^2$. (b) $\norm{x}=\sup_{f\in X'\setminus\{0\}}\frac{\abs{f(x)}}{\norm{f}}$.}
+\sol
+\textbf{(a)} Se $x=0$, tome $f=0$. Suponha $x\neq0$ e considere o subespaço $M=\operatorname{span}\{x\}$ com o funcional
+\[ g:M\to\K,\qquad g(\lambda x)=\lambda\norm{x}. \]
+Ele é linear e satisfaz $\abs{g(\lambda x)}=\abs{\lambda}\norm{x}=\norm{\lambda x}$, isto é, $\abs{g(u)}\le\norm{u}$ em $M$ com igualdade em $u=x$; logo $\norm{g}_{M'}=1$.
+
+Pelo Teorema de Hahn--Banach existe $h\in X'$ com $h|_M=g$ e $\norm{h}=\norm{g}_{M'}=1$. Em particular $h(x)=\norm{x}$. Agora ponha
+\[ f=\norm{x}\,h. \]
+Então $\norm{f}=\norm{x}\norm{h}=\norm{x}$ e $f(x)=\norm{x}h(x)=\norm{x}^2$, como desejado.
+
+\textbf{(b)} Para todo $f\in X'$ não nulo, $\abs{f(x)}\le\norm{f}\norm{x}$, ou seja, $\frac{\abs{f(x)}}{\norm{f}}\le\norm{x}$; logo o supremo é $\le\norm{x}$.
+
+Reciprocamente, se $x\neq0$, o funcional $h$ construído em (a) tem $\norm{h}=1$ e $h(x)=\norm{x}$, donde
+\[ \sup_{f\neq0}\frac{\abs{f(x)}}{\norm{f}}\ge\frac{\abs{h(x)}}{\norm{h}}=\norm{x}. \]
+Portanto vale a igualdade (e o supremo é atingido). Para $x=0$ os dois lados são nulos.
+
+\begin{obs}
+O item (b) é a ``dualidade'' entre $X$ e $X'$: a norma de $X$ pode ser recuperada testando contra funcionais, exatamente como a norma de $X'$ é definida testando contra vetores. Uma consequência muito usada: se $f(x)=0$ para todo $f\in X'$, então $x=0$ --- isto é, $X'$ \emph{separa pontos} de $X$. Os Exercícios 18, 22, 23 e 26 são aplicações diretas.
+\end{obs}
+\end{exercicio}
+\begin{exercicio}{$X\neq\{0\}$ e $Y$ normados. Se $\mathcal{L}(X,Y)$ é Banach, então $Y$ é Banach.}
+\sol
+Como $X\neq\{0\}$, fixe $x_0\in X$ com $\norm{x_0}=1$. Pelo Exercício 17(a) existe $f_0\in X'$ com
+\[ \norm{f_0}=1 \qquad\text{e}\qquad f_0(x_0)=1. \]
+
+Defina
+\[ J:Y\to\mathcal{L}(X,Y),\qquad J(y)\,x=f_0(x)\,y . \]
+Cada $J(y)$ é linear e limitada, pois $\norm{J(y)x}=\abs{f_0(x)}\norm{y}\le\norm{x}\norm{y}$; e $J$ é linear em $y$. Além disso $J$ é uma \emph{isometria}:
+\[ \norm{J(y)}=\sup_{\norm{x}\le1}\abs{f_0(x)}\norm{y}=\norm{f_0}\norm{y}=\norm{y}. \]
+
+Seja agora $(y_n)$ uma sequência de Cauchy em $Y$. Como $\norm{J(y_n)-J(y_m)}=\norm{y_n-y_m}$, a sequência $\bigl(J(y_n)\bigr)$ é de Cauchy em $\mathcal{L}(X,Y)$, que por hipótese é completo; logo existe $S\in\mathcal{L}(X,Y)$ com $\norm{J(y_n)-S}\to0$. Ponha $y:=Sx_0\in Y$. Então
+\[ \norm{y_n-y}=\norm{f_0(x_0)y_n-Sx_0}=\norm{\bigl(J(y_n)-S\bigr)x_0}\le\norm{J(y_n)-S}\,\norm{x_0}\longrightarrow0. \]
+Portanto $y_n\to y$ em $Y$, e $Y$ é completo.
+
+\begin{obs}
+Com a implicação recíproca (se $Y$ é Banach então $\mathcal{L}(X,Y)$ é Banach, provada tomando limites pontuais de uma sequência de Cauchy de operadores) obtém-se a equivalência do enunciado. Em particular $X'=\mathcal{L}(X,\K)$ é \emph{sempre} um espaço de Banach, mesmo quando $X$ não é.
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{$T:X\to Y$ linear é limitada se, e somente se, leva conjuntos limitados em conjuntos limitados.}
+\sol
+\textbf{($\Rightarrow$)} Seja $A\subset X$ limitado, digamos $\norm{a}\le R$ para todo $a\in A$. Então, pelo Exercício 4,
+\[ \norm{Ta}\le\norm{T}\norm{a}\le\norm{T}R,\qquad \forall a\in A, \]
+de modo que $T(A)$ é limitado.
+
+\textbf{($\Leftarrow$)} A bola $\overline{B}(0,1)=\{x;\ \norm{x}\le1\}$ é um conjunto limitado; por hipótese $T\bigl(\overline{B}(0,1)\bigr)$ é limitado, isto é, existe $M>0$ com
+\[ \norm{Tx}\le M \qquad\text{sempre que } \norm{x}\le1. \]
+Logo $\norm{T}=\sup_{\norm{x}\le1}\norm{Tx}\le M<\infty$ e $T$ é limitada.
+
+\begin{obs}
+Repare que a nomenclatura ``operador limitado'' vem exatamente daqui, e não de $T$ ser uma função limitada: um operador linear não nulo nunca é limitado como função (pois $\norm{T(\lambda x)}=\abs{\lambda}\norm{Tx}\to\infty$). Basta controlar $T$ na bola unitária, e a homogeneidade propaga o controle a todo o espaço.
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{A inversa $T^{-1}:\Ima(T)\to X$ de uma transformação linear limitada nem sempre é limitada.}
+\sol
+O Exercício 14 já fornece um exemplo: $T:\ell^\infty\to \ell^\infty$, $Tx=(x_n/n)$, é linear, limitada ($\norm{T}=1$) e injetiva, mas $T^{-1}y=(ny_n)$ satisfaz
+\[ \frac{\norm{T^{-1}(\frac1ne_n)}_\infty}{\norm{\frac1ne_n}_\infty}=n\longrightarrow\infty. \]
+
+Um segundo exemplo, com sabor diferente: seja $X=C^1[0,1]$ com $\norm{\cdot}_\infty$ (\emph{não} a norma de $C^1$) e $Y=C[0,1]$ com $\norm{\cdot}_\infty$, e considere o operador de integração
+\[ (Vf)(t)=\int_0^tf(s)\,ds,\qquad V:C[0,1]\to C[0,1]. \]
+$V$ é linear e limitado, com $\norm{Vf}_\infty\le\norm{f}_\infty$, e é injetivo (se $\int_0^tf=0$ para todo $t$, derivando obtém-se $f\equiv0$). Sua inversa na imagem é a derivação, $V^{-1}g=g'$, que é ilimitada: com $g_n(t)=\frac1n\sin(n^2t)$ temos $\norm{g_n}_\infty=\frac1n\to0$ mas $\norm{g_n'}_\infty=n\to\infty$.
+
+\begin{obs}
+Em dimensão finita isso não pode acontecer (toda aplicação linear é contínua, Exercício 1). E, em espaços de Banach, o Teorema da Aplicação Aberta garante que se $T\in\mathcal{L}(X,Y)$ é bijetiva então $T^{-1}$ é limitada; nos exemplos acima a falha ocorre porque $\Ima(T)$ não é fechada, logo não é um espaço de Banach.
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{$V$ com produto interno, $u\in V$ e $f_u(x)=\langle x,u\rangle$. Então $f_u\in V'$ e $\norm{f_u}=\norm{u}$.}
+\sol
+\emph{Linearidade.} Segue da linearidade do produto interno na primeira variável.
+
+\emph{Limitação e $\norm{f_u}\le\norm{u}$.} Por Cauchy--Schwarz,
+\[ \abs{f_u(x)}=\abs{\langle x,u\rangle}\le\norm{x}\norm{u},\qquad\forall x\in V, \]
+logo $f_u$ é limitado com $\norm{f_u}\le\norm{u}$.
+
+\emph{Igualdade.} Se $u=0$ ambos os lados são nulos. Se $u\neq0$, tome $x=u/\norm{u}$, que tem norma $1$:
+\[ f_u\Bigl(\frac{u}{\norm{u}}\Bigr)=\frac{\langle u,u\rangle}{\norm{u}}=\frac{\norm{u}^2}{\norm{u}}=\norm{u}. \]
+Logo $\norm{f_u}\ge\norm{u}$ e portanto $\norm{f_u}=\norm{u}$.
+
+\begin{obs}
+A aplicação $u\mapsto f_u$ é, assim, uma isometria de $V$ em $V'$ (conjugado-linear no caso complexo). O Teorema da Representação de Riesz afirma que ela é \emph{sobrejetiva} quando $V$ é um espaço de Hilbert --- o que generaliza o Exercício 11(a) e o caso $p=q=2$ do Exercício 11(b). Note ainda que $f_u$ realiza o Exercício 17(a): $\norm{f_u}=\norm{u}$ e $f_u(u)=\norm{u}^2$, sem precisar de Hahn--Banach.
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{$Y\subset X$ subespaço. Então $\dist(x_0,Y)=\sup\{f(x_0);\ f\in Y^\perp,\ \norm{f}=1\}$.}
+\sol
+Escreva $d=\dist(x_0,Y)=\inf_{y\in Y}\norm{x_0-y}$ e $\mathcal{F}=\{f\in Y^\perp;\ \norm{f}=1\}$.
+
+\textbf{($\ge$)} Seja $f\in\mathcal{F}$. Como $f$ se anula em $Y$, para todo $y\in Y$,
+\[ f(x_0)=f(x_0-y)\le\abs{f(x_0-y)}\le\norm{f}\norm{x_0-y}=\norm{x_0-y}. \]
+Tomando o ínfimo em $y\in Y$: $f(x_0)\le d$. Logo $\sup_{f\in\mathcal{F}}f(x_0)\le d$.
+
+\textbf{($\le$)} Se $x_0\in\overline{Y}$, então $d=0$; e todo $f\in Y^\perp$, sendo contínuo, anula-se em $\overline{Y}$, logo $f(x_0)=0$ e o supremo também é $0$.
+
+Suponha $x_0\notin\overline{Y}$, de modo que $d>0$. Considere $M=Y\oplus\operatorname{span}\{x_0\}$ e defina
+\[ g:M\to\K,\qquad g(y+\lambda x_0)=\lambda d \]
+(bem definida pela unicidade da decomposição, cf.\ Exercício 7). Então $g$ é linear, $g|_Y=0$ e $g(x_0)=d$. Além disso $\norm{g}_{M'}=1$:
+\begin{itemize}[leftmargin=1.4em,itemsep=1pt]
+\item \emph{$\le1$:} para $\lambda\neq0$, $\norm{y+\lambda x_0}=\abs{\lambda}\,\bigl\|x_0+\tfrac{y}{\lambda}\bigr\|\ge\abs{\lambda}d=\abs{g(y+\lambda x_0)}$ (pois $-y/\lambda\in Y$); para $\lambda=0$ o valor é $0$.
+\item \emph{$\ge1$:} tome $y_n\in Y$ com $\norm{x_0-y_n}\to d$; então $\abs{g(x_0-y_n)}/\norm{x_0-y_n}=d/\norm{x_0-y_n}\to1$.
+\end{itemize}
+Por Hahn--Banach, estenda $g$ a $f\in X'$ com $\norm{f}=1$. Então $f\in\mathcal{F}$ e $f(x_0)=d$, donde $\sup_{f\in\mathcal{F}}f(x_0)\ge d$.
+
+Concluímos que vale a igualdade e que o supremo é \emph{atingido}.
+
+\begin{obs}
+Quando $\overline{Y}=X$ o conjunto $\mathcal{F}$ é vazio e a fórmula deve ser lida com a convenção $\sup\emptyset=0$ --- coerente, pois nesse caso $d=0$ para todo $x_0$. O caso $Y=\{0\}$ recupera o Exercício 17(b).
+\end{obs}
+\end{exercicio}
+\begin{exercicio}{$T\in\mathcal{L}(X,Y)$. Então $\norm{T}=\sup_{\norm{x}=1}\ \sup_{\norm{f}=1}\abs{f(Tx)}$, com $f\in Y'$.}
+\sol
+Fixe $x\in X$. Aplicando o Exercício 17(b) ao vetor $Tx\in Y$,
+\[ \sup_{\substack{f\in Y'\\ \norm{f}=1}}\abs{f(Tx)}=\norm{Tx}, \]
+e o supremo é atingido (por Hahn--Banach existe $f$ unitário com $f(Tx)=\norm{Tx}$; se $Tx=0$ ambos os lados são nulos).
+
+Tomando agora o supremo sobre $\norm{x}=1$,
+\[ \sup_{\norm{x}=1}\ \sup_{\norm{f}=1}\abs{f(Tx)}=\sup_{\norm{x}=1}\norm{Tx}=\norm{T}. \]
+
+\begin{obs}
+Como o supremo iterado independe da ordem, vale também $\norm{T}=\sup_{\norm{f}=1}\sup_{\norm{x}=1}\abs{f(Tx)}=\sup_{\norm{f}=1}\norm{T'f}$, onde $T'f=f\circ T$ é o \emph{operador adjunto}. Ou seja, o exercício prova que $\norm{T'}=\norm{T}$.
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{$p$ semi-norma em $X$ real e $x_0\in X$. Existe funcional linear $f$ em $X$ com $f(x_0)=p(x_0)$ e $\abs{f(x)}\le p(x)$ para todo $x$.}
+\sol
+Uma semi-norma é, em particular, um funcional \emph{sublinear}: $p(x+y)\le p(x)+p(y)$ e $p(\lambda x)=\lambda p(x)$ para $\lambda\ge0$. Isso é exatamente a hipótese do Teorema de Hahn--Banach na versão real.
+
+\emph{Passo 1: definir $f$ em um subespaço.} Seja $M=\operatorname{span}\{x_0\}$ e
+\[ g:M\to\R,\qquad g(\lambda x_0)=\lambda\,p(x_0). \]
+Então $g$ é linear e $g\le p$ em $M$:
+\begin{itemize}[leftmargin=1.4em,itemsep=1pt]
+\item se $\lambda\ge0$: $g(\lambda x_0)=\lambda p(x_0)=p(\lambda x_0)$;
+\item se $\lambda<0$: $g(\lambda x_0)=\lambda p(x_0)\le0\le p(\lambda x_0)$, pois $p\ge0$.
+\end{itemize}
+
+\emph{Passo 2: estender.} Pelo Teorema de Hahn--Banach existe um funcional linear $f:X\to\R$ com $f|_M=g$ e $f(x)\le p(x)$ para todo $x\in X$. Em particular $f(x_0)=g(x_0)=p(x_0)$.
+
+\emph{Passo 3: o módulo.} Aplicando a desigualdade a $-x$ e usando $p(-x)=\abs{-1}p(x)=p(x)$,
+\[ -f(x)=f(-x)\le p(-x)=p(x), \]
+logo $-p(x)\le f(x)\le p(x)$, isto é, $\abs{f(x)}\le p(x)$ para todo $x\in X$.
+
+\begin{obs}
+Note que $p\ge0$ foi usado apenas no caso $\lambda<0$; e a simetria $p(-x)=p(x)$, apenas no Passo 3. Para um funcional sublinear geral (não simétrico, como $p(x)=\max\{x,0\}$ em $\R$) obtém-se $f\le p$, mas não o controle do módulo. Tomando $p=\norm{\cdot}$, este exercício reproduz o Exercício 17(a).
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{$f\in X'$, $f\neq0$, e $H=\{x\in X;\ f(x)=1\}$. Então $\norm{f}=\dfrac{1}{d(0,H)}$.}
+\sol
+Escreva $d=d(0,H)=\inf\{\norm{x};\ f(x)=1\}$. Como $f\neq0$, $H\neq\emptyset$ (se $f(u)\neq0$, então $u/f(u)\in H$).
+
+\textbf{$d\ge1/\norm{f}$.} Se $x\in H$, então
+\[ 1=\abs{f(x)}\le\norm{f}\norm{x} \quad\Longrightarrow\quad \norm{x}\ge\frac{1}{\norm{f}}. \]
+Tomando o ínfimo sobre $x\in H$: $d\ge1/\norm{f}$.
+
+\textbf{$d\le1/\norm{f}$.} Seja $0<\eps<\norm{f}$. Pela definição de $\norm{f}$ como supremo, existe $u$ com $\norm{u}=1$ e $\abs{f(u)}>\norm{f}-\eps$. Ponha
+\[ x=\frac{u}{f(u)}\in H . \]
+Então
+\[ d\le\norm{x}=\frac{\norm{u}}{\abs{f(u)}}=\frac{1}{\abs{f(u)}}<\frac{1}{\norm{f}-\eps}. \]
+Fazendo $\eps\to0^+$, obtemos $d\le1/\norm{f}$.
+
+Portanto $d=1/\norm{f}$, isto é, $\norm{f}=1/d(0,H)$.
+
+\begin{obs}
+A leitura geométrica: quanto ``mais perto da origem'' passa o hiperplano afim $\{f=1\}$, maior a norma do funcional. Reescalando, para $x_0$ qualquer obtém-se
+\[ \dist\bigl(x_0,\Ker(f)\bigr)=\frac{\abs{f(x_0)}}{\norm{f}}, \]
+fórmula usada no Exercício 3 e que generaliza a distância de um ponto a um hiperplano em $\R^n$. O ínfimo em geral não é atingido: isso ocorre precisamente quando $\norm{f}$ é atingida na esfera unitária, o que pode falhar (Exercício 3(i)).
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{$X$ Banach e $(x_n)\subset X$ com $\{f(x_n)\}$ limitada para toda $f\in X'$. Então $(x_n)$ é limitada.}
+\sol
+A ideia é aplicar o Princípio da Limitação Uniforme \emph{no dual}: o papel dos operadores será feito pelos próprios $x_n$, vistos como funcionais sobre $X'$.
+
+Para cada $n$, defina
+\[ J_n:X'\to\K,\qquad J_n(f)=f(x_n). \]
+Cada $J_n$ é linear (as operações em $X'$ são pontuais) e limitada, pois $\abs{J_n(f)}=\abs{f(x_n)}\le\norm{f}\norm{x_n}$; ademais, pelo Exercício 17(b),
+\[ \norm{J_n}=\sup_{\norm{f}\le1}\abs{f(x_n)}=\norm{x_n}. \]
+
+O espaço $X'$ é de Banach (Exercício 18, observação), \emph{independentemente} de $X$ ser completo. A hipótese diz que, para cada $f\in X'$ fixo, o conjunto $\{J_n(f)\}_n=\{f(x_n)\}_n$ é limitado --- isto é, a família $\{J_n\}$ é pontualmente limitada em $X'$.
+
+Pelo Princípio da Limitação Uniforme (Banach--Steinhaus), a família é uniformemente limitada:
+\[ \sup_n\norm{J_n}<\infty \quad\Longrightarrow\quad \sup_n\norm{x_n}<\infty . \]
+Portanto $(x_n)$ é limitada.
+
+\begin{obs}
+Em linguagem moderna: \emph{toda sequência fracamente limitada é limitada em norma}. Note que a completude de $X$ não foi usada --- o que se aplica Banach--Steinhaus é o dual $X'$, sempre completo. É um exemplo típico de argumento que ``sobe'' para o bidual: $J_n$ é a imagem canônica de $x_n$ em $X''$, e o Exercício 17(b) diz que essa imersão $J:X\to X''$ é isométrica.
+\end{obs}
+\end{exercicio}
+
+\begin{exercicio}{Use o Princípio da Limitação Uniforme para provar que $E=\{x:[0,1]\to\R;\ x \text{ polinômio}\}$, com $\norm{x}=\max_{j}\abs{a_j}$, não é completo.}
+\sol
+Aqui $x(t)=a_0+a_1t+\cdots+a_mt^m$ e $\norm{x}=\max_{0\le j\le m}\abs{a_j}$ (o máximo é sobre os coeficientes, e não depende de escrevermos ou não coeficientes nulos adicionais).
+
+\emph{Os funcionais.} Para cada $n\ge0$ defina
+\[ f_n:E\to\R,\qquad f_n(x)=n\,a_n, \]
+onde $a_n$ é o coeficiente de $t^n$ em $x$ (igual a $0$ se $\deg x<n$). Cada $f_n$ é linear e limitado, pois
+\[ \abs{f_n(x)}=n\abs{a_n}\le n\norm{x}; \]
+de fato $\norm{f_n}=n$, já que $x(t)=t^n$ tem $\norm{x}=1$ e $f_n(x)=n$.
+
+\emph{Limitação pontual.} Fixe $x\in E$, de grau $m$. Para $n>m$ tem-se $a_n=0$, logo $f_n(x)=0$. Assim
+\[ \sup_n\abs{f_n(x)}=\max_{0\le n\le m}\,n\abs{a_n}<\infty, \]
+isto é, $\{f_n\}$ é pontualmente limitada em $E$.
+
+\emph{Conclusão.} Se $E$ fosse completo, o Princípio da Limitação Uniforme forneceria $\sup_n\norm{f_n}<\infty$. Mas $\norm{f_n}=n\to\infty$. Contradição; logo $E$ não é completo.
+
+\begin{obs}
+É instrutivo exibir a falha diretamente. As somas parciais
+\[ x_m(t)=\sum_{j=1}^{m}\frac{t^j}{j} \]
+formam uma sequência de Cauchy, pois para $m>k$ vale $\norm{x_m-x_k}=\max_{k<j\le m}\frac1j=\frac{1}{k+1}\to0$. Se $x_m\to x$ em $E$, a convergência na norma implica convergência de cada coeficiente, logo $x$ teria $a_j=1/j$ para \emph{todo} $j$ --- e não seria um polinômio. O completamento de $E$ é, essencialmente, $c_0$ (via a identificação $x\mapsto(a_0,a_1,\dots)$, que é uma isometria de $E$ sobre $c_{00}$; cf.\ Lista I, Exercício 32).
+\end{obs}
+\end{exercicio}

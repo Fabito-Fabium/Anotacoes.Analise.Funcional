@@ -1,0 +1,34 @@
+\documentclass{report}
+
+\input{preamble}
+\input{macros}
+\input{letterfonts}
+\input{ptbr_mod}
+
+
+\title{\Huge{Anotações}\\Análise Funcional}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+\newpage% or \cleardoublepage
+% \pdfbookmark[<level>]{<title>}{<dest>}
+\pdfbookmark[section]{\contentsname}{toc}
+\tableofcontents
+\pagebreak
+
+\input{chapter/01-espacos-metricos-normados}
+\input{chapter/02-topologia}
+\input{chapter/03-completude}
+\input{chapter/04-contracoes-completamento}
+\input{chapter/05-operadores-lineares}
+\input{chapter/06-hahn-banach-baire}
+
+\appendix
+\chapter{Soluções}
+\input{chapter/solucoes-lista1}
+\input{chapter/solucoes-lista2}
+
+\end{document}
