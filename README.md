@@ -1,3 +1,8 @@
+# Descrição:
+
+Este projeto reúne as anotações das aulas de Análise Funcional do segundo semestre de 2026 na UFPR. O template original 
+utilizado neste repositório pode ser encontrado conforme a descrição abaixo.
+
 # (Antigo README.md) CMT - Charlie's Math Template
 
 A personal template I have created for my own use.

@@ -48,14 +48,12 @@ A lista percorre, em ordem, dez temas fundamentais:
 \item \textbf{Separabilidade, limitação e isometrias} (33, 37--44): totalmente limitado $\Rightarrow$ separável $\Rightarrow$ Lindelöf; base de Schauder; isometrias sobrejetivas.
 \item \textbf{Geometria dos Banach e quocientes} (45--50): subespaços fechados e soma $Y+Z$; Lema de Riesz; espaços quocientes $X/M$.
 \end{itemize}
-\medskip
-\noindent\footnotesize\textit{Nota: As soluções fazem referências cruzadas entre si; sempre que um resultado de outro exercício é invocado, o enunciado utilizado vem explicitado.}
 \end{tcolorbox}
 \vspace{4mm}
-% exercício 1
+% exercício1
 \begin{exercicio}{Seja $(X,d)$ um espaço métrico. Vejamos que 
 $$\abs{d(x,z)-d(z,y)}\le d(x,y) 
-\text{e} \abs{d(x_1,y_1)-d(x_2,y_2)}\le d(x_1,x_2)+d(y_1,y_2).$$}
+\quad \text{e}\quad \abs{d(x_1,y_1)-d(x_2,y_2)}\le d(x_1,x_2)+d(y_1,y_2).$$}
 
 \textbf{(i)} Pela desigualdade triangular e pela simetria,
 \[ d(x,z) \le d(x,y)+d(y,z) \quad\Longrightarrow\quad d(x,z)-d(z,y) \le d(x,y). \]
@@ -68,34 +66,67 @@ donde $d(x_1,y_1)-d(x_2,y_2)\le d(x_1,x_2)+d(y_1,y_2)$. Semelhante ao item anter
 segue o resultado.
 \end{exercicio}
 
-\begin{exercicio}{Sejam $A,B\subset X$ e $D(A,B)=\inf\{d(x,y);\, x\in A,\ y\in B\}$, $D(x,B)=\inf_{y\in B} d(x,y)$. (a) $D$ não é métrica nas partes de $X$. (b) $\abs{D(x,B)-D(z,B)}\le d(x,z)$.}
-\sol
-\textbf{(a)} Falham simultaneamente a separação e a desigualdade triangular. Tome $X=\R$ com a métrica usual.
+% exercício2
+\begin{exercicio}{Sejam $A,B\subset X$ e $D(A,B)=\inf\{d(x,y);\, x\in A,\ y\in B\}$, $D(x,B)=\inf_{y\in B} d(x,y)$, vejamos que 
+  valem as seguintes propriedades:
+  \begin{enumerate}[label=(\alph*)]
+  \item $D$ não é métrica nas partes de $X$;
+  \item $\abs{D(x,B)-D(z,B)}\le d(x,z)$. 
+\end{enumerate}}
+\textbf{(a)} Falham simultaneamente a separação e a desigualdade triangular. 
 
-\emph{Falha da separação:} $A=[0,1]$ e $B=[1,2]$ são conjuntos distintos com $D(A,B)=0$, pois $1\in A\cap B$. Também $A=(0,1)$ e $B=(1,2)$ são disjuntos, distintos, e ainda assim $D(A,B)=0$ (basta tomar $x=1-\tfrac1n$, $y=1+\tfrac1n$).
+\emph{Falha da separação:} Basta considerar $A, B \subset X$ satisfazendo $A \cap B \neq \emptyset$;
 
-\emph{Falha da desigualdade triangular:} com $A=\{0\}$, $B=\{10\}$ e $C=[0,10]$ temos
-\[ D(A,B)=10 > 0+0 = D(A,C)+D(C,B). \]
+\emph{Falha da desigualdade triangular:} Dados $A, B, C \subset X$ satisfazendo
+  $D(A, B) > 0$, $A \cap C \neq \emptyset$ e $B \cap C \neq \emptyset$,
+temos 
+\begin{align*}
+  D(A, B) > D(A, C) + D(B, C) = 0
+\end{align*}
 Ainda: $D(\emptyset,B)=\inf\emptyset=+\infty$, de modo que $D$ nem sequer assume valores em $[0,\infty)$ em todo $\mcP(X)$.
 
-\textbf{(b)} Se $B=\emptyset$ a afirmação é vazia; suponha $B\neq\emptyset$. Para todo $y\in B$,
-\[ D(x,B)\le d(x,y)\le d(x,z)+d(z,y). \]
-Tomando o ínfimo em $y\in B$ do lado direito, $D(x,B)\le d(x,z)+D(z,B)$, ou seja, $D(x,B)-D(z,B)\le d(x,z)$. Trocando $x$ por $z$ obtém-se a outra desigualdade, e portanto $\abs{D(x,B)-D(z,B)}\le d(x,z)$.
+\textbf{(b)} Se $B=\emptyset$ a afirmação é vazia; suponha $B\neq\emptyset$. Dados $x, z \in X$,
+    da definição de ínfimo, para todo $\epsilon>0$, 
+existe $y \in B$ tal que, 
+\begin{align*}
+  d(z, y) \le D(z, B) + \frac{\epsilon}{2} \implies -d(z, y) \ge -D(z, B) - \frac{\epsilon}{2};
+\end{align*}
+  Já que $d(x, y_0) \ge D(x, B)$ para todo $y_0 \in B$, segue da desigualdade acima que,
+\begin{align*}
+  d(x, z) \ge d(x, y) - d(z, y) \ge D(x, B) - D(z, B) - \frac{\epsilon}{2}, \quad \forall \epsilon>0.
+\end{align*}
+  Sendo assim, $D(x, B) - D(z, B) \le d(x, z)$. De maneira análoga temos $D(z, B) - D(x, B) \le d(x, z)$, e, por conseguinte 
+  o resultado proposto.
 \end{exercicio}
 
-\begin{exercicio}{Mostre que o fecho da bola aberta nem sempre é a bola fechada correspondente.}
-\sol
+% exercício3
+\begin{exercicio}{Mostre que o fecho da bola aberta nem sempre é a bola fechada correspondente.} \\
 Seja $X$ um conjunto com pelo menos dois pontos, munido da métrica discreta
 \[ d(x,y)=\begin{cases} 0,& x=y\\ 1,& x\neq y.\end{cases} \]
 Fixado $x_0\in X$ e $r=1$:
 \[ B(x_0,1)=\{x;\ d(x_0,x)<1\}=\{x_0\}, \qquad \overline{B}(x_0,1)=\{x;\ d(x_0,x)\le 1\}=X. \]
-Na métrica discreta todo subconjunto é fechado, logo $\overline{B(x_0,1)}=\{x_0\}\neq X=\overline{B}(x_0,1)$.
+  Note que $\{x_0\} = \overline{\set{x_0}}$, pois a única sequência que pode ser tomada em $\set{x_0}$ é a sequência constante. 
+Logo $\overline{B(x_0,1)}=\{x_0\}\neq X=\overline{B}(x_0,1)$.
 
 \begin{obs}
-Vale sempre a inclusão $\overline{B(x,r)}\subset \overline{B}(x,r)$, pois $\overline{B}(x,r)$ é fechada (é a pré-imagem de $[0,r]$ pela função contínua $y\mapsto d(x,y)$) e contém $B(x,r)$. A igualdade vale, por exemplo, em qualquer espaço \emph{normado} não trivial: se $\norm{y-x}\le r$, então $y_n = x+(1-\tfrac1n)(y-x)\in B(x,r)$ e $y_n\to y$.
+Vale sempre a inclusão $\overline{B(x,r)}\subset \overline{B}(x,r)$,
+  pois definindo 
+\begin{align*}
+  f_x: X &\to \bb R^+\\
+  y &\mapsto f_x(y) = d(x, y).
+\end{align*}
+  temos $f_x$ contínua pelo \hyperlink{sol:lista1:1}{exercício 1 da lista 1}. Já que
+  $\overline{B}(x,r) = f_x^{-1}([0, r])$, temos que $\overline{B}(x, r)$ é fechado. 
+  Mais ainda,
+  \begin{align*}
+    [0, r) \subset [0, r] \implies B(x, r) = f_x^{-1}([0, r)) \subset f_x^{-1}([0, r]) = \overline B(x, r).
+  \end{align*} 
+Daqui, basta notar que dado $A \subseteq B$ temos $\overline A \subseteq \overline B$. Por conseguinte, 
+  $\overline{B(x, r)} \subset \overline{\overline B(x, r)} = \overline B(x, r)$.
 \end{obs}
 \end{exercicio}
 
+% exercício4
 \begin{exercicio}{Num espaço normado $X$ vale $\bigl|\norm{x}-\norm{y}\bigr|\le \norm{x\pm y}$.}
 \sol
 Da desigualdade triangular, $\norm{x}=\norm{(x-y)+y}\le \norm{x-y}+\norm{y}$, isto é, $\norm{x}-\norm{y}\le\norm{x-y}$. Trocando $x\leftrightarrow y$ e usando $\norm{y-x}=\norm{-(x-y)}=\norm{x-y}$, obtemos $\norm{y}-\norm{x}\le \norm{x-y}$. Logo
@@ -104,11 +135,13 @@ Aplicando esta desigualdade ao par $(x,-y)$ e usando $\norm{-y}=\norm{y}$:
 \[ \bigl|\norm{x}-\norm{y}\bigr| = \bigl|\norm{x}-\norm{-y}\bigr| \le \norm{x-(-y)}=\norm{x+y}. \]
 \end{exercicio}
 
+% exercício5
 \begin{exercicio}{Se $\emptyset\neq A\subset X$, então $f(x)=d(x,A)$ é Lipschitz.}
 \sol
 Pelo Exercício 2(b), para todos $x,z\in X$ temos $\abs{d(x,A)-d(z,A)}\le d(x,z)$, ou seja, $f$ é Lipschitz com constante $L=1$ (em particular $f$ é uniformemente contínua). A hipótese $A\neq\emptyset$ garante que $f$ toma valores finitos.
 \end{exercicio}
 
+% exercício6
 \begin{exercicio}{$F,G\subset X$ fechados disjuntos e $f(x)=\dfrac{d(x,F)}{d(x,F)+d(x,G)}$. (a) $f$ é contínua, $f|_F=0$, $f|_G=1$. (b) $A=\{f<1/2\}$ e $B=\{f>1/2\}$ são abertos disjuntos com $F\subset A$, $G\subset B$.}
 \sol
 Suponha $F,G\neq\emptyset$ (caso contrário defina $f\equiv 1$ ou $f\equiv 0$).
@@ -126,19 +159,31 @@ Isto prova que todo espaço métrico é \emph{normal}, e ainda mais: fechados di
 \end{obs}
 \end{exercicio}
 
-\begin{exercicio}{$X=X_1\times X_2$ é métrico com $d_a(x,y)=\sqrt{d_1(x_1,y_1)^2+d_2(x_2,y_2)^2}$, $d_b = d_1+d_2$ e $d_c=\max\{d_1,d_2\}$.}
-\sol
-Escreva $u=d_1(x_1,y_1)$, $v=d_2(x_2,y_2)$, e analogamente para os outros pares. Em todos os três casos, não-negatividade e simetria são imediatas de $d_1,d_2$ serem métricas, e
+
+% exercício7
+\begin{exercicio}{Dado $X=X_1\times X_2$, vejamos que ele será um espaço métrico quando munido com as seguintes métricas 
+\begin{align*}
+ d_a(x,y)=\sqrt{d_1(x_1,y_1)^2+d_2(x_2,y_2)^2} \quad \text{,} \quad d_b = d_1+d_2 \quad \text{e} \quad d_c=\max\{d_1,d_2\}.
+\end{align*}
+}
+Em todos os três casos, não-negatividade e simetria são imediatas de $d_1,d_2$ serem métricas, e
 \[ d_\bullet(x,y)=0 \iff d_1(x_1,y_1)=d_2(x_2,y_2)=0 \iff x_1=y_1 \text{ e } x_2=y_2 \iff x=y, \]
-pois em cada caso $d_\bullet(x,y)=0$ força as duas parcelas a se anularem. Resta a desigualdade triangular; sejam $x,y,z\in X$ e ponha $a_i=d_i(x_i,z_i)$, $b_i=d_i(z_i,y_i)$, de modo que $d_i(x_i,y_i)\le a_i+b_i$ para $i=1,2$.
+pois em cada caso $d_\bullet(x,y)=0$ força as duas parcelas a se anularem. 
 
-\emph{$d_b$:} $d_b(x,y)\le (a_1+b_1)+(a_2+b_2)=d_b(x,z)+d_b(z,y)$.
+Resta a desigualdade triangular; sejam $x,y,z\in X$ e ponha $a_i=d_i(x_i,z_i)$, $b_i=d_i(z_i,y_i)$, de modo que $d_i(x_i,y_i)\le a_i+b_i$ para $i=1,2$.
+  \vspace{4mm} 
 
-\emph{$d_c$:} para $i=1,2$, $d_i(x_i,y_i)\le a_i+b_i \le \max\{a_1,a_2\}+\max\{b_1,b_2\}$; tomando o máximo em $i$ segue o resultado.
+Daqui, vejamos cada um dos casos,\\ 
+\emph{$d_b$:} Segue diretamente da desigualdade triangular das métricas 
+  $d_1$ e $d_2$.
 
-\emph{$d_a$:} como $t\mapsto \sqrt{t_1^2+t_2^2}$ é a norma euclidiana $\norm{\cdot}_2$ de $\R^2$ e é monótona em cada coordenada sobre vetores de coordenadas não-negativas,
+\emph{$d_c$:} Para $i=1,2$, note que 
+  $$d_i(x_i,y_i)\le a_i+b_i \le \max\{a_1,a_2\}+\max\{b_1,b_2\}.$$ 
+Tomando o máximo em $i$ segue o resultado.
+
+\emph{$d_a$:} Já que $t\mapsto \sqrt{t_1^2+t_2^2}$ é a norma euclidiana $\norm{\cdot}_2$ de $\R^2$ e é monótona em cada coordenada sobre vetores de coordenadas não-negativas,
 \[ d_a(x,y)=\norm{(d_1(x_1,y_1),d_2(x_2,y_2))}_2 \le \norm{(a_1+b_1,\,a_2+b_2)}_2 \le \norm{(a_1,a_2)}_2+\norm{(b_1,b_2)}_2, \]
-onde na última passagem usamos a desigualdade de Minkowski em $\R^2$. Isto é exatamente $d_a(x,y)\le d_a(x,z)+d_a(z,y)$.
+Ou seja, $d_a(x,y)\le d_a(x,z)+d_a(z,y)$.
 
 \begin{obs}
 As três métricas são equivalentes: $d_c\le d_a\le d_b\le 2d_c$.
@@ -161,13 +206,15 @@ Reciprocamente, sejam $x,y\in\overline{A}$ e $\eps>0$. Existem $a,b\in A$ com $\
 Como $\eps>0$ é arbitrário, $\norm{x-y}\le\operatorname{diam}(A)$; tomando o supremo sobre $x,y\in\overline{A}$ obtemos $\operatorname{diam}(\overline{A})\le\operatorname{diam}(A)$. (Em particular $\overline{A}$ também é limitado.) O argumento vale, ipsis litteris, em qualquer espaço métrico.
 \end{exercicio}
 
-\begin{exercicio}{Desigualdade de Hölder para $p=1$, $q=\infty$: se $x\in \ell^1$ e $y\in \ell^\infty$, então $\sum_{j\ge1}\abs{x_jy_j}\le\norm{x}_1\norm{y}_\infty$.}
-\sol
+% exercício10
+\begin{exercicio}{Vejamos que se $x\in \ell^1$ e $y\in \ell^\infty$, então 
+  $$\sum_{j\ge1}\abs{x_jy_j}\le\norm{x}_1\norm{y}_\infty.$$}
+
 Por definição, $\abs{y_j}\le \sup_k \abs{y_k}=\norm{y}_\infty$ para todo $j$. Logo, para cada $N\in\N$,
 \[ \sum_{j=1}^{N}\abs{x_jy_j}=\sum_{j=1}^{N}\abs{x_j}\,\abs{y_j} \le \norm{y}_\infty\sum_{j=1}^{N}\abs{x_j} \le \norm{y}_\infty\norm{x}_1. \]
 A sequência das somas parciais é crescente e limitada por $\norm{x}_1\norm{y}_\infty$; portanto a série converge e
 \[ \sum_{j=1}^{\infty}\abs{x_jy_j}\le \norm{x}_1\norm{y}_\infty. \]
-Em particular $(x_jy_j)\in \ell^1$, isto é, $\ell^\infty$ age sobre $\ell^1$ por multiplicação pontual. A desigualdade é ótima: se $y=(1,1,1,\dots)$, vale a igualdade.
+Em particular $(x_jy_j)\in \ell^1$.
 \end{exercicio}
 \begin{exercicio}{Se $d$ é métrica num espaço vetorial $E$, invariante por translações e homogênea, então $d$ é induzida por uma norma.}
 \sol
@@ -221,17 +268,27 @@ Multiplicando por $2^{-j}$ e somando em $j$ obtém-se $d(x,y)\le d(x,z)+d(z,y)$.
 \emph{$d$ não é induzida por norma:} se $d$ proviesse de uma norma $\norm{\cdot}$, teríamos $d(\lambda x,0)=\abs{\lambda}\norm{x}\to\infty$ quando $\abs{\lambda}\to\infty$, para qualquer $x\neq 0$ fixado. Mas $d$ é limitada por $1$. Como $S\neq\{0\}$, isto é impossível. (Equivalentemente: $d$ não é homogênea, cf.\ Exercício 11.)
 \end{exercicio}
 
+% exercício14
 \begin{exercicio}{Se $1<p<q<\infty$, então $\ell^1\subset \ell^p\subset \ell^q\subset \ell^\infty$, com inclusões próprias.}
-\sol
-\emph{Inclusões.} Sejam $1\le r<s<\infty$ e $x\in \ell^r$. Como $\sum_j\abs{x_j}^r<\infty$, temos $\abs{x_j}\to0$; logo $\abs{x_j}\le 1$ para $j\ge j_0$ e, nesse regime, $\abs{x_j}^s\le\abs{x_j}^r$ (pois $t\mapsto t^\alpha$ é decrescente em $\alpha$ para $0\le t\le1$). Portanto
-\[ \sum_{j\ge j_0}\abs{x_j}^s\le \sum_{j\ge j_0}\abs{x_j}^r<\infty, \]
-e somando os finitos termos restantes, $x\in \ell^s$. Isto dá $\ell^1\subset \ell^p\subset \ell^q$. Para $\ell^q\subset \ell^\infty$: se $x\in \ell^q$, então $\abs{x_k}^q\le\sum_j\abs{x_j}^q=\norm{x}_q^q$ para cada $k$, ou seja, $\norm{x}_\infty\le\norm{x}_q<\infty$.
+
+  \emph{Inclusões.} Sejam $1\le r<s<\infty$ e $x\in \ell^r$. Como $\sum_j\abs{x_j}^r<\infty$, temos $\abs{x_j}\to0$; logo $\abs{x_j}\le 1$ para $j\ge j_0$ e, como para $t \in [0, 1]$ temos $t^\alpha \le t^\beta$ sempre que $\alpha \ge \beta$,
+  então $\abs{x_j}^s\le\abs{x_j}^r$. Portanto
+  \begin{align*}
+    \sum_{j\ge j_0}\abs{x_j}^s\le \sum_{j\ge j_0}\abs{x_j}^r<+ \infty 
+    \implies \sum_{j \in \bb N} \abs{x_j}^s = \sum_{j = 1}^{j_0 - 1} \abs{x_j}^s +\sum_{j= j_0}^\infty\abs{x_j}^s < +\infty. 
+  \end{align*}
+Ou seja, $\ell^1\subset \ell^p\subset \ell^q$. Para $\ell^q\subset \ell^\infty$, basta notar que, dado $x \in \ell^q$, 
+\begin{align*}
+  |x_k|^q \le \sum_{j \in \bb N} \abs{x_j}^q = \norm{x}_q^q, \quad \quad \forall k \in \bb N.
+\end{align*}
+  Portanto, $\abs{x_k} \le \norm{x}_q$ para cada $k \in \bb N$, e, por conseguinte, $\norm{x}_\infty \le \norm{x}_q$.
 
 \begin{obs}
 O mesmo argumento, aplicado a $x/\norm{x}_r$, fornece $\norm{x}_s\le\norm{x}_r$ para $r<s$: podemos supor $\norm{x}_r=1$, e então $\abs{x_j}\le1$ para todo $j$, donde $\sum\abs{x_j}^s\le\sum\abs{x_j}^r=1$.
 \end{obs}
 
-\emph{As inclusões são próprias.}
+\emph{As inclusões são próprias:} para as $p$-normas com $p<+\infty$, isso é obtido forçando-se a aparição da série harmônica.
+Para a norma $\ell^\infty$ basta considerar uma sequência constante.
 \begin{itemize}[leftmargin=*]
 \item $\ell^p\setminus \ell^1\neq\emptyset$: $x_j=j^{-1}$ satisfaz $\sum j^{-p}<\infty$ (pois $p>1$) e $\sum j^{-1}=\infty$.
 \item $\ell^q\setminus \ell^p\neq\emptyset$: tome $x_j=j^{-1/p}$. Então $\sum\abs{x_j}^p=\sum j^{-1}=\infty$, logo $x\notin \ell^p$; e $\sum\abs{x_j}^q=\sum j^{-q/p}<\infty$, pois $q/p>1$.
@@ -239,8 +296,11 @@ O mesmo argumento, aplicado a $x/\norm{x}_r$, fornece $\norm{x}_s\le\norm{x}_r$ 
 \end{itemize}
 \end{exercicio}
 
-\begin{exercicio}{Para $1\le p<\infty$, $\ell^p\subset c_0\subset \ell^\infty$; e existe elemento de $c_0$ que não pertence a nenhum $\ell^p$.}
-\sol
+
+% exercício15
+\begin{exercicio}{Vejamos que $1\le p<\infty$, temos $\ell^p\subset c_0\subset \ell^\infty$. Além disso, exibiremos um 
+  elemento de $c_0$ que não pertence a nenhum $\ell^p$.}
+
 \emph{$\ell^p\subset c_0$:} se $\sum_j\abs{x_j}^p<\infty$, o termo geral da série tende a zero, isto é, $\abs{x_j}^p\to0$, logo $x_j\to0$ e $x\in c_0$.
 
 \emph{$c_0\subset \ell^\infty$:} toda sequência convergente é limitada.
